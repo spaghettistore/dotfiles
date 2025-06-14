@@ -1,0 +1,149 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    /*font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
+    /*font-family: Noto Sans Mono; Default Alacritty font */
+    font-family: DejaVu Sans Mono;
+    font-size: 14px;
+    color: #ebdbb2; /* Gruvbox Foreground */
+}
+
+
+#window {
+    padding: 0 4px;
+    margin: 0 1px;
+}
+
+window#waybar {
+    background: rgb(40, 40, 40); /* Gruvbox BG */
+}
+
+window#waybar.empty {
+    /*background-color: transparent;*/
+    background: rgb(40, 40, 40);  /* Gruvbox BG */
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    margin: 0 1px;
+}
+
+button:hover {
+    background: inherit;
+}
+
+#workspaces button {
+    padding: 0 4px;
+    font-weight: bold;
+    background: rgb(40, 40, 40); /* Gruvbox BG */
+}
+
+#workspaces button:hover {
+    background: rgb(104, 157, 106); /* Gruvbox Aqua (Cyan) */
+}
+
+#workspaces button.focused {
+    /*background: rgb(146, 131, 116); Gruvbox Comment */
+    background: rgb(60, 56, 54); /*Gruvbox CursorLine */
+}
+
+#workspaces button.urgent {
+    /*background: rgb(204, 36, 29); Gruvbox Red */
+    background: rgb(214, 93, 14); /* Gruvbox Orange */
+}
+
+#mode {
+    padding: 0 5px;
+    border-radius: 5px;
+    margin: 0 1px;
+    min-width: 16px;
+    background: rgb(214, 93, 14); /* Gruvbox Orange */
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#tray,
+#mode,
+#scratchpad,
+#window,
+#cpu,
+#memory,
+#temperature,
+#custom-appmenu,
+#custom-powermenu,
+
+#workspaces {
+    margin: 0 0px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ebdbb2; /* Gruvbox Foreground */
+        color: #282828; /* Gruvbox Background */
+    }
+}
+
+/*label:focus {
+    background-color: #000000;
+} */
+
+#tray {
+    background-color: transparent;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: rgb(214, 93, 14); /* Gruvbox Orange */
+}
+
+#scratchpad {
+    padding: 0 5px;
+    border-radius: 8px;
+    margin: 0 1px;
+    background: rgb(40, 40, 40); /* Gruvbox BG */
+}
+#scratchpad.empty {
+    background-color: transparent;
+}
+
+#cpu, #memory, #temperature, #pulseaudio, #network, #battery, #clock, #custom-appmenu, #custom-powermenu {
+    padding: 0 4px;
+    margin: 0 1px;
+    background: rgb(40, 40, 40); /* Gruvbox BG */
+    border-radius: 8px;
+}
+
+#network.disconnected, #clock {
+    font-size: 16px;
+}
+
+#battery.charging:not(.critical):not(.warning):not(.average){
+    background: rgb(152, 151, 26); /* Gruvbox Green */
+}
+#battery.warning:not(.charging) {
+    background: rgb(204, 36, 29); /*Gruvbox Red */
+}
+#battery.critical:not(.charging) {
+    background: rgb(204, 36, 29); /*Gruvbox Red */
+    animation-name: blink;
+    animation-duration: 0.6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#temperature.critical {
+    background: rgb(204, 36, 29); /*Gruvbox Red */
+}

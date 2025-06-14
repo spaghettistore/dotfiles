@@ -1,0 +1,55 @@
+# Default: /usr/share/doc/alacritty/examples/alacritty.yml
+
+env:
+  TERM: alacritty
+
+window:
+  #opacity: 0.95
+  title: Alacritty
+  dynamic_title: true
+
+font:
+  normal:
+    #family: monospace  # Default
+    #family: Noto Sans Mono  # Seems same as default
+    family: DejaVu Sans Mono
+    style: Regular
+  size: 14
+  #size: 14  # Default VS Code terminal font size
+  #size: 16  # Default font size in browsers
+
+#colors:
+#  primary:
+#    #background: '#191724'  # RosePine: Background
+#    #background: '#232136'  # RosePineMoon: Background
+#    #background: '#1a1b26'  # Tokyonight: bg0
+#    #background: '#282a36'  # Dracula: Background
+
+
+# Gruvbox
+colors:
+  primary:
+    background: '#282828'  # Gruvbox: Background
+    foreground: '#ebdbb2'  # Gruvbox: Foreground
+  normal:
+    white:      '#ebdbb2'  # Gruvbox: Foreground
+    red:        '#cc241d'  # Gruvbox: Red
+    green:      '#98971a'  # Gruvbox: Green
+    blue:       '#458588'  # Gruvbox: Blue
+    yellow:     '#d79921'  # Gruvbox: Yellow
+    magenta:    '#b16286'  # Gruvbox: Purple
+    cyan:       '#689d6a'  # Gruvbox: Aqua
+  bright:
+    red:        '#fb4934'  # Gruvbox: Bright Red
+    green:      '#b8bb26'  # Gruvbox: Bright Green
+    blue:       '#83a598'  # Gruvbox: Bright Blue
+    yellow:     '#fabd2f'  # Gruvbox: Bright Yellow
+    magenta:    '#d3869b'  # Gruvbox: Bright Purple
+    cyan:       '#8ec07c'  # Gruvbox: Bright Aqua
+  dim:
+    red:        '#9d0006'  # Gruvbox: Dim Red
+    green:      '#79740e'  # Gruvbox: Dim Green
+    blue:       '#076678'  # Gruvbox: Dim Blue
+    yellow:     '#b57614'  # Gruvbox: Dim Yellow
+    magenta:    '#8f3f71'  # Gruvbox: Dim Purple
+    cyan:       '#427b58'  # Gruvbox: Dim Aqua

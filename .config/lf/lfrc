@@ -1,0 +1,232 @@
+set number
+set relativenumber
+set ignorecase
+set smartcase
+set scrolloff 8
+
+# Using "$" Will be on seperate screen
+# Using "%" Will be on same lf screen (don't use for fzf)
+
+cmd func_touch %{{
+    printf "File Name: "
+    read var_ans
+    touch "$var_ans"
+    printf "'$var_ans' -> './'"
+}}
+
+
+cmd func_replace_space_touch %{{
+    printf "Spaceless file name: "
+    read var_ans
+
+    var_ans="$(echo $var_ans | sed 's/ /_/g')"
+
+    if [ "$var_ans" ]; then
+        touch "$var_ans"
+        printf "'$var_ans' -> './'"
+    fi
+}}
+
+
+cmd func_mkdir %{{
+    printf "Dir Name: "
+    read var_ans
+    mkdir "$var_ans"
+    printf "'$var_ans' -> './'"
+}}
+
+
+cmd func_replace_space_mkdir %{{
+    printf "Spaceless dir name: "
+    read var_ans
+
+    var_ans="$(echo $var_ans | sed 's/ /_/g')"
+
+    if [ "$var_ans" ]; then
+        mkdir "$var_ans"
+        printf "'$var_ans' -> './'"
+    fi
+}}
+
+
+cmd func_chmod %{{
+    printf "Chmod: "
+    read var_ans
+    for file in "$fx"; do
+        chmod "$var_ans" $file
+    done
+}}
+
+
+cmd func_move_trash ${{
+    mv "$f" /home/$USER/.local/share/Trash/files
+}}
+
+
+cmd func_cdfzf ${{
+    var="$(find -type d | fzf)"
+    if [ "$var" ]; then
+        lf -remote "send cd '$var'"
+    fi
+}}
+
+
+cmd func_fzfvim ${{
+    selected="$(find ./ -type f,l)"
+    var="$(echo "$selected" | grep -v -e "/\.steam/" -e "/retroarch/" -e "/95_roms/" -e "/GIMP/" -e "/\.config/libreoffice/" -e "/49-97_backup/" -e "\.mp3" -e "\.wma" -e "\.m4a" -e "\.png" -e "\.jpg" -e "\.jpeg" -e "\.svg" -e "\.kra" -e "\.pdf" -e "\.epub" -e "\.djvu" -e "\.docx" -e "\.mp4" -e "\.tdb" -e "\.zip" -e "/\.git/" -e "\.gitignore" | sort | fzf --preview 'cat {}')"
+
+    if [ "$var" ]; then
+        $EDITOR "$var"
+    fi
+}}
+
+
+# This will replace lf's default open function
+cmd open ${{
+    EDITOR="nvim"
+    READER="zathura"
+    VIDEO_PLAYER="mpv"
+    MUSIC_PLAYER="mpv -no-video"
+    IMAGE_VIEWER="imv-wayland"
+    IMAGE_EDITOR="krita"
+    BROWSER="firefox"
+
+    case "$f" in
+        # Text
+        *.txt | *.sh | *.py | *.lua | *.html | *.js | *.css | *.md | *.markdown)
+            $EDITOR "$f" ;;
+        *.pdf)
+            $READER "$f" ;;
+
+        # Videos
+        *.mp4)
+            $VIDEO_PLAYER "$f" ;;
+
+        # Music
+        *.mp3 | *.wav | *.wma | *.m4a | *.m3u)
+            $MUSIC_PLAYER "$f" ;;
+        *.xspf)
+            echo "vlc required to play"
+            $EDITOR "$f" ;;
+        *.mmpz)
+            lmms "$f" ;;
+
+        # Images
+        *.png | *.jpg | *.svg | *.jpeg | *.gif)
+            $IMAGE_VIEWER "$f" & ;;
+        *.kra)
+            krita "$f" ;;
+
+        # Unknown
+        *)
+            if [ "$(file "$f" | grep -i "text")" ]; then
+                $EDITOR "$f"
+            else
+                echo "Unknown file type"
+                echo "Attempt running with xdg-open? [y/N]"
+                read ans_var
+                case "$ans_var" in
+                    [yY]* )
+                        echo "opening"
+                        xdg-open "$f" ;;
+                    *) echo "not opening" ;;
+                esac
+            fi
+        ;;
+    esac
+}}
+
+
+cmd func_open_with ${{
+    EDITOR="nvim"
+    READER="zathura"
+    VIDEO_PLAYER="mpv"
+    MUSIC_PLAYER="mpv -no-video"
+    IMAGE_VIEWER="imv-wayland"
+    IMAGE_EDITOR="krita"
+    BROWSER="firefox"
+    case "$f" in
+        # Text
+        *.txt | *.sh | *.py | *.lua | *.html | *.js | *.css | *.md | *.markdown)
+            $EDITOR "$f" ;;
+        *.pdf)
+            $READER "$f" ;;
+
+        # Videos
+        *.mp4)
+            $VIDEO_PLAYER "$f" ;;
+
+        # Music
+        *.mp3 | *.wav | *.wma | *.m4a | *.m3u)
+            $MUSIC_PLAYER "$f" ;;
+        *.xspf)
+            echo "vlc required to play"
+            $EDITOR "$f" ;;
+        *.mmpz)
+            lmms "$f" ;;
+
+
+        # Images
+        *.kra)
+            krita "$f" ;;
+        *.png | *.jpg | *.svg | *.jpeg | *.gif)
+            printf "[o]pen \n[e]dit \n[k]rita \n[g]imp \n[d]rawing \n"
+            read selection_var
+            case "$selection_var" in
+                "o")
+                    $IMAGE_VIEWER "$f" & ;;
+                "e")
+                    $IMAGE_EDITOR "$f" ;;
+                "k")
+                    krita "$f" ;;
+                "g")
+                    gimp "$f" ;;
+                "d")
+                    drawing "$f" ;;
+            esac ;;
+
+        *.html)
+            printf "[e]dit \n[b]rowser \n"
+            read selection_var
+            case "$selection_var" in
+                "e")
+                    $EDITOR "$f" ;;
+                "b")
+                    $BROWSER "$f" ;;
+            esac ;;
+        *)
+            echo "unknown file" ;;
+    esac
+}}
+
+
+# Clear binds
+map y
+map d
+map c
+map u
+map m
+map <c-f>
+
+# Keybinds
+map gx func_open_with
+map yy copy
+map dd cut
+map dD delete
+map dT func_move_trash
+map cw rename
+map cd cd ~
+map cx func_chmod
+map uv unselect
+map uy clear
+map ud clear
+map um mark-remove
+map am mark-save
+map mf func_touch
+map md func_mkdir
+map msf func_replace_space_touch
+map msd func_replace_space_mkdir
+map <c-g> func_cdfzf
+map <c-f> func_fzfvim
+
+# Note: don't open files from within a script, open them here instead

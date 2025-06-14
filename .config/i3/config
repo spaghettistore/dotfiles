@@ -1,0 +1,501 @@
+# Variables
+# ---------
+
+### Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+### Application Preferences
+set $term alacritty
+set $browser firefox
+set $file_manager lf
+bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+
+# Super+Scroll_up/down changes workspace
+bindsym --whole-window --border $mod+button4 workspace next
+bindsym --whole-window --border $mod+button5 workspace prev
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "0"
+
+
+# Status Bar
+# ----------
+
+bar {
+    status_command i3status --config ~/.config/i3status/i3status.conf
+    position top
+}
+
+
+# Output configuration
+# --------------------
+
+### Multiple Monitor Configuration
+# Two horizontal
+exec xrandr --output DVI-I-0 --right-of HDMI-0
+
+# For vertical monitor on left
+#exec xrandr --output DVI-I-0 --mode 1920x1080 --pos 0x0 --rotate right --output HDMI-0 --mode 1920x1080 --pos 1080x650 --rotate normal
+#exec xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate right --output DVI-I-0 --mode 1920x1080 --pos 1080x650 --rotate normal
+
+# For vertical monitor on right
+#exec xrandr --output DVI-I-0 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate right
+
+### Background
+exec feh --bg-fill ~/.config/background.png
+
+### Fonts
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+
+# Key bindings
+# ------------
+
+### System
+# Basic
+bindsym $mod+c kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+slash exec ~/.local/bin/dms_dmenu_script.sh rofi
+# Volume (Use pactl to adjust volume in PulseAudio)
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# i3lock
+bindsym $mod+Shift+x exec systemctl suspend && i3lock
+# Applications
+bindsym $mod+Return exec $term
+bindsym $mod+b exec $browser
+bindsym $mod+e exec $term -e $file_manager
+
+### Focus
+# Vim
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# Arrow Keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+p workspace prev
+bindsym $mod+n workspace next
+# Parent Child
+bindsym $mod+a focus parent
+bindsym $mod+q focus child
+
+### Move [Focused Container]
+# Vim
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# Arrow Keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# Workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+p move container to workspace prev
+bindsym $mod+Shift+n move container to workspace next
+
+### Layout
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+z layout toggle split
+
+### Split
+bindsym $mod+x split h
+bindsym $mod+v split v
+
+### Floating
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+### Scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+
+
+# Custom Mode
+# -----------
+
+### Mode Selector Mode
+mode "[ ]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    # Change Mode
+    bindsym r mode "[r]"
+    bindsym m mode "[m]"
+    bindsym d mode "[d]"
+    bindsym o mode "[o]"
+    bindsym c mode "[c]"
+    # Switch to workspace
+    bindsym 1 workspace number $ws1
+    bindsym 2 workspace number $ws2
+    bindsym 3 workspace number $ws3
+    bindsym 4 workspace number $ws4
+    bindsym 5 workspace number $ws5
+    bindsym 6 workspace number $ws6
+    bindsym 7 workspace number $ws7
+    bindsym 8 workspace number $ws8
+    bindsym 9 workspace number $ws9
+    bindsym 0 workspace number $ws10
+    bindsym p workspace prev
+    bindsym n workspace next
+    # Focus
+    # Move your focus, vim keybinds
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
+    # Highlight window
+    bindsym a focus parent
+    bindsym q focus child
+    # Focus window type toggle
+    bindsym space focus mode_toggle
+    # Toggle window type
+    bindsym minus scratchpad show
+    bindsym Shift+minus move scratchpad
+    # Tiling
+    bindsym x split h
+    bindsym v split v
+}
+
+
+### Change Mode
+# Change Mode
+mode "[c]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    bindsym o mode "[co]"
+    # Toggle Layout
+    bindsym f fullscreen toggle, mode "[ ]"
+    bindsym t layout tabbed, mode "[ ]"
+    bindsym s layout stacking, mode "[ ]"
+    bindsym z layout toggle split, mode "[ ]"
+    # Tiling
+    bindsym x split h, mode "[ ]"
+    bindsym v split v, mode "[ ]"
+    bindsym n split none, mode "[ ]"
+    # Window Type
+    bindsym space floating toggle, mode "[ ]"
+    bindsym minus move scratchpad, mode "[ ]"
+}
+
+# Change Output/Orientation Mode
+mode "[co]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    bindsym r exec xrandr --output HDMI-0 --rotate right, mode "default"
+    bindsym n exec xrandr --output HDMI-0 --rotate normal, mode "default"
+    bindsym e exec xrandr --output DVI-I-0 --off, mode "default"
+    bindsym d exec xrandr --output DVI-I-0 --mode 1920x1080 --right-of HDMI-0, mode "default"
+}
+
+
+### Move Mode
+# Move Mode
+mode "[m]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    # Change Mode
+    bindsym c mode "[mc]"
+    bindsym g mode "[mg]"
+    bindsym r mode "[r]"
+    # Move focused container to workspace
+    bindsym 1 move container to workspace number $ws1, mode "[ ]"
+    bindsym 2 move container to workspace number $ws2, mode "[ ]"
+    bindsym 3 move container to workspace number $ws3, mode "[ ]"
+    bindsym 4 move container to workspace number $ws4, mode "[ ]"
+    bindsym 5 move container to workspace number $ws5, mode "[ ]"
+    bindsym 6 move container to workspace number $ws6, mode "[ ]"
+    bindsym 7 move container to workspace number $ws7, mode "[ ]"
+    bindsym 8 move container to workspace number $ws8, mode "[ ]"
+    bindsym 9 move container to workspace number $ws9, mode "[ ]"
+    bindsym 0 move container to workspace number $ws10, mode "[ ]"
+    bindsym p move container to workspace prev, mode "[ ]"
+    bindsym n move container to workspace next, mode "[ ]"
+    # Move the focused window, vim keybinds
+    bindsym h move left, mode "[ ]"
+    bindsym j move down, mode "[ ]"
+    bindsym k move up, mode "[ ]"
+    bindsym l move right, mode "[ ]"
+    # Fast Move with shift
+    bindsym Shift+h move left 100px
+    bindsym Shift+j move down 100px
+    bindsym Shift+k move up 100px
+    bindsym Shift+l move right 100px
+    # Move Center
+    bindsym m move position center, mode "[ ]"
+    # Highlight window
+    bindsym a focus parent
+    bindsym q focus child
+    # Toggle Layout
+    bindsym f fullscreen toggle, mode "[ ]"
+    bindsym t layout tabbed, mode "[ ]"
+    bindsym s layout stacking, mode "[ ]"
+    bindsym z layout toggle split, mode "[ ]"
+    # Window Type
+    bindsym space floating toggle, mode "[ ]"
+    bindsym minus move scratchpad, mode "[ ]"
+}
+
+# Move Go
+mode "[mg]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    bindsym 1 move container to workspace number $ws1, workspace number $ws1, mode "default"
+    bindsym 2 move container to workspace number $ws2, workspace number $ws2, mode "default"
+    bindsym 3 move container to workspace number $ws3, workspace number $ws3, mode "default"
+    bindsym 4 move container to workspace number $ws4, workspace number $ws4, mode "default"
+    bindsym 5 move container to workspace number $ws5, workspace number $ws5, mode "default"
+    bindsym 6 move container to workspace number $ws6, workspace number $ws6, mode "default"
+    bindsym 7 move container to workspace number $ws7, workspace number $ws7, mode "default"
+    bindsym 8 move container to workspace number $ws8, workspace number $ws8, mode "default"
+    bindsym 9 move container to workspace number $ws9, workspace number $ws9, mode "default"
+    bindsym 0 move container to workspace number $ws10, workspace number $ws10, mode "default"
+    bindsym p move container to workspace prev, workspace prev, mode "default"
+    bindsym n move container to workspace next, workspace next, mode "default"
+}
+
+# Move Continuous Mode
+mode "[mc]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    bindsym r mode "[r]"
+    # Workspace
+    bindsym 1 move container to workspace number $ws1
+    bindsym 2 move container to workspace number $ws2
+    bindsym 3 move container to workspace number $ws3
+    bindsym 4 move container to workspace number $ws4
+    bindsym 5 move container to workspace number $ws5
+    bindsym 6 move container to workspace number $ws6
+    bindsym 7 move container to workspace number $ws7
+    bindsym 8 move container to workspace number $ws8
+    bindsym 9 move container to workspace number $ws9
+    bindsym 0 move container to workspace number $ws10
+    bindsym p move container to workspace prev
+    bindsym n move container to workspace next
+    # Continuous Movement
+    bindsym h move left
+    bindsym j move down
+    bindsym k move up
+    bindsym l move right
+    # Fast Move with shift
+    bindsym Shift+h move left 100px
+    bindsym Shift+j move down 100px
+    bindsym Shift+k move up 100px
+    bindsym Shift+l move right 100px
+}
+
+
+### Resize Mode
+mode "[r]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    bindsym m mode "[m]"
+    # Resize, vim keybinds
+    #bindsym h resize shrink width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px
+    bindsym j resize grow height 10 px
+    bindsym k resize shrink height 10 px
+    bindsym l resize grow width 10 px
+    # Fast Resize, vim keybinds
+    bindsym Shift+h resize shrink width 100 px
+    bindsym Shift+j resize grow height 100 px
+    bindsym Shift+k resize shrink height 100 px
+    bindsym Shift+l resize grow width 100 px
+    bindsym z mode "[rz]"
+}
+
+# Resize Set Width Height - resize set 1920 1056 is fullscreen, as i3status is 24px
+mode "[rz]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    # Top
+    bindsym t resize set 1920 80, move position center, move up 485px, mode "default"
+    # Bottom
+    bindsym b resize set 1920 80, move position center, move down 485px, mode "default"
+    # Center / Maximise, -10 gap to make floating state more clear
+    bindsym z resize set 1910 1046, move position center, mode "default"
+}
+
+
+### Delete Mode
+mode "[d]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    bindsym w kill, mode "[ ]"
+    bindsym s split none, mode "[ ]"
+}
+
+
+# Open Mode
+# Open Mode
+mode "[o]" {
+    bindsym Return mode "default"
+    bindsym Escape mode "[ ]"
+    bindsym d exec "rofi -modi drun,run -show drun"
+    bindsym b exec $browser, mode "default"
+    bindsym t exec $term, mode "[ ]"
+    bindsym e exec $term -e $file_manager, mode "default"
+    bindsym c exec speedcrunch, mode "default"
+}
+
+
+### Quick Move Mode
+mode ":m" {
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    # Move focused container to workspace
+    bindsym 1 move container to workspace number $ws1, mode "default"
+    bindsym 2 move container to workspace number $ws2, mode "default"
+    bindsym 3 move container to workspace number $ws3, mode "default"
+    bindsym 4 move container to workspace number $ws4, mode "default"
+    bindsym 5 move container to workspace number $ws5, mode "default"
+    bindsym 6 move container to workspace number $ws6, mode "default"
+    bindsym 7 move container to workspace number $ws7, mode "default"
+    bindsym 8 move container to workspace number $ws8, mode "default"
+    bindsym 9 move container to workspace number $ws9, mode "default"
+    bindsym 0 move container to workspace number $ws10, mode "default"
+    bindsym p move container to workspace prev, mode "default"
+    bindsym n move container to workspace next, mode "default"
+    # Move the focused window, vim keybinds
+    bindsym h move left, mode "default"
+    bindsym j move down, mode "default"
+    bindsym k move up, mode "default"
+    bindsym l move right, mode "default"
+    # Move the focused window, arrow keys
+    bindsym Left move left, mode "default"
+    bindsym Down move down, mode "default"
+    bindsym Up move up, mode "default"
+    bindsym Right move right, mode "default"
+    # Toggle Layout
+    bindsym f fullscreen toggle, mode "default"
+    bindsym t layout tabbed, mode "default"
+    bindsym s layout stacking, mode "default"
+    bindsym z layout toggle split, mode "default"
+    # Window Type
+    bindsym space floating toggle, mode "default"
+    bindsym minus move scratchpad, mode "default"
+}
+
+### Mode Keybinds
+bindsym $mod+Shift+semicolon mode "[ ]"
+bindsym $mod+r mode "[r]"
+bindsym $mod+m mode ":m"
+
+
+# Input
+# -----
+
+### Keyboard
+exec_always setxkbmap -layout "gb" -variant "" -option "caps:escape"
+# Alternative keyboard layouts
+# Dvorak
+#exec_always setxkbmap -layout "gb,gb" -variant ",dvorak" -option "caps:escape,grp:alt_shift_toggle"
+# Colemak
+#exec_always setxkbmap -layout "gb,gb" -variant ",colemak" -option "caps:escape,grp:alt_shift_toggle"
+
+### Mouse
+# Disable Mouse Accel
+exec xinput --set-prop 'pointer:''Logitech Gaming Mouse G502' 'libinput Accel Profile Enabled' 0, 1
+exec xinput --set-prop 'pointer:''Logitech Gaming Mouse G502' 'libinput Accel Speed' 0
+
+# OUTDATED Capslock Esc (Use setxkbmap)
+#exec --no-startup-id xmodmap -e "clear lock"
+#exec --no-startup-id set caps_lock as escape
+#exec --no-startup-id xmodmap -e "keysym Caps_Lock = Escape"
+
+
+
+# Vanity
+# ------
+
+### Titlebar and Broder
+# Smart Borders
+smart_borders on
+
+# No Titlebar with Border
+default_border pixel 2
+
+# No Titlebar or Border
+#default_border none
+
+# Titlebar With Border
+#default_border normal 1
+
+
+# i3 Specific
+# -----------
+
+tiling_drag modifier titlebar
+
+### Compositor
+# This one removes screen tearing:
+exec picom --vsync --backend glx
+
+### Xset
+# Query xset
+#exec xset q
+# Screen saver
+exec xset s off
+# Power saver
+#exec xset -dpms
+
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+# TESTING commenting this out to prevent autolock
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet

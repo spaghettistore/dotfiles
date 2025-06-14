@@ -1,0 +1,117 @@
+// Default: /etc/xdg/waybar/*
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    //"height": 22, // Waybar height (commented out for auto height)
+    //"width": 1366, // Waybar width (commented out for auto height)
+    "spacing": 0, // Gaps between modules (0px)
+    // Choose the order of the modules
+    "modules-left": ["custom/appmenu", "sway/workspaces", "sway/scratchpad", "sway/mode", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "cpu", "memory", "temperature", "pulseaudio", "network", "battery", "custom/powermenu"],
+    // Modules configuration
+    "sway/workspaces": {
+       "disable-scroll": true,
+       "all-outputs": true,
+       //"format": "{name}: {icon}",
+       //"format-icons": {
+       //    //"1": "",
+       //    //"2": "",
+       //    //"3": "",
+       //    //"4": "",
+       //    //"5": "",
+       //    "urgent": "",
+       //    "focused": "",
+       //    "default": ""
+       //}
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "timezone": "Europe/London",
+        "tooltip-format": "<big>{:%Y %B %d  (#%V)}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%a %d %h %H:%M}",
+        "on-click": "alacritty -e calcurse"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{used}GiB ",
+        "tooltip-format": "Mem: {percentage}% [{used}GiB/{total}GiB]\nSwp: {swapPercentage}% [{swapUsed}GiB/{swapTotal}GiB]"
+    },
+    "temperature": {
+        "tooltip": false,
+        "critical-threshold": 80,
+        //"format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "max": 100,
+            "good": 80,
+            "average": 79,
+            "warning": 20,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "{timeTo}",
+        "on-click": "~/.config/sway/wofi_power_profiles.sh"
+    },
+    "network": {
+        "format-wifi": "{signalStrength}% ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{signalStrength}% {essid}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "⚠",
+        "on-click": "~/.config/sway/wofi_wifi_menu.py"
+    },
+    "pulseaudio": {
+        "tooltip": false,
+        // We have no space between icon and format source as we want to hide it when muted, so the unmuted icon must have a leading space
+        "format": "{volume}% {icon}{format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {format_source}",
+        "format-muted": "{format_source}",
+        "format-source": " {volume}% ", // Leading space due to hiding the muted icon
+        "format-source-muted": "",  // We hide the muted icon
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/appmenu": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "wofi -i --show drun",
+        "on-click-right": "~/.config/sway/sway_dmenu.sh"
+    },
+    "custom/powermenu": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "~/.config/sway/wofi_power_menu.sh"
+    }
+}
