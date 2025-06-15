@@ -1,8 +1,9 @@
 #!/bin/bash
 
 fzcd() {
-    local selected="$(find . -mindepth 1 -type d | fzf)" &&
-        cd "$selected"
+    local selected
+    selected="$(find . -mindepth 1 -type d | fzf)" &&
+        cd "$selected" || return 1
 }
 
 
@@ -24,37 +25,40 @@ fzed() {
 
 fzls() {
     #local selected="$(ls -A | fzf --preview '[[ -f {} ]] && cat {} || ls {}')" &&
-    local selected="$(ls -A | fzf)"
+    local selected
+    selected="$(find . -maxdepth 1 -mindepth 1 | fzf)"
 
     [[ -z "$selected" ]] &&
         return 1
 
     if [[ -d "$selected" ]]; then
-        cd "$selected"
+        cd "$selected" || return 1
     elif [[ -f "$selected" ]]; then
         [[ -e "$HOME/bin/open_thing.sh" ]] &&
-            $HOME/bin/open_thing.sh "$selected"
+            "$HOME"/bin/open_thing.sh "$selected"
     fi
 }
 
 
 goto() {
-    local target="$(find . -mindepth 1 | fzf)"
+    local target
+    target="$(find . -mindepth 1 | fzf)"
 
     [[ -z "$target" ]] &&
         return 1
 
-    local target="$(realpath "$target")"
+    target="$(realpath "$target")"
 
+    local directory
     if [[ -f "$target" ]]; then
-        local directory="$(dirname "$target")"
+        directory="$(dirname "$target")"
     elif [[ -d "$target" ]]; then
-        local directory="$target"
+        directory="$target"
     else
         return 1
     fi
 
-    cd "$directory"
+    cd "$directory" || return 1
 }
 
 
@@ -62,7 +66,8 @@ goto() {
 #    [[ ! "$(which git)" == "/usr/bin/git" ]] &&
 #        return
 #
-#    local git_status="$(git status -s 2>/dev/null | wc -l)"
+#    local git_status
+#    git_status="$(git status -s 2>/dev/null | wc -l)"
 #
 #    [[ "$git_status" -ne 0 ]] &&
 #        echo " [$git_status] "
