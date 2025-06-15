@@ -129,6 +129,8 @@ noremap <Leader>bg <cmd>ls<CR>:b<space>
 " -------------
 noremap <Leader>cn <cmd>cnext<CR>
 noremap <Leader>cp <cmd>cprev<CR>
+noremap <Leader>co <cmd>copen<CR>
+noremap <Leader>cc <cmd>cclose<CR>
 
 " Keep yanked (Delete)
 " --------------------
