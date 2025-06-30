@@ -32,6 +32,7 @@ return {
             vim.keymap.set("n", "<leader>]d", require('telescope.builtin').diagnostics)
             vim.keymap.set("n", "<leader>f?", require('telescope.builtin').builtin)
             vim.keymap.set("n", "<leader>z=", require('telescope.builtin').spell_suggest)
+            vim.keymap.set("n", "<leader>/", require('telescope.builtin').current_buffer_fuzzy_find)
             -- Edit Neovim
             vim.keymap.set("n", "<leader>en", function()
                 require('telescope.builtin').find_files {

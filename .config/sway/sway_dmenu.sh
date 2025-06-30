@@ -5,6 +5,7 @@ SEARCH_ENGINE="https://duckduckgo.com/?q="
 POWER_MENU="$HOME/.config/sway/wofi_power_menu.sh"
 GET_MONITOR_NAME="$HOME/.config/sway/get_monitor_name.py"
 WIFI_MENU="$HOME/.config/sway/wofi_wifi_menu.py"
+POWER_PROFILES_MENU="$HOME/.config/sway/wofi_power_profiles.sh"
 
 main() {
     local options=(
@@ -13,6 +14,7 @@ main() {
         " reboot"
         " logout"
         " lock"
+        " powerprofiles"
         " performance"
         " balanced"
         " power-saver"
@@ -45,6 +47,9 @@ main() {
             ;;
         " lock" | "lock")
             $POWER_MENU "lock"
+            ;;
+        " powerprofiles" | "powerprofiles")
+            $POWER_PROFILES_MENU
             ;;
         " performance" | "performance")
             powerprofilesctl set performance

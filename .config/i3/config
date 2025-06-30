@@ -1,3 +1,5 @@
+# Default config: /etc/i3/config
+
 # Variables
 # ---------
 
@@ -7,7 +9,8 @@ set $mod Mod4
 ### Application Preferences
 set $term alacritty
 set $browser firefox
-set $file_manager lf
+set $file_manager ranger
+set $calculator speedcrunch
 bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 
 # Super+Scroll_up/down changes workspace
@@ -52,16 +55,13 @@ exec xrandr --output DVI-I-0 --right-of HDMI-0
 #exec xrandr --output DVI-I-0 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate right
 
 ### Background
-exec feh --bg-fill ~/.config/background.png
+exec feh --bg-fill ~/.config/i3/background.png
 
 ### Fonts
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+#font pango:monospace 8
+font pango:DejaVu Sans Mono 14px
 
 
 # Key bindings
@@ -74,6 +74,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 #bindsym $mod+slash exec ~/.local/bin/dms_dmenu_script.sh rofi
+bindsym $mod+slash exec ~/.config/i3/i3_dmenu.sh
 # Volume (Use pactl to adjust volume in PulseAudio)
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
@@ -114,6 +115,9 @@ bindsym $mod+n workspace next
 # Parent Child
 bindsym $mod+a focus parent
 bindsym $mod+q focus child
+# Monitor
+bindsym $mod+bracketright focus output right
+bindsym $mod+bracketleft focus output left
 
 ### Move [Focused Container]
 # Vim
@@ -139,6 +143,9 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+p move container to workspace prev
 bindsym $mod+Shift+n move container to workspace next
+### Move [Workspace] between monitors
+bindsym $mod+Shift+bracketright move workspace to output right
+bindsym $mod+Shift+bracketleft move workspace to output left
 
 ### Layout
 bindsym $mod+f fullscreen toggle
@@ -383,7 +390,7 @@ mode "[o]" {
     bindsym b exec $browser, mode "default"
     bindsym t exec $term, mode "[ ]"
     bindsym e exec $term -e $file_manager, mode "default"
-    bindsym c exec speedcrunch, mode "default"
+    bindsym c exec $calculator, mode "default"
 }
 
 
@@ -473,19 +480,15 @@ default_border pixel 2
 # i3 Specific
 # -----------
 
+# Disable auto sleep (from 'man i3' ~/.xsession section)
+exec xset -dpms
+exec xset s off
+
 tiling_drag modifier titlebar
 
 ### Compositor
 # This one removes screen tearing:
 exec picom --vsync --backend glx
-
-### Xset
-# Query xset
-#exec xset q
-# Screen saver
-exec xset s off
-# Power saver
-#exec xset -dpms
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -493,7 +496,6 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-# TESTING commenting this out to prevent autolock
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,

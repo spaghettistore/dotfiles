@@ -123,10 +123,12 @@ bindsym ctrl+alt+Left workspace prev
 bindsym ctrl+alt+Right workspace next
 bindsym $mod+page_up workspace prev
 bindsym $mod+page_down workspace next
-#bindsym $mod+0 workspace "Test"
 # Parent Child
 bindsym $mod+a focus parent
 bindsym $mod+q focus child
+# Monitor
+bindsym $mod+bracketright focus output right
+bindsym $mod+bracketleft focus output left
 
 ### Move [Focused Container]
 # Vim
@@ -157,6 +159,9 @@ bindsym Shift+ctrl+alt+Right move container to workspace next
 bindsym $mod+Shift+page_up move container to workspace prev
 bindsym $mod+Shift+page_down move container to workspace next
 #bindsym $mod+Shift+0 move container to workspace "Test"
+### Move [Workspace] between monitors
+bindsym $mod+Shift+bracketright move workspace to output right
+bindsym $mod+Shift+bracketleft move workspace to output left
 
 ### Layout
 bindsym $mod+f fullscreen
@@ -199,8 +204,6 @@ show_marks yes
 
 ### Mode Selector Mode
 mode "[ ]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "default"
     bindsym r mode "[r]"
     bindsym m mode "[m]"
@@ -242,8 +245,6 @@ mode "[ ]" {
 ### Change Mode
 # Change Mode
 mode "[c]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     bindsym o mode "[co]"
     # Toggle Layout
@@ -265,8 +266,6 @@ mode "[c]" {
 
 # Change Output/Orientation Mode
 mode "[co]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     bindsym r output eDP-1 transform 90, mode "default"
     bindsym n output eDP-1 transform 0, mode "default"
@@ -276,8 +275,6 @@ mode "[co]" {
 ### Move Mode
 # Move Mode
 mode "[m]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     bindsym c mode "[mc]"
     bindsym g mode "[mg]"
@@ -322,8 +319,6 @@ mode "[m]" {
 
 # Move Go
 mode "[mg]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     # Move With focused container to workspace
     bindsym 1 move container to workspace number 1, workspace number 1, mode "[ ]"
@@ -342,8 +337,6 @@ mode "[mg]" {
 
 # Move Continuous Mode
 mode "[mc]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     bindsym r mode "[r]"
     bindsym m mode "[m]"
@@ -375,8 +368,6 @@ mode "[mc]" {
 
 ### Resize Mode
 mode "[r]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     bindsym m mode "[m]"
     # Resize, vim keybinds
@@ -395,8 +386,6 @@ mode "[r]" {
 
 # Resize Set Width Height - resize set 1366 744 is fullscreen, as waybar is 24px
 mode "[rz]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     # Top
     bindsym t move position center, resize set 1366 80, move up 330px, mode "default"
@@ -409,8 +398,6 @@ mode "[rz]" {
 
 ### Delete Mode
 mode "[d]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     bindsym w kill, mode "[ ]"
     bindsym s split none, mode "[ ]"
@@ -421,8 +408,6 @@ mode "[d]" {
 ### Open Mode
 # Open Mode
 mode "[o]" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "[ ]"
     bindsym d exec $menu, mode "default"
     bindsym b exec $browser, mode "default"
@@ -434,8 +419,6 @@ mode "[o]" {
 
 ### Quick Move Mode
 mode ":m" {
-    bindsym $mod+bracketleft mode "default"
-    bindsym ctrl+bracketleft mode "default"
     bindsym Escape mode "default"
     # Move focused container to workspace
     bindsym 1 move container to workspace number 1, mode "default"
@@ -585,7 +568,3 @@ font DejaVu Sans Mono:monospace 14px
 
 xwayland disable
 for_window [shell="xwayland"] title_format "[XWayland] %title"
-
-# Unused keys
-# -----------
-# bracketleft, braceleft, parenleft
