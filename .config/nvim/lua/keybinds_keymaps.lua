@@ -13,20 +13,25 @@ vim.keymap.set("n", "<Leader>'h", "<cmd>edit ~/.bash_history<CR>")
 -- File Explorer
 -- -------------
 vim.keymap.set("n", "<Leader>fe", "<cmd>Ex<CR>")
+vim.keymap.set("n", "<Leader>fo", ":find ")
 
 -- Buffer
 -- ------
-vim.keymap.set("n", "<Leader>bn", "<cmd>bnext<CR>")
-vim.keymap.set("n", "<Leader>bp", "<cmd>bprevious<CR>")
+--vim.keymap.set("n", "<Leader>bn", "<cmd>bnext<CR>")  -- Use [b
+--vim.keymap.set("n", "<Leader>bp", "<cmd>bprevious<CR>")  -- Use ]b
 vim.keymap.set("n", "<Leader>bd", "<cmd>bdelete<CR>")
---vim.keymap.set("n", "<Leader>bg", "<cmd>ls<CR>:b<space>")  -- Not needed due to telescope
+vim.keymap.set("n", "<Leader>ls", "<cmd>ls<CR>:b<space>")  -- Not needed due to telescope
 
 -- Quickfix list
 -- -------------
-vim.keymap.set("n", "<Leader>cn", "<cmd>cnext<CR>")  -- Use ]q
-vim.keymap.set("n", "<Leader>cp", "<cmd>cprev<CR>")  -- Use [q
+--vim.keymap.set("n", "<Leader>cn", "<cmd>cnext<CR>")  -- Use ]q
+--vim.keymap.set("n", "<Leader>cp", "<cmd>cprev<CR>")  -- Use [q
 vim.keymap.set("n", "<Leader>co", "<cmd>copen<CR>")
 vim.keymap.set("n", "<Leader>cc", "<cmd>cclose<CR>")
+
+-- Location list
+-- -------------
+vim.keymap.set("n", "<Leader>lo", "<cmd>lopen<CR>")
 
 -- Keep yanked (Delete)
 -- --------------------

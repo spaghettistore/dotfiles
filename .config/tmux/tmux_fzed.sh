@@ -6,8 +6,8 @@ if [[ "$#" -eq 1 ]]; then
 else
     # If we are in ~, only search specific directories to reduce clutter
     if [[ "$(pwd)" == "$HOME" ]]; then
-        files="$(find "$HOME/inbox" "$HOME/projects" "$HOME/areas" \
-            "$HOME/refs" "$HOME/bin" "$HOME/git_repos" "$HOME/dotfiles" \
+        files="$(find "$HOME/inbox" "$HOME/projects" "$HOME/refs" "$HOME/bin" \
+            "$HOME/git_repos" "$HOME/dotfiles" \
             -type f,l)
 $(find "$HOME" -maxdepth 1 -type f,l)"
     else

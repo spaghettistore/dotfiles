@@ -11,7 +11,6 @@ else
     files="$(find "$HOME" "$HOME/inbox" "$HOME/projects" "$HOME/refs" \
         "$HOME/git_repos" "$HOME/archive" "$HOME/media" \
         -mindepth 1 -maxdepth 1 -type d)
-$(find "$HOME/areas" -mindepth 1 -maxdepth 2 -type d)
 $HOME"
     selected="$(echo "$files" \
         | sort \

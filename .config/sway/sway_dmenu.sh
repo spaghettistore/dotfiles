@@ -1,11 +1,11 @@
 #!/bin/bash
 
-BROWSER="firefox"
-SEARCH_ENGINE="https://duckduckgo.com/?q="
-POWER_MENU="$HOME/.config/sway/wofi_power_menu.sh"
-GET_MONITOR_NAME="$HOME/.config/sway/get_monitor_name.py"
-WIFI_MENU="$HOME/.config/sway/wofi_wifi_menu.py"
-POWER_PROFILES_MENU="$HOME/.config/sway/wofi_power_profiles.sh"
+browser="firefox"
+search_engine="https://duckduckgo.com/?q="
+power_menu="$HOME/.config/sway/wofi_power_menu.sh"
+get_monitor_name="$HOME/.config/sway/get_monitor_name.py"
+wifi_menu="$HOME/.config/sway/wofi_wifi_menu.py"
+power_profiles_menu="$HOME/.config/sway/wofi_power_profiles.sh"
 
 main() {
     local options=(
@@ -24,32 +24,33 @@ main() {
     )
     local prompt
     prompt="$(basename "$0")"
+
     local input
     input="$(
         for option in "${options[@]}"; do
             echo "$option"
-        done |
-            wofi --matching="fuzzy" -ip "$prompt" --show dmenu
+        done \
+            | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
     )"
 
     case "$input" in
         " suspend" | "suspend")
-            $POWER_MENU "suspend"
+            $power_menu "suspend"
             ;;
         " poweroff" | "poweroff")
-            $POWER_MENU "poweroff"
+            $power_menu "poweroff"
             ;;
         " reboot" | "reboot")
-            $POWER_MENU "reboot"
+            $power_menu "reboot"
             ;;
         " logout" | "logout")
-            $POWER_MENU "logout"
+            $power_menu "logout"
             ;;
         " lock" | "lock")
-            $POWER_MENU "lock"
+            $power_menu "lock"
             ;;
         " powerprofiles" | "powerprofiles")
-            $POWER_PROFILES_MENU
+            $power_profiles_menu
             ;;
         " performance" | "performance")
             powerprofilesctl set performance
@@ -61,11 +62,11 @@ main() {
             powerprofilesctl set power-saver
             ;;
         " wifi" | "wifi")
-            $WIFI_MENU
+            $wifi_menu
             ;;
         " rotate" | " unrotate")
             local monitor_name
-            monitor_name="$($GET_MONITOR_NAME)"
+            monitor_name="$($get_monitor_name)"
             ;;&
         " rotate")
             swaymsg output "$monitor_name" transform 90, mode "default"
@@ -81,7 +82,7 @@ main() {
             exit 1
             ;;
         *)
-            $BROWSER "${SEARCH_ENGINE}${input}" &
+            $browser "${search_engine}${input}" &
             ;;
     esac
 }

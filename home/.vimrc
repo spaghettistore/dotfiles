@@ -117,20 +117,27 @@ noremap <Leader>'h <cmd>edit ~/.bash_history<CR>
 " File Explorer
 " -------------
 noremap <Leader>fe <cmd>Ex<CR>
+noremap <Leader>fo :find 
 
 " Buffer
 " ------
-noremap <Leader>bn <cmd>bnext<CR>
-noremap <Leader>bp <cmd>bprevious<CR>
+noremap ]b <cmd>bnext<CR>
+noremap [b <cmd>bprevious<CR>
 noremap <Leader>bd <cmd>bdelete<CR>
-noremap <Leader>bg <cmd>ls<CR>:b<space>
+noremap <Leader>ls <cmd>ls<CR>:b<space>
 
 " Quickfix list
 " -------------
-noremap <Leader>cn <cmd>cnext<CR>
-noremap <Leader>cp <cmd>cprev<CR>
+noremap ]q <cmd>cnext<CR>
+noremap [q <cmd>cprev<CR>
 noremap <Leader>co <cmd>copen<CR>
 noremap <Leader>cc <cmd>cclose<CR>
+
+" Location list
+" -------------
+noremap <Leader>lo <cmd>lopen<CR>
+noremap ]l <cmd>lnext<CR>
+noremap [l <cmd>lprev<CR>
 
 " Keep yanked (Delete)
 " --------------------
