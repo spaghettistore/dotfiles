@@ -14,9 +14,10 @@
 }
 
 /* This is the window itself */
-/* We leave this transparent so we can colour different parts with different opacity levels */
+/* Can leave this transparent to colour different parts with different opacity levels */
 #window {
-    background-color: transparent;
+    /*background-color: transparent; */
+    background-color: rgb(40, 40, 40); /* Gruvbox BG */
 }
 
 /* This is an item of the list */
@@ -27,14 +28,13 @@
 
 /* This is an item of the list that is hovered over */
 #entry:selected {
-    /*background: rgba(146, 131, 116, 0.55); Gruvbox Comment */
     background: rgb(60, 56, 54); /* Gruvbox CursorLine */
     /*font-weight: bold */
 }
 
 /* This is the text entry box */
 #input {
-    background: rgba(40, 40, 40, 0.90); /* Gruvbox BG */
+    /*background: rgb(40, 40, 40); Gruvbox BG */
     padding: 3px 5px 3px 5px;
     border: 2px solid #689d6a; /* Gruvbox Aqua (Cyan) */
     border-radius: 5px;
@@ -42,6 +42,7 @@
 
 /* This is the box the entries are placed in */
 #scroll {
-    background: rgba(40, 40, 40, 0.75); /* Gruvbox BG */
+    /*background: rgb(40, 40, 40); Gruvbox BG */
     border-radius: 5px;
+    border: 2px solid #3c3836; /* Gruvbox CursorLine */
 }

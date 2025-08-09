@@ -2,16 +2,14 @@
 
 get_confirmation() {
     local prompt="$1"
-    local options=(
+    declare -a options=(
         "yes"
         "no"
     )
     local response
     response="$(
-        for option in "${options[@]}"; do
-            echo "$option"
-        done |
-            wofi --matching="fuzzy" -ip "$prompt" --show dmenu
+        printf "%s\n" "${options[@]}" \
+            | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
     )"
 
     if [[ "$response" == "yes" ]]; then
@@ -26,7 +24,7 @@ main() {
     local selected_option
 
     if [[ $# -eq 0 ]]; then
-        local options=(
+        declare -a options=(
             " suspend"
             " poweroff"
             " reboot"
@@ -35,10 +33,8 @@ main() {
         )
         local prompt="Select power option"
         selected_option="$(
-            for option in "${options[@]}"; do
-                echo "$option"
-            done |
-                wofi -p "$prompt" --show dmenu
+            printf "%s\n" "${options[@]}" \
+                | wofi -p "$prompt" --show dmenu
         )"
     else
         selected_option="$1"

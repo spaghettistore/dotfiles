@@ -18,9 +18,8 @@ set $right l
 ### Application Prefrences
 set $term alacritty
 set $browser firefox
-#set $file_manager ranger
-set $file_manager lf
-set $calculator speedcrunch
+set $file_manager ranger
+#set $file_manager lf
 set $menu wofi -i --show drun
 set $menu2 wofi -i --show run
 set $screenshot_utility grim
@@ -92,8 +91,9 @@ bindsym $mod+Shift+x exec swaylock
 # Applications
 bindsym $mod+Return exec $term
 bindsym $mod+b exec $browser
-bindsym $mod+e exec $term -e $file_manager
+bindsym $mod+e exec "$term -e $file_manager"
 bindsym $mod+Print exec $screenshot_utility
+bindsym $mod+Equal exec "$term -e bc -l"
 
 ### Focus
 # Vim
@@ -168,12 +168,12 @@ bindsym $mod+f fullscreen
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+z layout toggle split
-bindsym $mod+equal sticky toggle
+bindsym $mod+Shift+Equal sticky toggle
 #bindsym $mod+Shift+z layout default
 
 ### Split
-bindsym $mod+v splitv
-bindsym $mod+x splith
+bindsym $mod+v splith
+bindsym $mod+x splitv
 #bindsym t split toggle
 #bindsym n split none
 
@@ -197,6 +197,13 @@ bindsym $mod+shift+minus move scratchpad
 #       # move [container|window] [to] mark <mark>
 #   bindsym $mod+Shift+a swap container with mark test_mark
 show_marks yes
+
+workspace_auto_back_and_forth yes
+
+# Scripts Keybinds
+# ---------------
+bindsym $mod+i exec ~/bin/inbox.sh "wofi"
+bindsym $mod+o exec ~/bin/menu_hub.sh "wofi"
 
 
 # Custom Mode
@@ -237,8 +244,8 @@ mode "[ ]" {
     bindsym minus scratchpad show
     bindsym shift+minus move scratchpad
     # Split
-    bindsym x splith
-    bindsym v splitv
+    bindsym v splith
+    bindsym x splitv
 }
 
 
@@ -254,14 +261,14 @@ mode "[c]" {
     bindsym z layout toggle split, mode "[ ]"
     #bindsym Shift+z layout default
     # Tiling
-    bindsym x splith, mode "[ ]"
-    bindsym v splitv, mode "[ ]"
+    bindsym v splith, mode "[ ]"
+    bindsym x splitv, mode "[ ]"
     bindsym n split none, mode "[ ]"
     #bindsym t split toggle, mode "[ ]"
     # Window Type
     bindsym Space floating toggle, mode "[ ]"
     bindsym minus move scratchpad, mode "[ ]"
-    bindsym equal sticky toggle, mode "[ ]"
+    bindsym Shift+Equal sticky toggle, mode "[ ]"
 }
 
 # Change Output/Orientation Mode
@@ -401,7 +408,7 @@ mode "[d]" {
     bindsym Escape mode "[ ]"
     bindsym w kill, mode "[ ]"
     bindsym s split none, mode "[ ]"
-    bindsym equal sticky disable, mode "[ ]"
+    bindsym Shift+Equal sticky disable, mode "[ ]"
 }
 
 
@@ -413,7 +420,7 @@ mode "[o]" {
     bindsym b exec $browser, mode "default"
     bindsym t exec $term, mode "[ ]"
     bindsym e exec $term -e $file_manager, mode "default"
-    bindsym c exec $calculator, mode "default"
+    bindsym c exec "$term -e bc -l", mode "default"
 }
 
 

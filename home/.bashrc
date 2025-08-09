@@ -125,7 +125,7 @@ fi
 
 # Functions
 # ---------
-source $HOME/dotfiles/home/.bashrc_functions.sh
+source "$HOME"/dotfiles/home/.bashrc_functions.sh
 
 # Keybinds
 # --------
@@ -154,3 +154,7 @@ export EDITOR="nvim"
 
 # Add '~/bin' to PATH (Not needed on Debian, but needed on RaspberryPiOS and Fedora)
 #export PATH="/home/$USER/bin:$PATH"
+
+# Aliases
+# -------
+alias bc="bc -lq" 

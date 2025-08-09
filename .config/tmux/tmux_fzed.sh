@@ -55,19 +55,17 @@ $(find "$HOME" -maxdepth 1 -type f,l)"
         -e "/__pycache__/" \
         -e "a\.out" \
         -e "\.gitignore" \
-            | sort \
-            | fzf --preview="batcat -n --theme=gruvbox-dark --color=always {}")"
-            #| fzf --preview 'cat {}')"
+        | sort \
+        | fzf --preview="batcat -n --theme=gruvbox-dark --color=always {}")"
+        #| fzf --preview 'cat {}')"
 
 fi
 
-[[ -z "$selected" ]] &&
-    exit 1
+[[ -z "$selected" ]] \
+    && exit 1
 
-[[ -z "$EDITOR" ]] &&
-    EDITOR="nvim"
-
-#tmux_running="$(prep tmux)"
+[[ -z "$EDITOR" ]] \
+    && EDITOR="nvim"
 
 file_name=$(basename "$selected")
 clean_name=$(echo "$file_name" | tr "./" "__")

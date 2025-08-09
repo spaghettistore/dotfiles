@@ -17,8 +17,8 @@ $HOME"
         | fzf)"
 fi
 
-[[ -z "$selected" ]] &&
-    exit 1
+[[ -z "$selected" ]] \
+    && exit 1
 
 # Create/Attach to tmux session in that directory
 selected_name="$(basename "$selected" | tr "." "_")"

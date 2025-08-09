@@ -4,7 +4,7 @@ main() {
     local selected_profile
 
     if [[ $# -eq 0 ]]; then
-        local options=(
+        declare -a options=(
             " performance"
             " balanced"
             " power-saver"
@@ -16,10 +16,8 @@ main() {
         )"
         local prompt="Current profile: $current_profile"
         selected_profile="$(
-            for option in "${options[@]}"; do
-                echo "$option"
-            done |
-                wofi --matching="fuzzy" -ip "$prompt" --show dmenu
+            printf "%s\n" "${options[@]}" \
+                | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
         )"
     else
         selected_profile="$1"

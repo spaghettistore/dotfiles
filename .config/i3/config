@@ -86,7 +86,8 @@ bindsym $mod+Shift+x exec systemctl suspend && i3lock
 # Applications
 bindsym $mod+Return exec $term
 bindsym $mod+b exec $browser
-bindsym $mod+e exec $term -e $file_manager
+bindsym $mod+e exec "$term -e $file_manager"
+bindsym $mod+equal exec "$term -e bc -lq"
 
 ### Focus
 # Vim
@@ -154,8 +155,8 @@ bindsym $mod+t layout tabbed
 bindsym $mod+z layout toggle split
 
 ### Split
-bindsym $mod+x split h
-bindsym $mod+v split v
+bindsym $mod+v split h
+bindsym $mod+x split v
 
 ### Floating
 floating_modifier $mod
@@ -165,6 +166,13 @@ bindsym $mod+space focus mode_toggle
 ### Scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
+
+workspace_auto_back_and_forth yes
+
+# Scripts Keybinds
+# ---------------
+bindsym $mod+i exec ~/bin/inbox.sh "rofi"
+bindsym $mod+o exec ~/bin/menu_hub.sh "rofi"
 
 
 # Custom Mode
@@ -208,8 +216,8 @@ mode "[ ]" {
     bindsym minus scratchpad show
     bindsym Shift+minus move scratchpad
     # Tiling
-    bindsym x split h
-    bindsym v split v
+    bindsym v split h
+    bindsym x split v
 }
 
 
@@ -225,8 +233,8 @@ mode "[c]" {
     bindsym s layout stacking, mode "[ ]"
     bindsym z layout toggle split, mode "[ ]"
     # Tiling
-    bindsym x split h, mode "[ ]"
-    bindsym v split v, mode "[ ]"
+    bindsym v split h, mode "[ ]"
+    bindsym x split v, mode "[ ]"
     bindsym n split none, mode "[ ]"
     # Window Type
     bindsym space floating toggle, mode "[ ]"

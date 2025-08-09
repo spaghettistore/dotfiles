@@ -8,7 +8,7 @@ wifi_menu="$HOME/.config/sway/wofi_wifi_menu.py"
 power_profiles_menu="$HOME/.config/sway/wofi_power_profiles.sh"
 
 main() {
-    local options=(
+    declare -a options=(
         " suspend"
         " poweroff"
         " reboot"
@@ -27,9 +27,7 @@ main() {
 
     local input
     input="$(
-        for option in "${options[@]}"; do
-            echo "$option"
-        done \
+        printf "%s\n" "${options[@]}" \
             | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
     )"
 
@@ -82,7 +80,8 @@ main() {
             exit 1
             ;;
         *)
-            $browser "${search_engine}${input}" &
+            #"$browser" "${search_engine}${input}" &
+            setsid -f "$browser" "${search_engine}${input}"
             ;;
     esac
 }

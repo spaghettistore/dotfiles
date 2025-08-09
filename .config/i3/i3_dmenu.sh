@@ -6,21 +6,19 @@
 # - fonts-font-awesome (for icons)
 
 browser="firefox"
-search_engine="https://duckduckgo.com/?q="
 terminal="alacritty"
+search_engine="https://duckduckgo.com/?q="
 
 get_confirmation() {
     local prompt="$1"
-    local options=(
+    declare -a options=(
         "yes"
         "no"
     )
     local response
     response="$(
-        for option in "${options[@]}"; do
-            echo "$option"
-        done |
-            rofi -matching "fuzzy" -p "$prompt" -dmenu -i
+        printf "%s\n" "${options[@]}" \
+            | rofi -matching "fuzzy" -p "$prompt" -dmenu -i
     )"
 
     if [[ "$response" == "yes" ]]; then
@@ -32,7 +30,7 @@ get_confirmation() {
 
 
 main() {
-    local options=(
+    declare -a options=(
         " suspend"
         " poweroff"
         " reboot"
@@ -46,10 +44,8 @@ main() {
     prompt="$(basename "$0")"
     local input
     input="$(
-        for option in "${options[@]}"; do
-            echo "$option"
-        done |
-            rofi -matching "fuzzy" -p "$prompt" -dmenu -i
+        printf "%s\n" "${options[@]}" \
+            | rofi -matching "fuzzy" -p "$prompt" -dmenu -i
     )"
 
     case "$input" in
@@ -92,7 +88,8 @@ main() {
             exit 1
             ;;
         *)
-            $browser "${search_engine}${input}" &
+            #"$browser" "${search_engine}${input}" &
+            setsid -f "$browser" "${search_engine}${input}"
             ;;
     esac
 }
