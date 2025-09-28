@@ -143,6 +143,8 @@ noremap [l <cmd>lprev<CR>
 " --------------------
 noremap <Leader>d "_d
 vnoremap <Leader>d "_d
+noremap <Leader>D "_D
+vnoremap <Leader>D "_D
 
 " Other keybinds
 " --------------
@@ -160,6 +162,7 @@ noremap <Leader>g <cmd>!tmux display-popup -E ~/.config/tmux/tmux_fzcd.sh<CR>
 noremap <Leader>y "+y
 vnoremap <Leader>y "+y
 noremap <Leader>Y "+y$
+vnoremap <Leader>Y "+y$
 noremap <Leader>p "+p
 vnoremap <Leader>p "+p
 noremap <Leader>P "+P

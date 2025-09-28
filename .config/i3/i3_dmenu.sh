@@ -1,13 +1,8 @@
 #!/bin/bash
 
-# Required packages:
-# - i3
-# - rofi
-# - fonts-font-awesome (for icons)
+# Required packages: i3 rofi nmtui fonts-font-awesome
 
-browser="firefox"
 terminal="alacritty"
-search_engine="https://duckduckgo.com/?q="
 
 get_confirmation() {
     local prompt="$1"
@@ -41,7 +36,7 @@ main() {
         " disable"
     )
     local prompt
-    prompt="$(basename "$0")"
+    prompt="$(basename -- "$0")"
     local input
     input="$(
         printf "%s\n" "${options[@]}" \
@@ -84,15 +79,11 @@ main() {
         " disable" | "disable")
             xrandr --output "DVI-I-0" --off
             ;;
-        "")
-            exit 1
-            ;;
         *)
-            #"$browser" "${search_engine}${input}" &
-            setsid -f "$browser" "${search_engine}${input}"
+            exit 1
             ;;
     esac
 }
 
 
-main "$@"
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && main "$@"

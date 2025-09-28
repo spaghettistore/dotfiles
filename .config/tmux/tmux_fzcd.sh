@@ -8,8 +8,8 @@
 if [[ "$#" -eq 1 ]]; then
     selected="$1"
 else
-    files="$(find "$HOME" "$HOME/inbox" "$HOME/projects" "$HOME/refs" \
-        "$HOME/git_repos" "$HOME/archive" "$HOME/media" \
+    files="$(find -L "$HOME" "$HOME/inbox" "$HOME/projects" "$HOME/refs" \
+        "$HOME/scripts" "$HOME/archive" "$HOME/media" \
         -mindepth 1 -maxdepth 1 -type d)
 $HOME"
     selected="$(echo "$files" \

@@ -1,9 +1,6 @@
 #!/bin/bash
 
-browser="firefox"
-search_engine="https://duckduckgo.com/?q="
 power_menu="$HOME/.config/sway/wofi_power_menu.sh"
-get_monitor_name="$HOME/.config/sway/get_monitor_name.py"
 wifi_menu="$HOME/.config/sway/wofi_wifi_menu.py"
 power_profiles_menu="$HOME/.config/sway/wofi_power_profiles.sh"
 
@@ -19,11 +16,21 @@ main() {
         " balanced"
         " power-saver"
         " wifi"
-        " rotate"
-        " unrotate"
+        " wifi on"
+        " wifi off"
+        " wifi home"
+        " wifi ext"
+        " enable laptop screen (eDP-1)"
+        " disable laptop screen (eDP-1)"
+        " enable external screen (HDMI-A-1)"
+        " disable external screen (HDMI-A-1)"
+        " rotate laptop screen (eDP-1)"
+        " unrotate laptop screen (eDP-1)"
+        " rotate external screen (HDMI-A-1)"
+        " unrotate external screen (HDMI-A-1)"
     )
     local prompt
-    prompt="$(basename "$0")"
+    prompt="$(basename -- "$0")"
 
     local input
     input="$(
@@ -62,29 +69,47 @@ main() {
         " wifi" | "wifi")
             $wifi_menu
             ;;
-        " rotate" | " unrotate")
-            local monitor_name
-            monitor_name="$($get_monitor_name)"
-            ;;&
-        " rotate")
-            swaymsg output "$monitor_name" transform 90, mode "default"
-            #swaymsg output "HDMI-A-1" transform 90, mode "default"
-            #swaymsg output "eDP-1" transform 90, mode "default"
+        " wifi on")
+            $wifi_menu "on"
             ;;
-        " unrotate")
-            swaymsg output "$monitor_name" transform 0, mode "default"
-            #swaymsg output "HDMI-A-1" transform 0, mode "default"
-            #swaymsg output "eDP-1" transform 0, mode "default"
+        " wifi off")
+            $wifi_menu "off"
             ;;
-        "")
-            exit 1
+        " wifi home")
+            $wifi_menu "home"
+            ;;
+        " wifi ext")
+            $wifi_menu "ext"
+            ;;
+        " enable laptop screen (eDP-1)")
+            swaymsg output eDP-1 enable
+            ;;
+        " disable laptop screen (eDP-1)")
+            swaymsg output eDP-1 disable
+            ;;
+        " enable external screen (HDMI-A-1)")
+            swaymsg output HDMI-A-1 enable
+            ;;
+        " disable external screen (HDMI-A-1)")
+            swaymsg output HDMI-A-1 disable
+            ;;
+        " rotate laptop screen (eDP-1)")
+            swaymsg output "eDP-1" transform 90
+            ;;
+        " unrotate laptop screen (eDP-1)")
+            swaymsg output "eDP-1" transform 0
+            ;;
+        " rotate external screen (HDMI-A-1)")
+            swaymsg output "HDMI-A-1" transform 90
+            ;;
+        " unrotate external screen (HDMI-A-1)")
+            swaymsg output "HDMI-A-1" transform 0
             ;;
         *)
-            #"$browser" "${search_engine}${input}" &
-            setsid -f "$browser" "${search_engine}${input}"
+            exit 1
             ;;
     esac
 }
 
 
-main "$@"
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && main "$@"

@@ -44,12 +44,12 @@ output * {
 
 ### Multilple Monitor Configuration
 output eDP-1 {
-    resolution 1366x768
+    resolution 1920x1080
     position 0,0
 }
 output HDMI-A-1 {
     resolution 1920x1080
-    position 1366,0
+    position -1920,0
 }
 
 ### Bind workspace to specific monitor
@@ -86,14 +86,17 @@ bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+# Toggle enable/disable touchpad
+bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
 # Swaylock
-bindsym $mod+Shift+x exec swaylock
+bindsym $mod+Shift+x exec systemctl suspend && swaylock
 # Applications
 bindsym $mod+Return exec $term
 bindsym $mod+b exec $browser
 bindsym $mod+e exec "$term -e $file_manager"
 bindsym $mod+Print exec $screenshot_utility
 bindsym $mod+Equal exec "$term -e bc -l"
+bindsym XF86Calculator exec "$term -e bc -l"
 
 ### Focus
 # Vim
@@ -186,6 +189,10 @@ bindsym $mod+Shift+Space floating toggle
 bindsym $mod+minus scratchpad show
 bindsym $mod+shift+minus move scratchpad
 #bindsym $mod+apostrophe [app_id="Alacritty"] scratchpad show
+
+# Touchpad Bindings
+bindgesture swipe:3:right workspace next
+bindgesture swipe:3:left workspace prev
 
 ### Marks TODO
 #   #bindsym $mod+Shift+q [con_mark="test_mark"] focus; mode "default"
@@ -284,7 +291,6 @@ mode "[co]" {
 mode "[m]" {
     bindsym Escape mode "[ ]"
     bindsym c mode "[mc]"
-    bindsym g mode "[mg]"
     bindsym r mode "[r]"
     # Move focused container to workspace
     bindsym 1 move container to workspace number 1, mode "[ ]"
@@ -322,24 +328,6 @@ mode "[m]" {
     # Window Type
     bindsym Space floating toggle, mode "[ ]"
     bindsym minus move scratchpad, mode "[ ]"
-}
-
-# Move Go
-mode "[mg]" {
-    bindsym Escape mode "[ ]"
-    # Move With focused container to workspace
-    bindsym 1 move container to workspace number 1, workspace number 1, mode "[ ]"
-    bindsym 2 move container to workspace number 2, workspace number 2, mode "[ ]"
-    bindsym 3 move container to workspace number 3, workspace number 3, mode "[ ]"
-    bindsym 4 move container to workspace number 4, workspace number 4, mode "[ ]"
-    bindsym 5 move container to workspace number 5, workspace number 5, mode "[ ]"
-    bindsym 6 move container to workspace number 6, workspace number 6, mode "[ ]"
-    bindsym 7 move container to workspace number 7, workspace number 7, mode "[ ]"
-    bindsym 8 move container to workspace number 8, workspace number 8, mode "[ ]"
-    bindsym 9 move container to workspace number 9, workspace number 9, mode "[ ]"
-    bindsym 0 move container to workspace number 0, workspace number 0, mode "[ ]"
-    bindsym p move container to workspace prev, workspace prev, mode "[ ]"
-    bindsym n move container to workspace next, workspace next, mode "[ ]"
 }
 
 # Move Continuous Mode
@@ -391,15 +379,15 @@ mode "[r]" {
     bindsym z mode "[rz]"
 }
 
-# Resize Set Width Height - resize set 1366 744 is fullscreen, as waybar is 24px
+# Resize Set Width Height - resize set 1920 1056 is fullscreen as waybar is 24px
 mode "[rz]" {
     bindsym Escape mode "[ ]"
     # Top
-    bindsym t move position center, resize set 1366 80, move up 330px, mode "default"
+    bindsym t move position center, resize set 1920 80, move up 485px, mode "default"
     # Bottom
-    bindsym b move position center, resize set 1366 80, move down 330px, mode "default"
+    bindsym b move position center, resize set 1920 80, move down 485px, mode "default"
     # Center / Maximise, -10 gap to make floating state more clear
-    bindsym z move position center, resize set 1356 734, mode "default"
+    bindsym z move position center, resize set 1910 1046, mode "default"
 }
 
 
@@ -504,7 +492,7 @@ input type:pointer {
     # Disable mouse acceleration
     accel_profile "flat"
     # Mouse speed
-    pointer_accel 0
+    pointer_accel -0.25
 }
 #pointer_accel 0.5 # Set mouse sensitivity (between -1 and 1)
 

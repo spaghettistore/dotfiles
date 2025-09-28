@@ -1,5 +1,3 @@
-# Default: /etc/skel/.bashrc
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -49,35 +47,30 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-        color_prompt=
+    color_prompt=
     fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '  # Default
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(func_git_status)\$ '  # Git status
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\A \u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '  # Time, $USER/$PWD
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '  # Default
-    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(func_git_status)\$ '  # Git status
-    #PS1='${debian_chroot:+($debian_chroot)}\A \u@\h:\w\$ '  # Time, $USER/$PWD
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|alacritty|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} \w \a\]$PS1"
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
 esac
-
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -157,4 +150,4 @@ export EDITOR="nvim"
 
 # Aliases
 # -------
-alias bc="bc -lq" 
+alias bc="bc -lq"

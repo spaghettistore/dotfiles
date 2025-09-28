@@ -1,18 +1,25 @@
 #!/bin/bash
 
-# If arg provided, use that path, else fzf for it
 if [[ "$#" -eq 1 ]]; then
-    selected="$1"
-else
+    if [[ -f "$1" ]]; then
+        # If provided argument is a file, use that and skip fzf
+        selected="$1"
+    elif [[ -d "$1" ]]; then
+        # If provided argument is a directory, open fzf using that directory
+        cd "$1" || exit 1
+    fi
+fi
+
+if [[ -z "$selected" ]]; then
     # If we are in ~, only search specific directories to reduce clutter
     if [[ "$(pwd)" == "$HOME" ]]; then
-        files="$(find "$HOME/inbox" "$HOME/projects" "$HOME/refs" "$HOME/bin" \
-            "$HOME/git_repos" "$HOME/dotfiles" \
-            -type f,l)
-$(find "$HOME" -maxdepth 1 -type f,l)"
+        files="$(find -L "$HOME/inbox" "$HOME/projects" "$HOME/refs" "$HOME/bin" \
+            "$HOME/scripts" "$HOME/dotfiles" \
+            -type f)
+$(find -L "$HOME" -maxdepth 1 -type f)"
     else
         # Search recursively
-        files="$(find ./ -type f,l)"
+        files="$(find -L ./ -type f)"
     fi
 
     # Filter out non-text files

@@ -64,15 +64,3 @@ goto() {
     cd "$directory" \
         || return 1
 }
-
-
-#func_git_status() {
-#    [[ ! "$(which git)" == "/usr/bin/git" ]] \
-#    && return
-#
-#    local git_status
-#    git_status="$(git status -s 2>/dev/null | wc -l)"
-#
-#    [[ "$git_status" -ne 0 ]] \
-#    && echo " [$git_status] "
-#}

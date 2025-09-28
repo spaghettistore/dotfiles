@@ -259,7 +259,6 @@ mode "[m]" {
     bindsym Escape mode "[ ]"
     # Change Mode
     bindsym c mode "[mc]"
-    bindsym g mode "[mg]"
     bindsym r mode "[r]"
     # Move focused container to workspace
     bindsym 1 move container to workspace number $ws1, mode "[ ]"
@@ -297,24 +296,6 @@ mode "[m]" {
     # Window Type
     bindsym space floating toggle, mode "[ ]"
     bindsym minus move scratchpad, mode "[ ]"
-}
-
-# Move Go
-mode "[mg]" {
-    bindsym Return mode "default"
-    bindsym Escape mode "[ ]"
-    bindsym 1 move container to workspace number $ws1, workspace number $ws1, mode "default"
-    bindsym 2 move container to workspace number $ws2, workspace number $ws2, mode "default"
-    bindsym 3 move container to workspace number $ws3, workspace number $ws3, mode "default"
-    bindsym 4 move container to workspace number $ws4, workspace number $ws4, mode "default"
-    bindsym 5 move container to workspace number $ws5, workspace number $ws5, mode "default"
-    bindsym 6 move container to workspace number $ws6, workspace number $ws6, mode "default"
-    bindsym 7 move container to workspace number $ws7, workspace number $ws7, mode "default"
-    bindsym 8 move container to workspace number $ws8, workspace number $ws8, mode "default"
-    bindsym 9 move container to workspace number $ws9, workspace number $ws9, mode "default"
-    bindsym 0 move container to workspace number $ws10, workspace number $ws10, mode "default"
-    bindsym p move container to workspace prev, workspace prev, mode "default"
-    bindsym n move container to workspace next, workspace next, mode "default"
 }
 
 # Move Continuous Mode

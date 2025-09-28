@@ -35,8 +35,8 @@ vim.keymap.set("n", "<Leader>lo", "<cmd>lopen<CR>")
 
 -- Keep yanked (Delete)
 -- --------------------
-vim.keymap.set("n", "<Leader>d", "\"_d")
-vim.keymap.set("v", "<Leader>d", "\"_d")
+vim.keymap.set({"n", "v"}, "<Leader>d", "\"_d")
+vim.keymap.set({"n", "v"}, "<Leader>D", "\"_D")
 
 -- Other keybinds
 -- --------------

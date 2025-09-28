@@ -16,6 +16,8 @@ vim.opt.mouse = 'a'
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.wrap = false
+-- Border for diagnostics and hover info
+--vim.opt.winborder = "rounded"
 
 -- Searching
 -- ---------
