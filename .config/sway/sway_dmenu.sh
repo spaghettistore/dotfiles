@@ -20,14 +20,16 @@ main() {
         " wifi off"
         " wifi home"
         " wifi ext"
-        " enable laptop screen (eDP-1)"
-        " disable laptop screen (eDP-1)"
-        " enable external screen (HDMI-A-1)"
-        " disable external screen (HDMI-A-1)"
-        " rotate laptop screen (eDP-1)"
-        " unrotate laptop screen (eDP-1)"
-        " rotate external screen (HDMI-A-1)"
-        " unrotate external screen (HDMI-A-1)"
+        " audio laptop (Analog Stereo Duplex)"
+        " audio hdmi (Digital Stereo (HDMI) Output)"
+        " enable laptop display (eDP-1)"
+        " disable laptop display (eDP-1)"
+        " enable external display (HDMI-A-1)"
+        " disable external display (HDMI-A-1)"
+        " rotate laptop display (eDP-1)"
+        " unrotate laptop display (eDP-1)"
+        " rotate external display (HDMI-A-1)"
+        " unrotate external display (HDMI-A-1)"
     )
     local prompt
     prompt="$(basename -- "$0")"
@@ -81,28 +83,34 @@ main() {
         " wifi ext")
             $wifi_menu "ext"
             ;;
-        " enable laptop screen (eDP-1)")
+        " audio laptop (Analog Stereo Duplex)")
+            pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo
+            ;;
+        " audio hdmi (Digital Stereo (HDMI) Output)")
+            pacmd set-card-profile 0 output:hdmi-stereo
+            ;;
+        " enable laptop display (eDP-1)")
             swaymsg output eDP-1 enable
             ;;
-        " disable laptop screen (eDP-1)")
+        " disable laptop display (eDP-1)")
             swaymsg output eDP-1 disable
             ;;
-        " enable external screen (HDMI-A-1)")
+        " enable external display (HDMI-A-1)")
             swaymsg output HDMI-A-1 enable
             ;;
-        " disable external screen (HDMI-A-1)")
+        " disable external display (HDMI-A-1)")
             swaymsg output HDMI-A-1 disable
             ;;
-        " rotate laptop screen (eDP-1)")
+        " rotate laptop display (eDP-1)")
             swaymsg output "eDP-1" transform 90
             ;;
-        " unrotate laptop screen (eDP-1)")
+        " unrotate laptop display (eDP-1)")
             swaymsg output "eDP-1" transform 0
             ;;
-        " rotate external screen (HDMI-A-1)")
+        " rotate external display (HDMI-A-1)")
             swaymsg output "HDMI-A-1" transform 90
             ;;
-        " unrotate external screen (HDMI-A-1)")
+        " unrotate external display (HDMI-A-1)")
             swaymsg output "HDMI-A-1" transform 0
             ;;
         *)
