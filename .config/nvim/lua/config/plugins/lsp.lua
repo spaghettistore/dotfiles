@@ -16,13 +16,16 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            require("lspconfig").lua_ls.setup {}
-            require("lspconfig").bashls.setup {}
-            require("lspconfig").pyright.setup {}
+            -- Outdated: require("lspconfig") is replaced with vim.lsp.enable
+            -- require("lspconfig").lua_ls.setup {}
+            -- require("lspconfig").bashls.setup {}
+            -- require("lspconfig").pyright.setup {}
+            vim.lsp.enable('lua_ls')
+            vim.lsp.enable('bashls')
+            vim.lsp.enable('pyright')
 
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-            -- vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, {})  -- Use gra
         end,
     }
 }

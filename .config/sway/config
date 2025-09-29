@@ -561,5 +561,5 @@ font DejaVu Sans Mono:monospace 14px
 # Xwayland
 # --------
 
-xwayland disable
+#xwayland disable
 for_window [shell="xwayland"] title_format "[XWayland] %title"
