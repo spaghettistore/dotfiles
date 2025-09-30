@@ -43,13 +43,21 @@ output * {
 }
 
 ### Multilple Monitor Configuration
+#output eDP-1 {
+#    resolution 1920x1080
+#    position 0,0
+#}
+#output HDMI-A-1 {
+#    resolution 1920x1080
+#    position -1920,0
+#}
 output eDP-1 {
     resolution 1920x1080
-    position 0,0
+    position 1920,0
 }
 output HDMI-A-1 {
     resolution 1920x1080
-    position -1920,0
+    position 0,0
 }
 
 ### Bind workspace to specific monitor
@@ -499,6 +507,9 @@ input type:pointer {
 # You can get the names of your inputs by running:
     #swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+
+
+focus_follows_mouse yes
 
 
 # Floating Defaults
