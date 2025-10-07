@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["custom/appmenu", "sway/workspaces", "sway/scratchpad", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "cpu", "memory", "temperature", "pulseaudio", "network", "battery", "custom/powermenu"],
+    "modules-right": ["tray", "idle_inhibitor", "custom/notification", "cpu", "memory", "temperature", "pulseaudio", "network", "battery", "custom/powermenu"],
     // Modules configuration
     "sway/workspaces": {
        "disable-scroll": true,
@@ -35,15 +35,42 @@
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
     },
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    },
     "clock": {
         "timezone": "Europe/London",
         "tooltip-format": "<big>{:%Y %B %d  (#%V)}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%a %d %h %H:%M}",
         "on-click": "alacritty -e calcurse"
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{0} {icon}",
+        "format-icons": {
+            "notification": "",
+            "none": "",
+            "dnd-notification": "",
+            "dnd-none": "",
+            "inhibited-notification": "",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     },
     "cpu": {
         "format": "{usage}% ",

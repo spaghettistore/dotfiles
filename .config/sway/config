@@ -2,6 +2,7 @@
 
 include /etc/sway/config-vars.d/*
 
+# ---------
 # Variables
 # ---------
 
@@ -19,11 +20,11 @@ set $right l
 set $term alacritty
 set $browser firefox
 set $file_manager ranger
-#set $file_manager lf
 set $menu wofi -i --show drun
 set $menu2 wofi -i --show run
 set $screenshot_utility grim
 
+# ----------
 # Status Bar
 # ----------
 
@@ -33,7 +34,30 @@ bar {
 include /etc/sway/config.d/*
 # Read `man 5 sway-bar` for more information about this section.
 
+# -------------
+# Notifications
+# -------------
 
+exec swaync
+bindsym $mod+i exec swaync-client -t -sw
+exec ~/.config/sway/bat_notify.sh
+
+# ------------------
+# Idle Configuration
+# ------------------
+
+# Read `man swayidle` EXAMPLE section for more information.
+# Turn off screen, then lock, then sleep
+exec swayidle -w \
+    timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    timeout 660 'swaylock -f' \
+    timeout 1200 'systemctl suspend'
+
+# Disable swayidle whan an application is fullscreen
+for_window [class="."] inhibit_idle fullscreen
+for_window [app_id="."] inhibit_idle fullscreen
+
+# --------------------
 # Output configuration
 # --------------------
 
@@ -66,7 +90,60 @@ output HDMI-A-1 {
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+# -----
+# Input
+# -----
 
+### Keyboard
+input type:keyboard {
+    xkb_layout "gb"
+    xkb_variant ""
+    xkb_options "caps:escape"
+    xkb_numlock disabled
+    xkb_capslock disabled
+}
+# Colemak
+    #xkb_layout "gb,gb"
+    #xkb_variant ",colemak"
+    #xkb_options "caps:escape,grp:alt_shift_toggle"
+# Alternative Keyboard Layouts
+    # Capslock Escape, Layout Switcher
+        #xkb_options "caps:escape_shifted_capslock"
+        #xkb_options "caps:escape,grp:alt_shift_toggle"
+        #xkb_options "caps:escape,grp:shift_caps_toggle"
+    # Dvorak | Dvorak programmer | UK Punctuation
+        #xkb_layout "gb,us"
+        #xkb_variant "<dvorak|dvorakukp>,<dvorak|dvp|dvorak-classic>"
+    # Colemak
+        #xkb_layout "<gb|us>"
+        #xkb_variant "<colemak|colemak_dh>"
+
+### Mouse
+# Touchpad
+input type:touchpad {
+    tap enabled
+    dwt enabled
+    middle_emulation enabled
+    #natural_scroll enabled
+    #accel_profile "flat"
+}
+
+# Mouse
+input type:pointer {
+    # Disable mouse acceleration
+    accel_profile "flat"
+    # Mouse speed
+    pointer_accel -0.25
+}
+#pointer_accel 0.5 # Set mouse sensitivity (between -1 and 1)
+
+# You can get the names of your inputs by running:
+    #swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+focus_follows_mouse yes
+
+# ------------
 # Key bindings
 # ------------
 
@@ -215,12 +292,12 @@ show_marks yes
 
 workspace_auto_back_and_forth yes
 
+# ---------------
 # Scripts Keybinds
 # ---------------
-bindsym $mod+i exec ~/bin/inbox.sh "wofi"
 bindsym $mod+o exec ~/bin/menu_hub.sh "wofi"
 
-
+# -----------
 # Custom Mode
 # -----------
 
@@ -263,7 +340,6 @@ mode "[ ]" {
     bindsym x splitv
 }
 
-
 ### Change Mode
 # Change Mode
 mode "[c]" {
@@ -292,7 +368,6 @@ mode "[co]" {
     bindsym r output eDP-1 transform 90, mode "default"
     bindsym n output eDP-1 transform 0, mode "default"
 }
-
 
 ### Move Mode
 # Move Mode
@@ -368,7 +443,6 @@ mode "[mc]" {
     bindsym Shift+$right move right 100px
 }
 
-
 ### Resize Mode
 mode "[r]" {
     bindsym Escape mode "[ ]"
@@ -398,7 +472,6 @@ mode "[rz]" {
     bindsym z move position center, resize set 1910 1046, mode "default"
 }
 
-
 ### Delete Mode
 mode "[d]" {
     bindsym Escape mode "[ ]"
@@ -406,7 +479,6 @@ mode "[d]" {
     bindsym s split none, mode "[ ]"
     bindsym Shift+Equal sticky disable, mode "[ ]"
 }
-
 
 ### Open Mode
 # Open Mode
@@ -418,7 +490,6 @@ mode "[o]" {
     bindsym e exec $term -e $file_manager, mode "default"
     bindsym c exec "$term -e bc -l", mode "default"
 }
-
 
 ### Quick Move Mode
 mode ":m" {
@@ -451,67 +522,12 @@ mode ":m" {
     bindsym minus move scratchpad, mode "default"
 }
 
-
 ### Mode Keybinds
 bindsym $mod+Shift+semicolon mode "[ ]"
 bindsym $mod+r mode "[r]"
 bindsym $mod+m mode ":m"
 
-
-# Input
-# -----
-
-### Keyboard
-input type:keyboard {
-    xkb_layout "gb"
-    xkb_variant ""
-    xkb_options "caps:escape"
-    xkb_numlock disabled
-    xkb_capslock disabled
-}
-# Colemak
-    #xkb_layout "gb,gb"
-    #xkb_variant ",colemak"
-    #xkb_options "caps:escape,grp:alt_shift_toggle"
-# Alternative Keyboard Layouts
-    # Capslock Escape, Layout Switcher
-        #xkb_options "caps:escape_shifted_capslock"
-        #xkb_options "caps:escape,grp:alt_shift_toggle"
-        #xkb_options "caps:escape,grp:shift_caps_toggle"
-    # Dvorak | Dvorak programmer | UK Punctuation
-        #xkb_layout "gb,us"
-        #xkb_variant "<dvorak|dvorakukp>,<dvorak|dvp|dvorak-classic>"
-    # Colemak
-        #xkb_layout "<gb|us>"
-        #xkb_variant "<colemak|colemak_dh>"
-
-### Mouse
-# Touchpad
-input type:touchpad {
-    tap enabled
-    dwt enabled
-    middle_emulation enabled
-    #natural_scroll enabled
-    #accel_profile "flat"
-}
-
-# Mouse
-input type:pointer {
-    # Disable mouse acceleration
-    accel_profile "flat"
-    # Mouse speed
-    pointer_accel -0.25
-}
-#pointer_accel 0.5 # Set mouse sensitivity (between -1 and 1)
-
-# You can get the names of your inputs by running:
-    #swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-
-
-focus_follows_mouse yes
-
-
+# -----------------
 # Floating Defaults
 # -----------------
 
@@ -529,31 +545,21 @@ for_window [app_id="org.speedcrunch.speedcrunch"] floating enable
 # You can get the app_id with:
     #swaymsg -t get_tree | grep "app_id"
 
-
+# ------
 # Vanity
 # ------
 
-### Titlebar and Border
-# Smart Borders
+# Smart borders (don't show when only one window)
 smart_borders on
-#hide_edge_borders smart
 
 # No Titlebar With Border
 default_border pixel 2
-
-# No Titlebar or Border
-#default_border none
-
-# Titlebar With Border
-#default_border normal 2
 
 # Gaps
 #gaps inner 1
 #gaps outer 1
 
-
 ### Color Scheme
-# client.<class> <border> <background> <text> [<indicator> [<child_border>]]
 # Gruvbox colorscheme
 set {
     $color_orange #d65d0e
@@ -561,6 +567,7 @@ set {
     $color_fg #ebdbb2
     $color_green #98971a
 }
+# client.<class> <border> <background> <text> [<indicator> [<child_border>]]
 # Class                 border          bground         text        indicator       child_border
 #client.focused          #4c7899         #285577         #ffffff     #2e9ef4         #285577  # Default
 client.focused          $color_orange   $color_cyan     $color_fg   $color_green    $color_cyan
@@ -568,7 +575,7 @@ client.focused          $color_orange   $color_cyan     $color_fg   $color_green
 # Font
 font DejaVu Sans Mono:monospace 14px
 
-
+# --------
 # Xwayland
 # --------
 
