@@ -20,8 +20,8 @@ set $right l
 set $term alacritty
 set $browser firefox
 set $file_manager ranger
-set $menu wofi -i --show drun
-set $menu2 wofi -i --show run
+set $menu pkill wofi || wofi -i --show drun
+set $menu2 pkill wofi || wofi -i --show run
 set $screenshot_utility grim
 
 # ----------
@@ -157,7 +157,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Log out?' -B 'Yes, exit sway' 'swaymsg exit'
 # Launcher
 bindsym $mod+d exec $menu
-#bindsym $mod+Slash exec ~/bin/dms_dmenu_script.sh "wofi"
 bindsym $mod+Slash exec ~/.config/sway/sway_dmenu.sh
 bindsym $mod+Shift+d exec $menu2
 # Volume

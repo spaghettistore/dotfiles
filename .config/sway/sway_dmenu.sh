@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Kill already running processes
+already_running="$(pgrep -c 'wofi')"
+if [[ $already_running -gt 0 ]]; then
+    pkill 'wofi'
+    exit 0
+fi
+
 power_menu="$HOME/.config/sway/wofi_power_menu.sh"
 wifi_menu="$HOME/.config/sway/wofi_wifi_menu.py"
 power_profiles_menu="$HOME/.config/sway/wofi_power_profiles.sh"
