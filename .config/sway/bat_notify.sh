@@ -14,18 +14,18 @@ while true; do
 
     if [[ $battery_status == 'Discharging' && $battery_charge -le 25 ]]; then
         if [[ $battery_charge -le 15 ]]; then
-            notify-send --urgency=critical "Battery critically low!" "${battery_charge}%"
+            notify-send --urgency=critical "Battery critically low" "${battery_charge}%"
             sleep 180
         else
-            notify-send --urgency=critical "Battery low!" "${battery_charge}%"
+            notify-send --urgency=critical "Battery low" "${battery_charge}%"
             sleep 300
         fi
     elif [[ $battery_status == 'Charging' && $battery_charge -ge 80 ]]; then
-        if [[ $battery_charge -ge 99 ]]; then
-            notify-send --urgency=critical "Battery max!" "${battery_charge}%"
+        if [[ $battery_charge -ge 95 ]]; then
+            notify-send --urgency=critical "Battery full" "${battery_charge}%"
             sleep 180
         else
-            notify-send "Battery high!" "${battery_charge}%"
+            notify-send "Battery high" "${battery_charge}%"
             sleep 300
         fi
     else
