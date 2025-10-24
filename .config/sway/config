@@ -67,14 +67,6 @@ output * {
 }
 
 ### Multilple Monitor Configuration
-#output eDP-1 {
-#    resolution 1920x1080
-#    position 0,0
-#}
-#output HDMI-A-1 {
-#    resolution 1920x1080
-#    position -1920,0
-#}
 output eDP-1 {
     resolution 1920x1080
     position 1920,0
@@ -147,8 +139,7 @@ focus_follows_mouse yes
 # Key bindings
 # ------------
 
-bindsym $mod+g exec ~/.config/sway/sway_wofi_focus_window.py
-bindsym $mod+apostrophe exec ~/.config/sway/sway_wofi_focus_window.py
+bindsym $mod+apostrophe exec pkill wofi || ~/.config/sway/sway_wofi_focus_window.py
 
 ### System
 # Basic
@@ -272,7 +263,6 @@ bindsym $mod+Shift+Space floating toggle
 ### Scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+shift+minus move scratchpad
-#bindsym $mod+apostrophe [app_id="Alacritty"] scratchpad show
 
 # Touchpad Bindings
 bindgesture swipe:3:right workspace next
@@ -294,8 +284,8 @@ workspace_auto_back_and_forth yes
 # ---------------
 # Scripts Keybinds
 # ---------------
-bindsym $mod+o exec ~/bin/menu_hub.sh "wofi"
-bindsym $mod+shift+b exec ~/bin/bmks "wofi"
+bindsym $mod+o exec pkill wofi || ~/bin/menu_hub.sh "wofi"
+bindsym $mod+shift+b exec pkill wofi || ~/bin/bmks "wofi"
 
 # -----------
 # Custom Mode
