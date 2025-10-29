@@ -37,6 +37,8 @@ main() {
         " unrotate laptop display (eDP-1)"
         " rotate external display (HDMI-A-1)"
         " unrotate external display (HDMI-A-1)"
+        " screenshot to clipboard"
+        " screenshot to file"
     )
     local prompt
     prompt="$(basename -- "$0")"
@@ -119,6 +121,14 @@ main() {
             ;;
         " unrotate external display (HDMI-A-1)")
             swaymsg output "HDMI-A-1" transform 0
+            ;;
+        " screenshot to clipboard")
+            grim /tmp/grim_temp_screenshot.png \
+                && wl-copy < /tmp/grim_temp_screenshot.png \
+                && rm /tmp/grim_temp_screenshot.png
+            ;;
+        " screenshot to file")
+            grim
             ;;
         *)
             exit 1
