@@ -9,6 +9,7 @@ vim.g.mapleader = " "
 -- Marks
 -- -----
 vim.keymap.set("n", "<Leader>'h", "<cmd>edit ~/.bash_history<CR>")
+vim.keymap.set("n", "<Leader>'n", "<cmd>edit ~/inbox/notepad.txt<CR>")
 
 -- File Explorer
 -- -------------
@@ -21,6 +22,7 @@ vim.keymap.set("n", "<Leader>fo", ":find ")
 --vim.keymap.set("n", "<Leader>bp", "<cmd>bprevious<CR>")  -- Use ]b
 vim.keymap.set("n", "<Leader>bd", "<cmd>bdelete<CR>")
 vim.keymap.set("n", "<Leader>ls", "<cmd>ls<CR>:b<space>")  -- Not needed due to telescope
+vim.keymap.set("n", "<Leader>bb", "<cmd>b#<CR>")  -- Switch to Other buffer (like CTRL-^)
 
 -- Quickfix list
 -- -------------
@@ -51,6 +53,11 @@ vim.keymap.set({"n", "v"}, "<Leader>y", "\"+y")
 vim.keymap.set("n", "<Leader>Y", "\"+y$")
 vim.keymap.set({"n", "v"}, "<Leader>p", "\"+p")
 vim.keymap.set({"n", "v"}, "<Leader>P", "\"+P")
+
+-- Toggles
+-- -------
+vim.keymap.set("n", "<Leader>us", "<CMD>setlocal spell!<CR>")
+vim.keymap.set("n", "<Leader>uw", "<CMD>set wrap!<CR>")
 
 -- Movement
 -- --------
