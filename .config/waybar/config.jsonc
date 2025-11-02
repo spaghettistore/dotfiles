@@ -54,15 +54,16 @@
     },
     "custom/notification": {
         "tooltip": false,
-        "format": "{0} {icon}",
+        //"format": "{0} {icon}", // Display number of notifications before icon
+        "format": "{icon}",
         "format-icons": {
-            "notification": "",
+            "notification": "",
             "none": "",
-            "dnd-notification": "",
+            "dnd-notification": "",
             "dnd-none": "",
-            "inhibited-notification": "",
+            "inhibited-notification": "",
             "inhibited-none": "",
-            "dnd-inhibited-notification": "<",
+            "dnd-inhibited-notification": "",
             "dnd-inhibited-none": ""
         },
         "return-type": "json",
@@ -115,8 +116,8 @@
         // We have no space between icon and format source as we want to hide it when muted, so the unmuted icon must have a leading space
         "format": "{volume}% {icon}{format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {format_source}",
-        "format-muted": "{format_source}",
+        "format-bluetooth-muted": " {format_source}",
+        "format-muted": " {format_source}",
         "format-source": " {volume}% ", // Leading space due to hiding the muted icon
         "format-source-muted": "",  // We hide the muted icon
         "format-icons": {
