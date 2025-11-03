@@ -113,12 +113,12 @@ let mapleader = "\<Space>"
 " Marks
 " -----
 noremap <Leader>'h <cmd>edit ~/.bash_history<CR>
-noremap <Leader>'h <cmd>edit ~/inbox/notepad.txt<CR>
+noremap <Leader>'n <cmd>edit ~/inbox/notepad.txt<CR>
 
 " File Explorer
 " -------------
 noremap <Leader>fe <cmd>Ex<CR>
-noremap <Leader>fo :find 
+noremap <Leader>fo :find
 
 " Buffer
 " ------
@@ -127,6 +127,8 @@ noremap [b <cmd>bprevious<CR>
 noremap <Leader>bd <cmd>bdelete<CR>
 noremap <Leader>ls <cmd>ls<CR>:b<space>
 noremap <Leader>bb <cmd>b#<CR>
+noremap <Leader>bo <cmd>%bd<CR><cmd>e#<CR><cmd>bd#<CR>
+
 
 " Quickfix list
 " -------------

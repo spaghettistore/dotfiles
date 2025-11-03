@@ -23,6 +23,7 @@ vim.keymap.set("n", "<Leader>fo", ":find ")
 vim.keymap.set("n", "<Leader>bd", "<cmd>bdelete<CR>")
 vim.keymap.set("n", "<Leader>ls", "<cmd>ls<CR>:b<space>")  -- Not needed due to telescope
 vim.keymap.set("n", "<Leader>bb", "<cmd>b#<CR>")  -- Switch to Other buffer (like CTRL-^)
+vim.keymap.set("n", "<Leader>bo", "<cmd>%bd|e#|bd#<CR>")  -- Delete all bufferes except current buffer
 
 -- Quickfix list
 -- -------------
