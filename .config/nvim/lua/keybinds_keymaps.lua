@@ -47,6 +47,7 @@ vim.keymap.set({"n", "v"}, "<Leader>D", "\"_D")
 vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("n", "J", "J^")
 vim.keymap.set("n", "<leader>+x", "<cmd>!chmod +x %<CR>")
+vim.keymap.set("n", "<leader>cd", "<cmd>cd %:h|pwd<CR>")
 
 -- Clipboard
 -- ---------

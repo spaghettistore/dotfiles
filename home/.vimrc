@@ -155,6 +155,7 @@ vnoremap <Leader>D "_D
 noremap Y y$
 noremap J J^
 noremap <leader>+x <cmd>!chmod +x %<CR>
+noremap <leader>cd <cmd>cd %:h<CR><cmd>pwd<CR>
 
 " Tmux
 " ----
