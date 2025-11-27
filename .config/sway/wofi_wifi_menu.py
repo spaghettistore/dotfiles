@@ -10,15 +10,36 @@ FILE_NAME=f"{HOME}/.config/wofi_wifi_menu/ssid_list.json"
 
 def get_wifi_status() -> str:
     # Returns 'enabled' or 'disabled'
-    return subprocess.check_output(
-        'nmcli --fields "WIFI" g | sed 1d',
-        shell=True,
-        encoding="UTF-8"
-    ).strip()
+    process = subprocess.run(
+        ["nmcli", "--fields", "WIFI", "g"],
+        text=True,
+        capture_output=True
+    )
+    # Remove line 1 containing word 'WIFI'
+    status = process.stdout.split()[-1]
+
+    return status
+
+
+def get_wifi_name() -> str:
+    process = subprocess.run(
+        ["nmcli", "-t", "-f", "NAME", "c", "show", "--active"],
+        text=True,
+        capture_output=True
+    )
+
+    # Remove trailing line 'lo'
+    name = process.stdout.split()[0]
+
+    return name
 
 
 def get_wofi_response(bash_list: str) -> str:
     prompt = get_wifi_status()
+    if prompt == "enabled":
+        name = get_wifi_name()
+        prompt = f"{prompt}: {name}"
+
     command = f'printf -- "{bash_list}" | wofi --matching="fuzzy" -ip "{prompt}" --show dmenu'
 
     try:
