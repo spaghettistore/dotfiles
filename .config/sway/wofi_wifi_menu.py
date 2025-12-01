@@ -74,6 +74,14 @@ def get_wofi_response(bash_list: str, prompt: str) -> str:
     return response
 
 
+def notify_send(body: str) -> None:
+    subprocess.run(["notify-send",
+        "Wifi", body,
+        "--urgency=low",
+        "--app-name=wofi_wifi_menu",
+        "--hint=string:x-canonical-private-synchronous:'wofi_wifi_menu'"])
+
+
 def main():
     all_args = sys.argv[1:]
     check_if_ssid_file_exists()
@@ -103,9 +111,13 @@ def main():
         subprocess.run("nmcli radio wifi on", shell=True)
         # Connect to established SSID connection
         subprocess.run(f"nmcli connection up {selected_ssid}", shell=True)
-    elif response in ["on", "off"]:
-        # Enable / disable wifi
+        notify_send(f"Connecting to {selected_ssid}")
+    elif response == "on":
         subprocess.run(f"nmcli radio wifi {response}", shell=True)
+        notify_send(f"Enabled")
+    elif response == "off":
+        subprocess.run(f"nmcli radio wifi {response}", shell=True)
+        notify_send(f"Disabled")
     else:
         print(f"wofi_wifi_menu: '{response}': Invalid option")
         exit(1)
