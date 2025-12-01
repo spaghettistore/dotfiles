@@ -28,6 +28,7 @@ main() {
         " wifi off"
         " wifi home"
         " wifi ext"
+        "notifications"
         " audio laptop (Analog Stereo Duplex)"
         " audio hdmi (Digital Stereo (HDMI) Output)"
         " enable laptop display (eDP-1)"
@@ -99,6 +100,9 @@ main() {
             ;;
         " wifi ext")
             $wifi_menu "ext"
+            ;;
+        "notifications")
+            swaync-client -t -sw
             ;;
         " audio laptop (Analog Stereo Duplex)")
             pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo
