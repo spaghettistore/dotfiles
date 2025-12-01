@@ -82,6 +82,15 @@ def notify_send(body: str) -> None:
         "--hint=string:x-canonical-private-synchronous:'wofi_wifi_menu'"])
 
 
+def toggle_wifi() -> None:
+    if get_wifi_status() == "enabled":
+        subprocess.run(f"nmcli radio wifi off", shell=True)
+        notify_send("Disabled")
+    else:
+        subprocess.run(f"nmcli radio wifi on", shell=True)
+        notify_send("Enabled")
+
+
 def main():
     all_args = sys.argv[1:]
     check_if_ssid_file_exists()
@@ -95,10 +104,10 @@ def main():
     # If no external arguments provided, read selection with wofi, else use
     # provided arg.
     if len(all_args) == 0:
-        # Convert python list of ssid nicknames to bash list, and append 'on'
-        # and 'off' for options to toggle wifi.
+        # Convert python list of ssid nicknames to bash list, and append extra
+        # options to toggle wifi.
         bash_list = "\n".join(data.keys())
-        bash_list += "\non\noff"
+        bash_list += "\non\noff\ntoggle"
 
         prompt = get_status_prompt()
         response = get_wofi_response(bash_list, prompt)
@@ -118,6 +127,8 @@ def main():
     elif response == "off":
         subprocess.run(f"nmcli radio wifi {response}", shell=True)
         notify_send(f"Disabled")
+    elif response == "toggle":
+        toggle_wifi()
     else:
         print(f"wofi_wifi_menu: '{response}': Invalid option")
         exit(1)
