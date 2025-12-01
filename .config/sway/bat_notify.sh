@@ -16,18 +16,34 @@ while true; do
 
     if [[ $battery_status == 'Discharging' && $battery_charge -le 25 ]]; then
         if [[ $battery_charge -le 15 ]]; then
-            notify-send --app-name="$script_name" --urgency=critical "Battery critically low" "${battery_charge}%"
+            notify-send \
+                "Battery critically low" "${battery_charge}%" \
+                --urgency=critical \
+                --app-name="$script_name" \
+                --hint=string:x-canonical-private-synchronous:"$script_name"
             sleep 180
         else
-            notify-send --app-name="$script_name" --urgency=critical "Battery low" "${battery_charge}%"
+            notify-send \
+                "Battery low" "${battery_charge}%" \
+                --urgency=critical \
+                --app-name="$script_name" \
+                --hint=string:x-canonical-private-synchronous:"$script_name"
             sleep 300
         fi
     elif [[ $battery_status == 'Charging' && $battery_charge -ge 80 ]]; then
         if [[ $battery_charge -ge 95 ]]; then
-            notify-send --app-name="$script_name" --urgency=critical "Battery full" "${battery_charge}%"
+            notify-send \
+                "Battery full" "${battery_charge}%" \
+                --urgency=critical \
+                --app-name="$script_name" \
+                --hint=string:x-canonical-private-synchronous:"$script_name"
             sleep 180
         else
-            notify-send --app-name="$script_name" "Battery high" "${battery_charge}%"
+            notify-send \
+                "Battery high" "${battery_charge}%" \
+                --urgency=normal \
+                --app-name="$script_name" \
+                --hint=string:x-canonical-private-synchronous:"$script_name"
             sleep 300
         fi
     else
