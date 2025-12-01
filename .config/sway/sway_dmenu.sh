@@ -125,10 +125,17 @@ main() {
         " screenshot to clipboard")
             grim /tmp/grim_temp_screenshot.png \
                 && wl-copy < /tmp/grim_temp_screenshot.png \
-                && rm /tmp/grim_temp_screenshot.png
+                && rm /tmp/grim_temp_screenshot.png \
+                && notify-send \
+                    "Screenshot saved to clipboard" \
+                    --urgency=low \
+                    --hint=string:x-canonical-private-synchronous:"screenshot_to_clipboard_notification"
             ;;
         " screenshot to file")
-            grim
+            grim \
+             && notify-send "Screenshot saved to file" \
+                 --urgency=low \
+                 --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
             ;;
         *)
             exit 1
