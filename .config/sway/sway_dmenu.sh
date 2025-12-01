@@ -22,6 +22,7 @@ main() {
         " performance"
         " balanced"
         " power-saver"
+        "battery"
         " wifi"
         " wifi on"
         " wifi off"
@@ -76,6 +77,13 @@ main() {
             ;;
         " power-saver" | "power-saver")
             $power_profiles_menu "power-saver"
+            ;;
+        "battery")
+            notify-send \
+                "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" \
+                --app-name="battery_capacity_status" \
+                --urgency=low \
+                --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
             ;;
         " wifi" | "wifi")
             $wifi_menu
