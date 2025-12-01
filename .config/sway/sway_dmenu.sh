@@ -69,13 +69,13 @@ main() {
             $power_profiles_menu
             ;;
         " performance" | "performance")
-            powerprofilesctl set performance
+            $power_profiles_menu "performance"
             ;;
         " balanced" | "balanced")
-            powerprofilesctl set balanced
+            $power_profiles_menu "balanced"
             ;;
         " power-saver" | "power-saver")
-            powerprofilesctl set power-saver
+            $power_profiles_menu "power-saver"
             ;;
         " wifi" | "wifi")
             $wifi_menu

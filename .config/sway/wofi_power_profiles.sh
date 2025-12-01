@@ -1,7 +1,7 @@
 #!/bin/bash
 
 main() {
-    local selected_profile
+    local current_profile prompt selected_profile profile
 
     if [[ $# -eq 0 ]]; then
         declare -a options=(
@@ -9,12 +9,11 @@ main() {
             " balanced"
             " power-saver"
         )
-        local current_profile
         current_profile="$(powerprofilesctl |
             grep "^\*" |
             tr -d "* :"
         )"
-        local prompt="Current profile: $current_profile"
+        prompt="Current profile: $current_profile"
         selected_profile="$(
             printf "%s\n" "${options[@]}" \
                 | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
@@ -25,18 +24,26 @@ main() {
 
     case "$selected_profile" in
         " performance" | "performance")
-            powerprofilesctl set performance
+            profile="performance"
             ;;
         " balanced" | "balanced")
-            powerprofilesctl set balanced
+            profile="balanced"
             ;;
         " power-saver" | "power-saver")
-            powerprofilesctl set power-saver
+            profile="power-saver"
             ;;
         *)
             exit 1
             ;;
     esac
+
+    powerprofilesctl set "$profile"
+    notify-send \
+        "Power Profile" "$profile" \
+        --urgency=low \
+        --app-name="current_power_profile_notification" \
+        --hint=string:x-canonical-private-synchronous:"current_power_profile_notification"
+
 }
 
 main "$@"
