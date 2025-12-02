@@ -21,6 +21,7 @@ return {
             require('telescope').load_extension('fzf')
 
             vim.keymap.set("n", "<leader>fd", require('telescope.builtin').find_files, {desc = ":Telescope find_files"})
+            vim.keymap.set("n", "<leader>fa", function() require('telescope.builtin').find_files {hidden=true} end, {desc = ":Telescope find_files hidden=true"})
             vim.keymap.set("n", "<leader>gr", require('telescope.builtin').lsp_references, {desc = ":Telescope lsp_references"})
             vim.keymap.set("n", "<leader>/", require('telescope.builtin').current_buffer_fuzzy_find, {desc = ":Telescope current_buffer_fuzzy_find"})
             vim.keymap.set("n", "<leader>ls", require('telescope.builtin').buffers, {desc = ":Telescope buffers"})
