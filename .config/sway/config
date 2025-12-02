@@ -1,4 +1,4 @@
-# Default: /etc/sway/config
+# Default config file: /etc/sway/config
 
 include /etc/sway/config-vars.d/*
 
@@ -6,17 +6,16 @@ include /etc/sway/config-vars.d/*
 # Variables
 # ---------
 
-### Logo key. Use Mod1 for Alt.
-# Mod5=AltGr, menu=KeyboardMenuKey
+# Mod4=WindowsKey, Mod1=Alt, Mod5=AltGr, menu=KeyboardMenuKey
 set $mod Mod4
 
-### Home row direction keys, like vim
+# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
 
-### Application Prefrences
+# Application Prefrences
 set $term alacritty
 set $browser firefox
 set $file_manager ranger
@@ -27,11 +26,12 @@ set $menu2 pkill wofi || wofi -i --show run
 # Status Bar
 # ----------
 
+# Read 'man 5 sway-bar' for more information about this section.
+
 bar {
     swaybar_command waybar
 }
 include /etc/sway/config.d/*
-# Read `man 5 sway-bar` for more information about this section.
 
 # -------------
 # Notifications
@@ -45,8 +45,9 @@ exec ~/.config/sway/bat_notify.sh
 # Idle Configuration
 # ------------------
 
-# Read `man swayidle` EXAMPLE section for more information.
-# Turn off screen, then lock, then sleep
+# Read 'man swayidle' EXAMPLE section for more information.
+
+# Turn off screen, then lock, then sleep.
 exec swayidle -w \
     timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
     timeout 660 'swaylock -f' \
@@ -60,12 +61,15 @@ for_window [app_id="."] inhibit_idle fullscreen
 # Output configuration
 # --------------------
 
+# You can get the names of your outputs by running: 'swaymsg -t get_outputs'
+
 ### Default wallpaper
 output * {
     bg ~/.config/sway/background.png fill
 }
 
 ### Multilple Monitor Configuration
+
 output eDP-1 {
     resolution 1920x1080
     position 1920,0
@@ -79,11 +83,13 @@ output HDMI-A-1 {
 #workspace 1 output eDP-1
 #workspace 2 output HDMI-A-1
 
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
 # -----
 # Input
 # -----
+
+# You can get the names of your inputs by running: 'swaymsg -t get_inputs'
+# Read `man 5 sway-input` for more information about this section.
+
 
 ### Keyboard
 input type:keyboard {
@@ -126,11 +132,6 @@ input type:pointer {
     # Mouse speed
     pointer_accel -0.25
 }
-#pointer_accel 0.5 # Set mouse sensitivity (between -1 and 1)
-
-# You can get the names of your inputs by running:
-    #swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 
 focus_follows_mouse yes
 
@@ -237,7 +238,6 @@ bindsym Shift+ctrl+alt+Left move container to workspace prev
 bindsym Shift+ctrl+alt+Right move container to workspace next
 bindsym $mod+Shift+page_up move container to workspace prev
 bindsym $mod+Shift+page_down move container to workspace next
-#bindsym $mod+Shift+0 move container to workspace "Test"
 ### Move [Workspace] between monitors
 bindsym $mod+Shift+bracketright move workspace to output right
 bindsym $mod+Shift+bracketleft move workspace to output left
@@ -270,36 +270,33 @@ bindgesture swipe:3:right workspace next
 bindgesture swipe:3:left workspace prev
 
 ### Marks TODO
-#   #bindsym $mod+Shift+q [con_mark="test_mark"] focus; mode "default"
-#
-#   bindsym $mod+Shift+z mark --add test_mark
-#   #bindsym $mod+Shift+q unmark
-#       # unmark [<identifier>]
-#   #bindsym $mod+Shift+q move mark test_mark
-#       # move [container|window] [to] mark <mark>
-#   bindsym $mod+Shift+a swap container with mark test_mark
+#bindsym $mod+Shift+q [con_mark="test_mark"] focus; mode "default"
+#bindsym $mod+Shift+z mark --add test_mark
+#bindsym $mod+Shift+q unmark
+#bindsym $mod+Shift+q move mark test_mark
+#bindsym $mod+Shift+a swap container with mark test_mark
 show_marks yes
 
 #workspace_auto_back_and_forth yes
 
-# ---------------
+# ----------------
 # Scripts Keybinds
-# ---------------
+# ----------------
+
 bindsym $mod+o exec pkill wofi || ~/bin/menu_hub.sh "wofi"
 bindsym $mod+shift+b exec pkill wofi || ~/bin/bmks "wofi"
 
-# -----------
-# Custom Mode
-# -----------
+# ------------
+# Custom Modes
+# ------------
 
-### Mode Selector Mode
+# Mode Selector Mode
 mode "[ ]" {
     bindsym Escape mode "default"
     bindsym r mode "[r]"
     bindsym m mode "[m]"
     bindsym d mode "[d]"
     bindsym o mode "[o]"
-    bindsym c mode "[c]"
     # Switch to workspace
     bindsym 1 workspace number 1
     bindsym 2 workspace number 2
@@ -331,36 +328,6 @@ mode "[ ]" {
     bindsym x splitv
 }
 
-### Change Mode
-# Change Mode
-mode "[c]" {
-    bindsym Escape mode "[ ]"
-    bindsym o mode "[co]"
-    # Toggle Layout
-    bindsym f fullscreen, mode "[ ]"
-    bindsym t layout tabbed, mode "[ ]"
-    bindsym s layout stacking, mode "[ ]"
-    bindsym z layout toggle split, mode "[ ]"
-    #bindsym Shift+z layout default
-    # Tiling
-    bindsym v splith, mode "[ ]"
-    bindsym x splitv, mode "[ ]"
-    bindsym n split none, mode "[ ]"
-    #bindsym t split toggle, mode "[ ]"
-    # Window Type
-    bindsym Space floating toggle, mode "[ ]"
-    bindsym minus move scratchpad, mode "[ ]"
-    bindsym Shift+Equal sticky toggle, mode "[ ]"
-}
-
-# Change Output/Orientation Mode
-mode "[co]" {
-    bindsym Escape mode "[ ]"
-    bindsym r output eDP-1 transform 90, mode "default"
-    bindsym n output eDP-1 transform 0, mode "default"
-}
-
-### Move Mode
 # Move Mode
 mode "[m]" {
     bindsym Escape mode "[ ]"
@@ -399,9 +366,16 @@ mode "[m]" {
     bindsym t layout tabbed, mode "[ ]"
     bindsym s layout stacking, mode "[ ]"
     bindsym z layout toggle split, mode "[ ]"
+    #bindsym Shift+z layout default
+    # Tiling
+    bindsym v splith, mode "[ ]"
+    bindsym x splitv, mode "[ ]"
+    #bindsym n split none, mode "[ ]"
+    #bindsym t split toggle, mode "[ ]"
     # Window Type
     bindsym Space floating toggle, mode "[ ]"
     bindsym minus move scratchpad, mode "[ ]"
+    bindsym Shift+Equal sticky toggle, mode "[ ]"
 }
 
 # Move Continuous Mode
@@ -434,7 +408,7 @@ mode "[mc]" {
     bindsym Shift+$right move right 100px
 }
 
-### Resize Mode
+# Resize Mode
 mode "[r]" {
     bindsym Escape mode "[ ]"
     bindsym m mode "[m]"
@@ -463,7 +437,7 @@ mode "[rz]" {
     bindsym z move position center, resize set 1910 1046, mode "default"
 }
 
-### Delete Mode
+# Delete Mode
 mode "[d]" {
     bindsym Escape mode "[ ]"
     bindsym w kill, mode "[ ]"
@@ -471,7 +445,6 @@ mode "[d]" {
     bindsym Shift+Equal sticky disable, mode "[ ]"
 }
 
-### Open Mode
 # Open Mode
 mode "[o]" {
     bindsym Escape mode "[ ]"
@@ -482,7 +455,7 @@ mode "[o]" {
     bindsym c exec "$term -e bc -l", mode "default"
 }
 
-### Quick Move Mode
+# Quick Move Mode
 mode ":m" {
     bindsym Escape mode "default"
     # Move focused container to workspace
@@ -513,7 +486,7 @@ mode ":m" {
     bindsym minus move scratchpad, mode "default"
 }
 
-### Mode Keybinds
+# Mode Keybinds
 bindsym $mod+Shift+semicolon mode "[ ]"
 bindsym $mod+r mode "[r]"
 bindsym $mod+m mode ":m"
@@ -533,8 +506,7 @@ for_window [app_id="python3.11"] floating enable
 for_window [app_id="org.speedcrunch.speedcrunch"] floating enable
 #for_window [app_id="org.libretro.RetroArch"] floating enable, resize set 1356 734
 
-# You can get the app_id with:
-    #swaymsg -t get_tree | grep "app_id"
+# You can get the app_id with: 'swaymsg -t get_tree | grep "app_id"'
 
 # ------
 # Vanity
