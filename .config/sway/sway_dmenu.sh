@@ -41,6 +41,7 @@ main() {
         " unrotate external display (HDMI-A-1)"
         " screenshot to clipboard"
         " screenshot to file"
+        "datetime"
     )
     local prompt
     prompt="$(basename -- "$0")"
@@ -148,6 +149,11 @@ main() {
              && notify-send "Screenshot saved to file" \
                  --urgency=low \
                  --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
+            ;;
+        "datetime")
+            notify-send "$(date "+%a %d %b %H:%M")" \
+                --urgency=low \
+                --hint=string:x-canonical-private-synchronous:"datetime_notification"
             ;;
         *)
             exit 1
