@@ -34,3 +34,7 @@
 *\.kra
 *\.docx
 *\.wav
+*\.db
+*\.tdb
+*\.sav
+*\.bak
