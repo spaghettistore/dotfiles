@@ -113,20 +113,23 @@ if ! shopt -oq posix; then
 fi
 
 
+# -------------
 # Custom Config
 # -------------
 
 # Functions
 # ---------
+
 source "$HOME"/dotfiles/home/.bashrc_functions.sh
 
-# Keybinds
-# --------
-## Vim Keybinds
+# GNU Readline Keybinds
+# ---------------------
+
+# Vim Keybinds
 set -o vi
 #bind -x '"\C-L": "clear"'  # Vim mode clear
 
-# Arrow keys up down use what is in prompt
+# Arrow keys up/down use what is in prompt
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
@@ -136,12 +139,23 @@ bind -x '"\C-G": "~/.config/tmux/tmux_fzcd.sh"'
 
 # Fzf
 # ---
-# Set up fzf key bindings and fuzzy completion (requires fzf version 0.48.0 or later)
-#eval "$(fzf --bash)"
+
+# Set up fzf key bindings
+# Disable 'ALT+c' as pressing 'Esc' then 'c' will trigger it, which sucks in vim mode
+FZF_ALT_C_COMMAND=""
+eval "$(fzf --bash)"
+
+# CTRL-Y to copy the command into clipboard using wl-copy
+export FZF_CTRL_R_OPTS="
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
 
 # Environment Variables
 # ---------------------
+
 export EDITOR="nvim"
+
 # Open man pages with vim instead of less
 #export MANPAGER="nvim +Man!"
 
