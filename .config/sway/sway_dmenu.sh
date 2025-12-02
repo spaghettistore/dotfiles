@@ -22,13 +22,13 @@ main() {
         " performance"
         " balanced"
         " power-saver"
-        "battery"
+        " battery"
         " wifi"
         " wifi on"
         " wifi off"
         " wifi home"
         " wifi ext"
-        "notifications"
+        " notifications"
         " audio laptop (Analog Stereo Duplex)"
         " audio hdmi (Digital Stereo (HDMI) Output)"
         " enable laptop display (eDP-1)"
@@ -41,7 +41,7 @@ main() {
         " unrotate external display (HDMI-A-1)"
         " screenshot to clipboard"
         " screenshot to file"
-        "datetime"
+        " datetime"
     )
     local prompt
     prompt="$(basename -- "$0")"
@@ -80,7 +80,7 @@ main() {
         " power-saver" | "power-saver")
             $power_profiles_menu "power-saver"
             ;;
-        "battery")
+        " battery")
             notify-send \
                 "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" \
                 --app-name="battery_capacity_status" \
@@ -102,7 +102,7 @@ main() {
         " wifi ext")
             $wifi_menu "ext"
             ;;
-        "notifications")
+        " notifications")
             swaync-client -t -sw
             ;;
         " audio laptop (Analog Stereo Duplex)")
@@ -150,7 +150,7 @@ main() {
                  --urgency=low \
                  --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
             ;;
-        "datetime")
+        " datetime")
             notify-send "$(date "+%a %d %b %H:%M")" \
                 --urgency=low \
                 --hint=string:x-canonical-private-synchronous:"datetime_notification"
