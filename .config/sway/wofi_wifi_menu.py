@@ -60,18 +60,22 @@ def get_status_prompt() -> str:
 
 def get_wofi_response(bash_list: str, prompt: str) -> str:
     # This function calls wofi and returns the response, or exits if wofi is
-    # quit without selecting anything.
-    command = f'printf -- "{bash_list}" | wofi --matching="fuzzy" -ip "{prompt}" --show dmenu'
+    # quit without selecting anything. It will return entered text even if it
+    # is not an option, as long as enter is pressed.
+    process = subprocess.run(
+        ["wofi", "--matching=fuzzy", "-ip", prompt, "--show", "dmenu"],
+        input=bash_list,
+        text=True,
+        capture_output=True
+    )
 
-    try:
-        response = subprocess.check_output(command, shell=True, encoding="UTF-8")
-        response = response.strip()
-    except subprocess.CalledProcessError:
-        # This happens if escaping wofi without selecting anything.
-        # We want to quit immediately if this happens.
+    # Check if the user made a selection
+    if process.returncode == 0:
+        selected_item = process.stdout.strip()
+    else:
         exit(1)
 
-    return response
+    return selected_item
 
 
 def notify_send(body: str) -> None:
