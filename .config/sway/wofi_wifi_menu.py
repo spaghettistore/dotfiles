@@ -43,6 +43,10 @@ def get_wifi_name() -> str:
     # Remove trailing line 'lo'
     name = process.stdout.split()[0]
 
+    # If not connected to a network (wifi radio can be either on or off)
+    if name == "lo":
+        name = "disconnected"
+
     return name
 
 
