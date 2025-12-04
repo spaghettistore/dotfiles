@@ -9,7 +9,8 @@ vim.g.mapleader = " "
 -- Marks
 -- -----
 vim.keymap.set("n", "<Leader>'h", "<cmd>edit ~/.bash_history<CR>")
-vim.keymap.set("n", "<Leader>'n", "<cmd>edit ~/inbox/notepad.txt<CR>")
+vim.keymap.set("n", "<Leader>'i", "<cmd>edit ~/inbox/notepad.txt<CR>")
+vim.keymap.set("n", "<Leader>'t", "<cmd>edit ~/projects/todo.txt<CR>")
 
 -- File Explorer
 -- -------------
