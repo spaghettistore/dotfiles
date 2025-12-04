@@ -31,14 +31,14 @@ main() {
         " notifications"
         " audio laptop (Analog Stereo Duplex)"
         " audio hdmi (Digital Stereo (HDMI) Output)"
-        " enable laptop display (eDP-1)"
-        " disable laptop display (eDP-1)"
-        " enable external display (HDMI-A-1)"
-        " disable external display (HDMI-A-1)"
-        " rotate laptop display (eDP-1)"
-        " unrotate laptop display (eDP-1)"
-        " rotate external display (HDMI-A-1)"
-        " unrotate external display (HDMI-A-1)"
+        " display enable laptop (eDP-1)"
+        " display disable laptop (eDP-1)"
+        " display enable external (HDMI-A-1)"
+        " display disable external (HDMI-A-1)"
+        " display rotate laptop (eDP-1)"
+        " display unrotate laptop (eDP-1)"
+        " display rotate external (HDMI-A-1)"
+        " display unrotate external (HDMI-A-1)"
         " screenshot to clipboard"
         " screenshot to file"
         " datetime"
@@ -68,6 +68,13 @@ main() {
         " lock" | "lock")
             $power_menu "lock"
             ;;
+        " battery")
+            notify-send \
+                "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" \
+                --app-name="battery_capacity_status" \
+                --urgency=low \
+                --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
+            ;;
         " powerprofiles" | "powerprofiles")
             $power_profiles_menu
             ;;
@@ -79,13 +86,6 @@ main() {
             ;;
         " power-saver" | "power-saver")
             $power_profiles_menu "power-saver"
-            ;;
-        " battery")
-            notify-send \
-                "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" \
-                --app-name="battery_capacity_status" \
-                --urgency=low \
-                --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
             ;;
         " wifi" | "wifi")
             $wifi_menu
@@ -111,28 +111,28 @@ main() {
         " audio hdmi (Digital Stereo (HDMI) Output)")
             pacmd set-card-profile 0 output:hdmi-stereo
             ;;
-        " enable laptop display (eDP-1)")
+        " display enable laptop (eDP-1)")
             swaymsg output eDP-1 enable
             ;;
-        " disable laptop display (eDP-1)")
+        " display disable laptop (eDP-1)")
             swaymsg output eDP-1 disable
             ;;
-        " enable external display (HDMI-A-1)")
+        " display enable external (HDMI-A-1)")
             swaymsg output HDMI-A-1 enable
             ;;
-        " disable external display (HDMI-A-1)")
+        " display disable external (HDMI-A-1)")
             swaymsg output HDMI-A-1 disable
             ;;
-        " rotate laptop display (eDP-1)")
+        " display rotate laptop (eDP-1)")
             swaymsg output "eDP-1" transform 90
             ;;
-        " unrotate laptop display (eDP-1)")
+        " display unrotate laptop (eDP-1)")
             swaymsg output "eDP-1" transform 0
             ;;
-        " rotate external display (HDMI-A-1)")
+        " display rotate external (HDMI-A-1)")
             swaymsg output "HDMI-A-1" transform 90
             ;;
-        " unrotate external display (HDMI-A-1)")
+        " display unrotate external (HDMI-A-1)")
             swaymsg output "HDMI-A-1" transform 0
             ;;
         " screenshot to clipboard")
