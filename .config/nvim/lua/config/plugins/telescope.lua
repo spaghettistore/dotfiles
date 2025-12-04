@@ -49,13 +49,17 @@ return {
             vim.keymap.set("n", "<leader>sr", require('telescope.builtin').oldfiles, {desc = ":Telescope oldfiles"})
             vim.keymap.set("n", "<leader>sR", require('telescope.builtin').resume, {desc = ":Telescope resume"})
 
+            vim.keymap.set('n', '<leader>sG', function()
+                require("telescope.builtin").live_grep({
+                    additional_args = function() return {"--hidden"} end })end,
+                    { desc = "Telescope Live Grep with hidden files" })
             vim.keymap.set("n", "<leader>sb", function()
                 require('telescope.builtin').grep_string {
                     grep_open_files=true,
                     search=""
                 }
                 end,
-                {desc = "Telescope grep current open buffers"})
+                {desc = "Telescope Live Grep current open buffers"})
             vim.keymap.set("n", "<leader>en", function()
                 require('telescope.builtin').find_files {
                     cwd = vim.fn.stdpath("config")
