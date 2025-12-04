@@ -41,6 +41,8 @@ exec swaync
 bindsym $mod+i exec swaync-client -t -sw
 exec ~/.config/sway/bat_notify.sh
 
+bindsym $mod+t exec notify-send "$(date "+%a %d %b %H:%M")" --urgency=low --hint=string:x-canonical-private-synchronous:"datetime_notification"
+
 # ------------------
 # Idle Configuration
 # ------------------
@@ -244,8 +246,8 @@ bindsym $mod+Shift+bracketleft move workspace to output left
 
 ### Layout
 bindsym $mod+f fullscreen
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+t layout tabbed
 bindsym $mod+z layout toggle split
 bindsym $mod+Shift+Equal sticky toggle
 #bindsym $mod+Shift+z layout default
