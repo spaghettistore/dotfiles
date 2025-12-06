@@ -47,17 +47,22 @@ fzls() {
 
 goto() {
     local target
-    target="$(find . -mindepth 1 \
-        | fzf)"
+
+    if [[ "$1" ]]; then
+        target="$1"
+    else
+        target="$(find . -mindepth 1 \
+            | fzf)"
+    fi
 
     [[ -z "$target" ]] \
         && return 1
 
-    target="$(realpath "$target")"
+    target="$(realpath -- "$target")"
 
     local directory
     if [[ -f "$target" ]]; then
-        directory="$(dirname "$target")"
+        directory="$(dirname -- "$target")"
     elif [[ -d "$target" ]]; then
         directory="$target"
     else
