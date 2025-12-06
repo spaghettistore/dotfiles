@@ -5,6 +5,7 @@
 # '~/dotfiles/home/*' -> '~/'
 
 dry_run="false"
+dotfiles_directory="$HOME"/dotfiles
 
 # Echo, but prefixed with '[DRY_RUN]: ' if global variable 'dry_run' is 'true'.
 # Globals:
@@ -70,6 +71,8 @@ attempt_create_symlink() {
 
 
 main() {
+    local config_dir dir_name new_config_dir_path file file_name new_home_dir_path
+
     case "$1" in
         "--dry" | "--dry-run")
             dry_run="true"
@@ -78,28 +81,24 @@ main() {
 
     confirm_start_or_exit
 
-    local -a config_directories
-    mapfile -t config_directories < <(\
-        find "$HOME"/dotfiles/.config -mindepth 1 -maxdepth 1 -type d)
+    local -a dotfiles_config_directories
+    mapfile -t dotfiles_config_directories < <(\
+        find "$dotfiles_directory"/.config -mindepth 1 -maxdepth 1 -type d)
 
-    local config_dir
-    for config_dir in "${config_directories[@]}"; do
-        local dir_name
-        dir_name="$(basename "$config_dir")"
-        local new_path="$HOME/.config/$dir_name"
-        attempt_create_symlink "$config_dir" "$new_path"
+    for config_dir in "${dotfiles_config_directories[@]}"; do
+        dir_name="$(basename -- "$config_dir")"
+        new_config_dir_path="$HOME/.config/$dir_name"
+        attempt_create_symlink "$config_dir" "$new_config_dir_path"
     done
 
-    local -a dotfiles_home
-    mapfile -t dotfiles_home < <(\
-        find "$HOME"/dotfiles/home -maxdepth 1 -mindepth 1)
+    local -a dotfiles_home_directories
+    mapfile -t dotfiles_home_directories < <(\
+        find "$dotfiles_directory"/home -maxdepth 1 -mindepth 1)
 
-    local file
-    for file in "${dotfiles_home[@]}"; do
-        local file_name
-        file_name="$(basename "$file")"
-        local new_path="$HOME/$file_name"
-        attempt_create_symlink "$file" "$new_path"
+    for file in "${dotfiles_home_directories[@]}"; do
+        file_name="$(basename -- "$file")"
+        new_home_dir_path="$HOME/$file_name"
+        attempt_create_symlink "$file" "$new_home_dir_path"
     done
 }
 
