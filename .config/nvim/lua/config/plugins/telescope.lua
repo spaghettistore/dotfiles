@@ -51,7 +51,7 @@ return {
             vim.keymap.set("n", "<leader>gS", require('telescope.builtin').git_stash, {desc = ":Telescope git_stash"})
             vim.keymap.set("n", "<leader>sr", require('telescope.builtin').oldfiles, {desc = ":Telescope oldfiles"})
             vim.keymap.set("n", "<leader>sR", require('telescope.builtin').resume, {desc = ":Telescope resume"})
-
+            vim.keymap.set("n", "<leader>uC", function() require('telescope.builtin').colorscheme {enable_preview=true} end, {desc = ":Telescope colorscheme enable_preview=true"})
             vim.keymap.set('n', '<leader>Sg',
                 function()
                     require("telescope.builtin").live_grep({
