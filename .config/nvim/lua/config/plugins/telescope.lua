@@ -9,9 +9,9 @@ return {
         config = function()
             require('telescope').setup {
                 pickers = {
-                    find_files = {
-                        theme = "ivy"
-                    }
+                    find_files = {theme = "ivy"},
+                    live_grep = {theme = "ivy"},
+                    current_buffer_fuzzy_find = {theme = "ivy"}
                 },
                 extensions = {
                     fzf = {}
@@ -26,6 +26,8 @@ return {
             vim.keymap.set("n", "<leader>fD", function() require('telescope.builtin').find_files {cwd="$HOME/dotfiles", hidden=true} end, {desc = ":Telescope find_files cwd=~/dotfiles hidden=true"})
             vim.keymap.set("n", "<leader>gr", require('telescope.builtin').lsp_references, {desc = ":Telescope lsp_references"})
             vim.keymap.set("n", "<leader>/", require('telescope.builtin').current_buffer_fuzzy_find, {desc = ":Telescope current_buffer_fuzzy_find"})
+            vim.keymap.set("n", "<leader>sg", require('telescope.builtin').live_grep, {desc = ":Telescope live_grep"})
+            vim.keymap.set("n", "<leader>sG", function() require('telescope.builtin').live_grep {cwd="%:h"} end, {desc = ":Telescope live_grep cwd=%:h"})
             vim.keymap.set("n", "<leader>ls", require('telescope.builtin').buffers, {desc = ":Telescope buffers"})
             vim.keymap.set("n", "<leader>,", require('telescope.builtin').buffers, {desc = ":Telescope buffers"})
             vim.keymap.set("n", "<leader>s\"", require('telescope.builtin').registers, {desc = ":Telescope registers"})
@@ -35,7 +37,6 @@ return {
             vim.keymap.set("n", "<leader>sc", require('telescope.builtin').command_history, {desc = ":Telescope command_history"})
             vim.keymap.set("n", "<leader>s:", require('telescope.builtin').command_history, {desc = ":Telescope command_history"})
             vim.keymap.set("n", "<leader>sd", require('telescope.builtin').diagnostics, {desc = ":Telescope diagnostics"})
-            vim.keymap.set("n", "<leader>sg", require('telescope.builtin').live_grep, {desc = ":Telescope live_grep"})
             vim.keymap.set("n", "<leader>sh", require('telescope.builtin').help_tags, {desc = ":Telescope help_tags"})
             vim.keymap.set("n", "<leader>f?", require('telescope.builtin').builtin, {desc = ":Telescope builtin"})
             vim.keymap.set("n", "<leader>sj", require('telescope.builtin').jumplist, {desc = ":Telescope jumplist"})
@@ -51,7 +52,7 @@ return {
             vim.keymap.set("n", "<leader>sr", require('telescope.builtin').oldfiles, {desc = ":Telescope oldfiles"})
             vim.keymap.set("n", "<leader>sR", require('telescope.builtin').resume, {desc = ":Telescope resume"})
 
-            vim.keymap.set('n', '<leader>sG',
+            vim.keymap.set('n', '<leader>Sg',
                 function()
                     require("telescope.builtin").live_grep({
                         additional_args = function() return {"--hidden"} end
