@@ -22,7 +22,7 @@ return {
 
             vim.keymap.set("n", "<leader>fd", require('telescope.builtin').find_files, {desc = ":Telescope find_files"})
             vim.keymap.set("n", "<leader>fa", function() require('telescope.builtin').find_files {hidden=true} end, {desc = ":Telescope find_files hidden=true"})
-            vim.keymap.set("n", "<leader>f.", function() require('telescope.builtin').find_files {hidden=true} end, {desc = ":Telescope find_files hidden=true"})
+            vim.keymap.set("n", "<leader>fF", function() require('telescope.builtin').find_files {cwd="%:h"} end, {desc = ":Telescope find_files cwd=%:h"})
             vim.keymap.set("n", "<leader>fD", function() require('telescope.builtin').find_files {cwd="$HOME/dotfiles", hidden=true} end, {desc = ":Telescope find_files cwd=~/dotfiles hidden=true"})
             vim.keymap.set("n", "<leader>gr", require('telescope.builtin').lsp_references, {desc = ":Telescope lsp_references"})
             vim.keymap.set("n", "<leader>/", require('telescope.builtin').current_buffer_fuzzy_find, {desc = ":Telescope current_buffer_fuzzy_find"})
@@ -51,45 +51,54 @@ return {
             vim.keymap.set("n", "<leader>sr", require('telescope.builtin').oldfiles, {desc = ":Telescope oldfiles"})
             vim.keymap.set("n", "<leader>sR", require('telescope.builtin').resume, {desc = ":Telescope resume"})
 
-            vim.keymap.set('n', '<leader>sG', function()
-                require("telescope.builtin").live_grep({
-                    additional_args = function() return {"--hidden"} end })end,
-                    { desc = "Telescope Live Grep with hidden files" })
-            vim.keymap.set("n", "<leader>sb", function()
-                require('telescope.builtin').grep_string {
-                    grep_open_files=true,
-                    search=""
-                }
+            vim.keymap.set('n', '<leader>sG',
+                function()
+                    require("telescope.builtin").live_grep({
+                        additional_args = function() return {"--hidden"} end
+                    })
+                end,
+                {desc = "Telescope Live Grep with hidden files"})
+            vim.keymap.set("n", "<leader>sb",
+                function()
+                    require('telescope.builtin').grep_string {
+                        grep_open_files=true,
+                        search=""
+                    }
                 end,
                 {desc = "Telescope Live Grep current open buffers"})
-            vim.keymap.set("n", "<leader>en", function()
-                require('telescope.builtin').find_files {
-                    cwd = vim.fn.stdpath("config")
-                }
+            vim.keymap.set("n", "<leader>en",
+                function()
+                    require('telescope.builtin').find_files {
+                        cwd = vim.fn.stdpath("config")
+                    }
                 end,
                 {desc = "Telescope edit nvim config files"})
-            vim.keymap.set("n", "<leader>fh", function()
-                require('telescope.builtin').find_files {
-                    cwd = "$HOME"
-                }
+            vim.keymap.set("n", "<leader>fh",
+                function()
+                    require('telescope.builtin').find_files {
+                        cwd = "$HOME"
+                    }
                 end,
                 {desc = "Telescope fzf home directory"})
-            vim.keymap.set("n", "<leader>fi", function()
-                require('telescope.builtin').find_files {
-                    cwd = "$HOME/inbox"
-                }
+            vim.keymap.set("n", "<leader>fi",
+                function()
+                    require('telescope.builtin').find_files {
+                        cwd = "$HOME/inbox"
+                    }
                 end,
                 {desc = "Telescope fzf ~/inbox directory"})
-            vim.keymap.set("n", "<leader>fp", function()
-                require('telescope.builtin').find_files {
-                    cwd = "$HOME/projects"
-                }
+            vim.keymap.set("n", "<leader>fp",
+                function()
+                    require('telescope.builtin').find_files {
+                        cwd = "$HOME/projects"
+                    }
                 end,
                 {desc = "Telescope fzf ~/projects directory"})
-            vim.keymap.set("n", "<leader>fr", function()
-                require('telescope.builtin').find_files {
-                    cwd = "$HOME/refs"
-                }
+            vim.keymap.set("n", "<leader>fr",
+                function()
+                    require('telescope.builtin').find_files {
+                        cwd = "$HOME/refs"
+                    }
                 end,
                 {desc = "Telescope fzf ~/refs directory"})
         end
