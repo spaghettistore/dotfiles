@@ -11,7 +11,8 @@ return {
                 pickers = {
                     find_files = {theme = "ivy"},
                     live_grep = {theme = "ivy"},
-                    current_buffer_fuzzy_find = {theme = "ivy"}
+                    current_buffer_fuzzy_find = {theme = "ivy"},
+                    grep_string = {theme = "ivy"}
                 },
                 extensions = {
                     fzf = {}
@@ -38,7 +39,7 @@ return {
                         additional_args = function() return {"--hidden"} end
                     })
                 end,
-                {desc = "Telescope Live Grep with hidden files"})
+                {desc = "Telescope Live Grep hidden=true"})
             vim.keymap.set("n", "<leader>s.", function() require('telescope.builtin').live_grep {cwd="%:h"} end, {desc = ":Telescope live_grep cwd=%:h"})
             vim.keymap.set('n', '<leader>S.',
                 function()
