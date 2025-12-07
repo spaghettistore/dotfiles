@@ -8,20 +8,40 @@
 if [[ "$#" -eq 1 ]]; then
     selected="$1"
 else
-    files="$(find -L "$HOME" "$HOME/inbox" "$HOME/projects" "$HOME/refs" \
-        "$HOME/scripts" "$HOME/archive" "$HOME/media" \
-        -mindepth 1 -maxdepth 1 -type d)
-$HOME"
+    dirs=(
+        "$HOME"
+        "$HOME/inbox"
+        "$HOME/projects"
+        "$HOME/refs"
+        "$HOME/archive"
+        "$HOME/scripts"
+        "$HOME/media"
+    )
+
+    files="$(find -L "${dirs[@]}" -mindepth 1 -maxdepth 1 -type d)"
+
+    # Remove '/home/$USER' prefix during fzf
+    files="$(echo "$files" | sed "s|^$HOME/||")"
+    files="$files
+~"
+
     selected="$(echo "$files" \
         | sort \
         | fzf)"
+
+    # Re-add '/home/$USER' prefix
+    case "$selected" in
+        "~") selected="$HOME" ;;
+        "") exit 1 ;;
+        *) selected="$HOME/${selected}" ;;
+    esac
 fi
 
 [[ -z "$selected" ]] \
     && exit 1
 
 # Create/Attach to tmux session in that directory
-selected_name="$(basename "$selected" | tr "." "_")"
+selected_name="$(basename -- "$selected" | tr "." "_")"
 
 if [[ "$TMUX" ]]; then
     # Inside tmux
