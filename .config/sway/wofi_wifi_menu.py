@@ -20,12 +20,11 @@ def check_if_ssid_file_exists() -> None:
 def get_wifi_status() -> str:
     # This function returns 'enabled' or 'disabled'
     process = subprocess.run(
-        ["nmcli", "--fields", "WIFI", "g"],
+        ["nmcli", "--colors=no", "--terse", "--fields", "WIFI", "general"],
         text=True,
         capture_output=True
     )
-    # Remove line 1 containing word 'WIFI'
-    status = process.stdout.split()[-1]
+    status = process.stdout.strip()
 
     return status
 
@@ -35,7 +34,7 @@ def get_wifi_name() -> str:
     # This function expects wifi to be enabled, else it  will reutrn the
     # otherwise trailing line 'lo'.
     process = subprocess.run(
-        ["nmcli", "-t", "-f", "NAME", "c", "show", "--active"],
+        ["nmcli", "--colors=no", "--terse", "--fields", "NAME", "connection", "show", "--active"],
         text=True,
         capture_output=True
     )
@@ -128,7 +127,7 @@ def main():
         subprocess.run("nmcli radio wifi on", shell=True)
         # Connect to established SSID connection
         subprocess.run(f"nmcli connection up {selected_ssid}", shell=True)
-        notify_send(f"Connecting to {selected_ssid}")
+        notify_send(f"Connected to {selected_ssid}")
     elif response == "on":
         subprocess.run(f"nmcli radio wifi {response}", shell=True)
         notify_send(f"Enabled")
