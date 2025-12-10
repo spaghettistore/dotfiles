@@ -41,7 +41,7 @@ exec swaync
 bindsym $mod+i exec swaync-client -t -sw
 exec ~/.config/sway/bat_notify.sh
 
-bindsym $mod+t exec notify-send "$(date "+%a %d %b %H:%M")" --urgency=low --hint=string:x-canonical-private-synchronous:"datetime_notification"
+bindsym $mod+t exec notify-send "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
 
 # ------------------
 # Idle Configuration
@@ -174,8 +174,8 @@ bindsym $mod+e exec "$term -e $file_manager"
 bindsym $mod+Equal exec "$term -e bc -l"
 bindsym XF86Calculator exec "$term -e bc -l"
 # Screenshot / printscreen
-bindsym Print exec grim /tmp/grim_temp_screenshot.png && wl-copy < /tmp/grim_temp_screenshot.png && rm /tmp/grim_temp_screenshot.png && notify-send "Screenshot saved to clipboard" --urgency=low --hint=string:x-canonical-private-synchronous:"screenshot_to_clipboard_notification"
-bindsym $mod+Print exec grim && notify-send "Screenshot saved to file" --urgency=low --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
+bindsym Print exec grim /tmp/grim_temp_screenshot.png && wl-copy < /tmp/grim_temp_screenshot.png && rm /tmp/grim_temp_screenshot.png && notify-send "Screenshot saved to clipboard" --urgency=low --app-name="screenshot_to_clipboard_notification" --hint=string:x-canonical-private-synchronous:"screenshot_to_clipboard_notification"
+bindsym $mod+Print exec grim && notify-send "Screenshot saved to file" --urgency=low --app-name="screenshot_saved_notification" --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
 
 ### Focus
 # Vim

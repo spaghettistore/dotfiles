@@ -142,17 +142,20 @@ main() {
                 && notify-send \
                     "Screenshot saved to clipboard" \
                     --urgency=low \
+                    --app-name="screenshot_to_clipboard_notification" \
                     --hint=string:x-canonical-private-synchronous:"screenshot_to_clipboard_notification"
             ;;
         " screenshot to file")
             grim \
              && notify-send "Screenshot saved to file" \
                  --urgency=low \
+                 --app-name="screenshot_saved_notification" \
                  --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
             ;;
         " datetime")
             notify-send "$(date "+%a %d %b %H:%M")" \
                 --urgency=low \
+                --app-name="datetime_notification" \
                 --hint=string:x-canonical-private-synchronous:"datetime_notification"
             ;;
         *)
