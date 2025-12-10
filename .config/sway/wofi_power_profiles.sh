@@ -9,9 +9,9 @@ main() {
             " balanced"
             " power-saver"
         )
-        current_profile="$(powerprofilesctl |
-            grep "^\*" |
-            tr -d "* :"
+        current_profile="$(powerprofilesctl \
+            | grep "^\*" \
+            | tr -d "* :"
         )"
         prompt="Current profile: $current_profile"
         selected_profile="$(
