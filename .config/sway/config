@@ -123,6 +123,7 @@ input type:touchpad {
     tap enabled
     dwt enabled
     middle_emulation enabled
+    pointer_accel 0.10
     #natural_scroll enabled
     #accel_profile "flat"
 }
