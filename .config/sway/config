@@ -206,6 +206,7 @@ bindsym ctrl+alt+Left workspace prev
 bindsym ctrl+alt+Right workspace next
 bindsym $mod+page_up workspace prev
 bindsym $mod+page_down workspace next
+bindsym $mod+tab workspace next
 # Parent Child
 bindsym $mod+a focus parent
 bindsym $mod+q focus child
@@ -241,6 +242,7 @@ bindsym Shift+ctrl+alt+Left move container to workspace prev
 bindsym Shift+ctrl+alt+Right move container to workspace next
 bindsym $mod+Shift+page_up move container to workspace prev
 bindsym $mod+Shift+page_down move container to workspace next
+bindsym $mod+Shift+tab move container to workspace next
 ### Move [Workspace] between monitors
 bindsym $mod+Shift+bracketright move workspace to output right
 bindsym $mod+Shift+bracketleft move workspace to output left
