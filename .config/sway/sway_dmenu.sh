@@ -10,6 +10,7 @@ fi
 power_menu="$HOME/.config/sway/wofi_power_menu.sh"
 wifi_menu="$HOME/.config/sway/wofi_wifi_menu.py"
 power_profiles_menu="$HOME/.config/sway/wofi_power_profiles.sh"
+info_notifications_script="$HOME/.config/sway/info_notification.sh"
 
 main() {
     declare -a options=(
@@ -42,6 +43,7 @@ main() {
         " screenshot to clipboard"
         " screenshot to file"
         " datetime"
+        "info"
     )
     local prompt
     prompt="$(basename -- "$0")"
@@ -157,6 +159,9 @@ main() {
                 --urgency=low \
                 --app-name="datetime_notification" \
                 --hint=string:x-canonical-private-synchronous:"datetime_notification"
+            ;;
+        "info")
+            $info_notifications_script "all"
             ;;
         *)
             exit 1
