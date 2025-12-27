@@ -215,6 +215,16 @@ bindsym $mod+q focus child
 # Monitor
 bindsym $mod+bracketright focus output right
 bindsym $mod+bracketleft focus output left
+bindsym $mod+alt+$right focus output right
+bindsym $mod+alt+$left focus output left
+bindsym $mod+alt+$up focus output up
+bindsym $mod+alt+$down focus output down
+bindsym $mod+alt+Right focus output right
+bindsym $mod+alt+Left focus output left
+bindsym $mod+alt+Up focus output up
+bindsym $mod+alt+Down focus output down
+bindsym $mod+alt+n focus output next
+bindsym $mod+alt+p focus output prev
 
 ### Move [Focused Container]
 # Vim
@@ -247,6 +257,16 @@ bindsym $mod+Shift+page_down move container to workspace next
 ### Move [Workspace] between monitors
 bindsym $mod+Shift+bracketright move workspace to output right
 bindsym $mod+Shift+bracketleft move workspace to output left
+bindsym $mod+Shift+alt+$right move workspace to output right
+bindsym $mod+Shift+alt+$left move workspace to output left
+bindsym $mod+Shift+alt+$up move workspace to output up
+bindsym $mod+Shift+alt+$down move workspace to output down
+bindsym $mod+Shift+alt+Right move workspace to output right
+bindsym $mod+Shift+alt+Left move workspace to output left
+bindsym $mod+Shift+alt+Up move workspace to output up
+bindsym $mod+Shift+alt+Down move workspace to output down
+bindsym $mod+Shift+alt+n move workspace to output next
+bindsym $mod+Shift+alt+p move workspace to output prev
 
 ### Layout
 bindsym $mod+f fullscreen
