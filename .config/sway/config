@@ -166,7 +166,7 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 # Toggle enable/disable touchpad
-bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled, exec ~/.config/sway/current_touchpad_status_notification.sh
+bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled, exec ~/.config/sway/info_notification.sh "touchpad"
 # Swaylock
 bindsym $mod+Shift+x exec systemctl suspend && swaylock
 # Applications
