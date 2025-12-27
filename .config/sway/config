@@ -42,6 +42,7 @@ bindsym $mod+i exec swaync-client -t -sw
 exec ~/.config/sway/bat_notify.sh
 
 bindsym $mod+t exec notify-send "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
+bindsym $mod+alt+i exec ~/.config/sway/info_notification.sh "time" "wifi" "battery"
 
 # ------------------
 # Idle Configuration
