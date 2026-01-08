@@ -310,7 +310,7 @@ show_marks yes
 # ----------------
 
 bindsym $mod+o exec pkill wofi || ~/bin/menu_hub.sh "wofi"
-bindsym $mod+shift+b exec pkill wofi || ~/bin/bmks "wofi"
+bindsym $mod+alt+b exec pkill wofi || ~/bin/bmks "wofi"
 
 # ------------
 # Custom Modes
