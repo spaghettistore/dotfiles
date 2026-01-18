@@ -71,16 +71,23 @@ output * {
     bg ~/.config/sway/background.png fill
 }
 
-### Multilple Monitor Configuration
+### Monitor Configuration
 
+# This layout is for no external monitor connected
 output eDP-1 {
-    resolution 1920x1080
-    position 1920,0
-}
-output HDMI-A-1 {
     resolution 1920x1080
     position 0,0
 }
+
+# This layout is to make Steam games work normally with an external monitor connected
+#output eDP-1 {
+#    resolution 1920x1080
+#    position 1920,0
+#}
+#output HDMI-A-1 {
+#    resolution 1920x1080
+#    position 0,0
+#}
 
 ### Bind workspace to specific monitor
 #workspace 1 output eDP-1
