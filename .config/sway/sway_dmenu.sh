@@ -121,9 +121,13 @@ main() {
             ;;
         " display enable external (HDMI-A-1)")
             swaymsg output HDMI-A-1 enable
+            # Set external on left, laptop on right
+            swaymsg output eDP-1 position 1920 0
+            swaymsg output HDMI-A-1 position 0 0
             ;;
         " display disable external (HDMI-A-1)")
             swaymsg output HDMI-A-1 disable
+            swaymsg output eDP-1 position 0 0
             ;;
         " display rotate laptop (eDP-1)")
             swaymsg output "eDP-1" transform 90
