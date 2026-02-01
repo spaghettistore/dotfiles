@@ -316,7 +316,6 @@ show_marks yes
 # Scripts Keybinds
 # ----------------
 
-bindsym $mod+o exec pkill wofi || ~/bin/menu_hub.sh "wofi"
 bindsym $mod+alt+b exec pkill wofi || ~/bin/bmks "wofi"
 
 # ------------
