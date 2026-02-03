@@ -31,7 +31,7 @@ foreground = "#ebdbb2"  # Gruvbox: Foreground
 TERM = "alacritty"
 
 [font]
-size = 14
+size = 13
 
 [font.normal]
 family = "DejaVu Sans Mono"
