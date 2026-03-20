@@ -32,6 +32,10 @@ main() {
         " notifications"
         " audio laptop (Analog Stereo Duplex)"
         " audio hdmi (Digital Stereo (HDMI) Output)"
+        " display switch to external screen"
+        " display switch to laptop screen"
+        " display extend to left"
+        " display extend to right"
         " display enable laptop (eDP-1)"
         " display disable laptop (eDP-1)"
         " display enable external (HDMI-A-1)"
@@ -113,6 +117,28 @@ main() {
         " audio hdmi (Digital Stereo (HDMI) Output)")
             pacmd set-card-profile 0 output:hdmi-stereo
             ;;
+        " display switch to external screen")
+            swaymsg output HDMI-A-1 enable
+            swaymsg output eDP-1 disable
+            swaymsg output HDMI-A-1 position 0 0
+            ;;
+        " display switch to laptop screen")
+            swaymsg output eDP-1 enable
+            swaymsg output HDMI-A-1 disable
+            swaymsg output eDP-1 position 0 0
+            ;;
+        " display extend to left")
+            swaymsg output eDP-1 enable
+            swaymsg output HDMI-A-1 enable
+            swaymsg output eDP-1 position 1920 0
+            swaymsg output HDMI-A-1 position 0 0
+            ;;
+        " display extend to right")
+            swaymsg output eDP-1 enable
+            swaymsg output HDMI-A-1 enable
+            swaymsg output eDP-1 position 0 0
+            swaymsg output HDMI-A-1 position 1920 0
+            ;;
         " display enable laptop (eDP-1)")
             swaymsg output eDP-1 enable
             ;;
@@ -129,6 +155,7 @@ main() {
             swaymsg output HDMI-A-1 disable
             swaymsg output eDP-1 position 0 0
             ;;
+
         " display rotate laptop (eDP-1)")
             swaymsg output "eDP-1" transform 90
             ;;
