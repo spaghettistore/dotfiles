@@ -48,9 +48,7 @@ get_battery_info() {
     local capacity status profile
     capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
     status="$(cat /sys/class/power_supply/BAT0/status)"
-    profile="$(powerprofilesctl \
-        | grep "^\*" \
-        | tr -d "* :")"
+    profile="$(powerprofilesctl | grep "^\*" | tr -d "* :")"
     echo "${capacity}% ${status} (${profile})"
 }
 

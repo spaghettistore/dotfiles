@@ -1,7 +1,9 @@
 #!/bin/bash
 
 main() {
-    local current_profile prompt selected_profile profile
+    local current_profile prompt selected_profile profile capacity \
+        charging_status
+
 
     if [[ $# -eq 0 ]]; then
         declare -a options=(
@@ -9,11 +11,11 @@ main() {
             " balanced"
             " power-saver"
         )
-        current_profile="$(powerprofilesctl \
-            | grep "^\*" \
-            | tr -d "* :"
-        )"
-        prompt="Current profile: $current_profile"
+        current_profile="$(powerprofilesctl | grep "^\*" | tr -d "* :")"
+        capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
+        charging_status="$(cat /sys/class/power_supply/BAT0/status)"
+
+        prompt="${capacity}% ${charging_status} (${current_profile})"
         selected_profile="$(
             printf "%s\n" "${options[@]}" \
                 | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
