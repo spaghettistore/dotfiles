@@ -126,7 +126,7 @@ source "$HOME"/dotfiles/home/.bashrc_functions.sh
 # ---------------------
 
 # Vim Keybinds
-set -o vi
+#set -o vi  # Use 'set editing-mode vi' in '~/.inputrc' instead, so that all readline() based apps use vi keybinds
 #bind -x '"\C-L": "clear"'  # Vim mode clear
 
 # Arrow keys up/down use what is in prompt

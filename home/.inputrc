@@ -69,3 +69,5 @@ $endif
 # "\e[F": end-of-line
 
 $endif
+
+set editing-mode vi  # Use this instead of 'set -o vi' in '~/.bashrc', so that all readline() based apps use vi keybinds
