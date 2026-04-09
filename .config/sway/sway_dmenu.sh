@@ -11,6 +11,7 @@ power_menu="$HOME/.config/sway/wofi_power_menu.sh"
 wifi_menu="$HOME/.config/sway/wofi_wifi_menu.py"
 power_profiles_menu="$HOME/.config/sway/wofi_power_profiles.sh"
 info_notifications_script="$HOME/.config/sway/info_notification.sh"
+what_bin_day_script="$HOME/bin/bin_day.py"
 
 main() {
     declare -a options=(
@@ -48,6 +49,7 @@ main() {
         " screenshot to file"
         " datetime"
         "info"
+        "what bin day"
     )
     local prompt
     prompt="$(basename -- "$0")"
@@ -193,6 +195,13 @@ main() {
             ;;
         "info")
             $info_notifications_script "all"
+            ;;
+        "what bin day")
+            [[ -e "$what_bin_day_script" ]] \
+                && notify-send "$("$what_bin_day_script")" \
+                    --urgency=low \
+                    --app-name="what_bin_day_notification" \
+                    --hint=string:x-canonical-private-synchronous:"what_bin_day_notification"
             ;;
         *)
             exit 1
