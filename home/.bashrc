@@ -136,6 +136,7 @@ bind '"\e[B": history-search-forward'
 # Script keybinds
 bind -x '"\C-F": "~/.config/tmux/tmux_fzed.sh"'
 bind -x '"\C-G": "~/.config/tmux/tmux_fzcd.sh"'
+bind -x '"\C-O": "fzed"'
 
 # Fzf
 # ---
