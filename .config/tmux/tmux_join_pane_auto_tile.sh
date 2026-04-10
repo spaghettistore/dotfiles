@@ -5,7 +5,7 @@ if [[ "$TMUX" ]]; then
     num_panes="$(tmux list-panes | wc --lines)"
 
     if [[ "$num_panes" -le 1 ]]; then
-        tmux join-pane -h
+        tmux join-pane -h || tmux select-pane -t "$current_pane" && exit 0
     else
         current_pane="$(tmux list-panes | grep "(active)$" | awk -F ":" '{print $1}')"
 
@@ -15,10 +15,11 @@ if [[ "$TMUX" ]]; then
 
         # Create new pane from final pane so the way it spawns is consistent
         if [[ $(( num_panes %2 )) -eq 0 ]]; then
-            tmux join-pane -v
+            tmux join-pane -v || tmux select-pane -t "$current_pane" && exit 0
         else
-            tmux join-pane -h
+            tmux join-pane -h || tmux select-pane -t "$current_pane" && exit 0
         fi
+
 
         # Return to original pane, and then back to newly created pane.
         # We do this to keep tmux's last pane the same (as otherwise the last
