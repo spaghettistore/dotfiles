@@ -10,24 +10,27 @@ get_confirmation() {
     esac
 }
 
+
 main() {
-    case "$1" in
+    case "$*" in
         "status -s") git status -s | less ;;
         "status") git status | less ;;
         "difftool") git difftool ;;
         "difftool --staged") git difftool --staged ;;
         "log --oneline") git log --oneline | less ;;
-        "log") git log | less;;
+        "log") git log | less ;;
         "add")
-            git status -s
-            if get_confirmation "Confirm 'git add .'"; then
-                git add .
+            if git status -s; then
+                if get_confirmation "Confirm 'git add .'"; then
+                    git add .
+                fi
             fi
             ;;
         "commit")
-            git status -s
-            if get_confirmation "Confirm 'git commit'"; then
-                git commit
+            if git status -s; then
+                if get_confirmation "Confirm 'git commit'"; then
+                    git commit
+                fi
             fi
             ;;
         *) exit 0 ;;
