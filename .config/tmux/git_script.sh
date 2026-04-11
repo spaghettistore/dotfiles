@@ -20,17 +20,15 @@ main() {
         "log --oneline") git log --oneline | less ;;
         "log") git log | less ;;
         "add")
-            if git status -s; then
-                if get_confirmation "Confirm 'git add .'"; then
-                    git add .
-                fi
+            git status -s
+            if get_confirmation "Confirm 'git add .'"; then
+                git add .
             fi
             ;;
         "commit")
-            if git status -s; then
-                if get_confirmation "Confirm 'git commit'"; then
-                    git commit
-                fi
+            git status -s
+            if get_confirmation "Confirm 'git commit'"; then
+                git commit
             fi
             ;;
         *) exit 0 ;;
