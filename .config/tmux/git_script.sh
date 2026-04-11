@@ -18,18 +18,22 @@ get_git_branch() {
 }
 
 
+display_with_less() { 
+    [[ "$*" ]] && echo "$*" | less -R 
+}
+
+
 main() {
     case "$*" in
         "getbranch") get_git_branch ;;
-        "status -s") git status -s 2>/dev/null | less ;;
-        "status") git status 2>/dev/null | less ;;
-        "diff") git diff --color 2>/dev/null | less -R ;;
-        "diff --staged") git diff --staged --color 2>/dev/null | less -R ;;
+        "status -s") display_with_less "$(git status -s 2>/dev/null)" ;;
+        "status") display_with_less "$(git status 2>/dev/null)" ;;
+        "diff") display_with_less "$(git diff --color 2>/dev/null)" ;;
+        "diff --staged") display_with_less "$(git diff --staged --color 2>/dev/null)" ;;
         "difftool") git difftool 2>/dev/null ;;
         "difftool --staged") git difftool --staged 2>/dev/null ;;
-        "log --oneline") git log --oneline --color 2>/dev/null | less -R ;;
-        "log") git log --oneline -p --color 2>/dev/null | less -R ;;
-        "log full") git log --oneline -p --color ;;
+        "log --oneline") display_with_less "$(git log --oneline --color 2>/dev/null)" ;;
+        "log") display_with_less "$(git log --oneline -p --color 2>/dev/null)" ;;
         "add")
             git status -s 2>/dev/null
             if git diff 2>/dev/null; then
