@@ -21,12 +21,14 @@ main() {
         "log") git log | less ;;
         "add")
             git status -s
+            git diff
             if get_confirmation "Confirm 'git add .'"; then
                 git add .
             fi
             ;;
         "commit")
             git status -s
+            git diff --staged
             if get_confirmation "Confirm 'git commit'"; then
                 git commit
             fi
