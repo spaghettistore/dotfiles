@@ -21,13 +21,15 @@ get_git_branch() {
 main() {
     case "$*" in
         "getbranch") get_git_branch ;;
-        "status -s") git status -s | less ;;
-        "status") git status | less ;;
-        "difftool") git difftool ;;
-        "difftool --staged") git difftool --staged ;;
-        "log --oneline") git log --oneline | less ;;
-        "log") git log | less ;;
-        "log full") git log --oneline -p ;;
+        "status -s") git status -s 2>/dev/null | less ;;
+        "status") git status 2>/dev/null | less ;;
+        "diff") git diff --color 2>/dev/null | less -R ;;
+        "diff --staged") git diff --staged --color 2>/dev/null | less -R ;;
+        "difftool") git difftool 2>/dev/null ;;
+        "difftool --staged") git difftool --staged 2>/dev/null ;;
+        "log --oneline") git log --oneline --color 2>/dev/null | less -R ;;
+        "log") git log --oneline -p --color 2>/dev/null | less -R ;;
+        "log full") git log --oneline -p --color ;;
         "add")
             git status -s 2>/dev/null
             if git diff 2>/dev/null; then
