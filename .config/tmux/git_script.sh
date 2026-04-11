@@ -23,8 +23,27 @@ display_with_less() {
 }
 
 
+tmux_git_display_menu() {
+    tmux display-menu -T "Git" \
+        "Status (Short)" s "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh status -s\"" \
+        "Status (Full)" S "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh status\"" \
+        "Difftool" D "new-window -n difftool \"~/.config/tmux/git_script.sh difftool\"" \
+        "Diff Menu" d "display-menu -T \"Diff Menu\" \
+            \"Diff\" d \"display-popup -w 80% -h 80% -E '~/.config/tmux/git_script.sh diff'\" \
+            \"Diff (Staged)\" D \"display-popup -w 80% -h 80% -E '~/.config/tmux/git_script.sh diff --staged'\" \
+            \"Difftool\" t \"new-window -n difftool '~/.config/tmux/git_script.sh difftool'\" \
+            \"Difftool (Staged)\" T \"new-window -n difftool '~/.config/tmux/git_script.sh difftool --staged'\" \
+        " \
+        "Log" l "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log --oneline\"" \
+        "Log (Full)" L "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log\"" \
+        "Add" a "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh add\"" \
+        "Commit" c "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh commit\""
+}
+
+
 main() {
     case "$*" in
+        "display-menu") tmux_git_display_menu ;;
         "getbranch") get_git_branch ;;
         "status -s") display_with_less "$(git status -s 2>/dev/null)" ;;
         "status") display_with_less "$(git status 2>/dev/null)" ;;
