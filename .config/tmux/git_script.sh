@@ -11,8 +11,16 @@ get_confirmation() {
 }
 
 
+get_git_branch() {
+    local current_branch
+    current_branch="$(git branch --list | grep "^\* ")"
+    echo "${current_branch:2}"  # Strip the '* ' prefix
+}
+
+
 main() {
     case "$*" in
+        "getbranch") get_git_branch ;;
         "status -s") git status -s | less ;;
         "status") git status | less ;;
         "difftool") git difftool ;;
