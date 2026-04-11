@@ -18,8 +18,8 @@ get_git_branch() {
 }
 
 
-display_with_less() { 
-    [[ "$*" ]] && echo "$*" | less -R 
+display_with_less() {
+    [[ "$*" ]] && echo "$*" | less -R
 }
 
 
