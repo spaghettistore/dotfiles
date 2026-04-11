@@ -29,17 +29,19 @@ main() {
         "log") git log | less ;;
         "log full") git log --oneline -p ;;
         "add")
-            git status -s
-            git diff
-            if get_confirmation "Confirm 'git add .'"; then
-                git add .
+            git status -s 2>/dev/null
+            if git diff 2>/dev/null; then
+                if get_confirmation "Confirm 'git add .'"; then
+                    git add .
+                fi
             fi
             ;;
         "commit")
-            git status -s
-            git diff --staged
-            if get_confirmation "Confirm 'git commit'"; then
-                git commit
+            git status -s 2>/dev/null
+            if git diff --staged 2>/dev/null; then
+                if get_confirmation "Confirm 'git commit'"; then
+                    git commit
+                fi
             fi
             ;;
         *) exit 0 ;;
