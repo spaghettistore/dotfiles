@@ -17,6 +17,9 @@ if [[ -z "$selected" ]]; then
             "$HOME/scripts" "$HOME/dotfiles" \
             -type f)
 $(find -L "$HOME" -maxdepth 1 -type f)"
+
+        # Remove '/home/$USER' prefix during fzf from ~
+        files="$(echo "$files" | sed "s|^$HOME/||")"
     else
         # Search recursively
         files="$(find -L ./ -type f)"
@@ -68,13 +71,16 @@ $(find -L "$HOME" -maxdepth 1 -type f)"
 
 fi
 
-[[ -z "$selected" ]] \
-    && exit 1
+[[ -z "$selected" ]] && exit 1
 
-[[ -z "$EDITOR" ]] \
-    && EDITOR="nvim"
+[[ -z "$EDITOR" ]] && EDITOR="nvim"
 
-file_name=$(basename "$selected")
+if [[ "$(pwd)" == "$HOME" ]]; then
+    # Re-add '/home/$USER' prefix
+    selected="$HOME/${selected}"
+fi
+
+file_name=$(basename -- "$selected")
 clean_name=$(echo "$file_name" | tr "./" "__")
 
 dir_path="$(echo "$selected" | sed "s/\/$file_name$//")"
