@@ -31,8 +31,6 @@ fzed() {
                 "$HOME/scripts" "$HOME/dotfiles" \
                 -type f)
     $(find -L "$HOME" -maxdepth 1 -type f)"
-            # Remove '/home/$USER' prefix during fzf from ~
-            files="$(echo "$files" | sed "s|^$HOME/||")"
         else
             # Search recursively
             files="$(find -L ./ -type f)"
@@ -84,13 +82,7 @@ fzed() {
     fi
 
     [[ -z "$selected" ]] && return 1
-
     [[ -z "$EDITOR" ]] && EDITOR="nvim"
-
-    if [[ "$(pwd)" == "$HOME" ]]; then
-        # Re-add '/home/$USER' prefix
-        selected="$HOME/${selected}"
-    fi
 
     $EDITOR "$selected"
 }
