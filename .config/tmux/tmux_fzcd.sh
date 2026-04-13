@@ -5,7 +5,7 @@
     # In term outside tmux
     # In term inside tmux
 
-if [[ "$#" -eq 1 ]]; then
+if (( $# == 1 )); then
     selected="$1"
 else
     dirs=(
@@ -22,12 +22,12 @@ else
 
     # Remove '/home/$USER' prefix during fzf
     files="$(echo "$files" | sed "s|^$HOME/||")"
+
+    # Add ~ as final option (so it will be highlighted by default)
     files="$files
 ~"
 
-    selected="$(echo "$files" \
-        | sort \
-        | fzf)"
+    selected="$(echo "$files" | sort | fzf)"
 
     # Re-add '/home/$USER' prefix
     case "$selected" in
@@ -37,8 +37,7 @@ else
     esac
 fi
 
-[[ -z "$selected" ]] \
-    && exit 1
+[[ -z "$selected" ]] && exit 1
 
 # Create/Attach to tmux session in that directory
 selected_name="$(basename -- "$selected" | tr "." "_")"
