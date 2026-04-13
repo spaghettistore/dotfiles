@@ -3,7 +3,8 @@ return {
     priority = 1000 ,
     opts = {
         italic = {
-            strings = false
+            strings = false,
+            comments = false
         }
     }
 }
