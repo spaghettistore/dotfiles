@@ -62,6 +62,10 @@ vim.keymap.set({"n", "v"}, "<Leader>P", "\"+P")
 vim.keymap.set("n", "<Leader>us", "<CMD>setlocal spell!<CR>")
 vim.keymap.set("n", "<Leader>uw", "<CMD>set wrap!<CR>")
 
+-- Tmux
+-- ----
+vim.keymap.set("n", "<Leader>ot", "<cmd>silent !tmux display-popup -E \"~/.config/tmux/tmux_new_pane_auto_tile.sh $(realpath -- %:h)\"<CR>")
+
 -- Movement
 -- --------
 -- Windows
