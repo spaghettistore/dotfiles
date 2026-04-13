@@ -13,9 +13,15 @@ fi
 if [[ -z "$selected" ]]; then
     # If we are in ~, only search specific directories to reduce clutter
     if [[ "$(pwd)" == "$HOME" ]]; then
-        files="$(find -L "$HOME/inbox" "$HOME/projects" "$HOME/refs" "$HOME/bin" \
-            "$HOME/scripts" "$HOME/dotfiles" \
-            -type f)
+        dirs=(
+            "$HOME/inbox"
+            "$HOME/projects"
+            "$HOME/refs"
+            "$HOME/bin"
+            "$HOME/scripts"
+            "$HOME/dotfiles"
+        )
+        files="$(find -L "${dirs[@]}" -type f)
 $(find -L "$HOME" -maxdepth 1 -type f)"
     else
         # Search recursively
