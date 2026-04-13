@@ -3,9 +3,10 @@
 [[ "$TMUX" ]] || exit 0
 
 num_panes="$(tmux list-panes | wc --lines)"
-current_pane="$(tmux list-panes | grep "(active)$" | awk -F ":" '{print $1}')"
+#current_pane="$(tmux list-panes | grep "(active)$" | awk -F ":" '{print $1}')"
+current_pane="$(tmux display -p "#{pane_index}")"
 
-if [[ "$num_panes" -le 1 ]]; then
+if (( num_panes <= 1 )); then
     if ! tmux join-pane -h; then
         tmux select-pane -t "$current_pane"
         exit 0
@@ -17,7 +18,7 @@ else
     tmux select-pane -t "$final_pane"
 
     # Create new pane from final pane so the way it spawns is consistent
-    if [[ $(( num_panes %2 )) -eq 0 ]]; then
+    if (( $(( num_panes %2 )) == 0 )); then
         direction="v"
     else
         direction="h"

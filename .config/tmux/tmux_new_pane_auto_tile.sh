@@ -3,10 +3,9 @@
 # Open a tmux new pane that is auto tiled.
 # Optionally can provide a directory path as argmument 1 open in that directory.
 
-directory="$1"
-
 [[ "$TMUX" ]] || exit 0
 
+directory="$1"
 num_panes="$(tmux list-panes | wc --lines)"
 
 if (( num_panes <= 1 )); then
@@ -31,9 +30,9 @@ else
     fi
 
     if [[ -d "$directory" ]]; then
-        tmux split-pane -$direction -c "$directory"
+        tmux split-pane "-$direction" -c "$directory"
     else
-        tmux split-pane -$direction
+        tmux split-pane "-$direction"
     fi
 
     # Return to original pane, and then back to newly created pane.
