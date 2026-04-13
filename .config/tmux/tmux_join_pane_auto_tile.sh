@@ -3,7 +3,6 @@
 [[ "$TMUX" ]] || exit 0
 
 num_panes="$(tmux list-panes | wc --lines)"
-#current_pane="$(tmux list-panes | grep "(active)$" | awk -F ":" '{print $1}')"
 current_pane="$(tmux display -p "#{pane_index}")"
 
 if (( num_panes <= 1 )); then

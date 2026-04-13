@@ -85,7 +85,7 @@ if [[ "$TMUX" ]]; then
     if [[ "$num_panes" -le 1 ]]; then
         tmux split-window -h "$EDITOR" "$selected"
     else
-        current_pane="$(tmux list-panes | grep "(active)$" | awk -F ":" '{print $1}')"
+        current_pane="$(tmux display -p "#{pane_index}")"
 
         # Select final pane to auto tile (panes start at index 0 so we -1)
         final_pane="$(( num_panes - 1))"
