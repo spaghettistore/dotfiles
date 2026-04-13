@@ -41,6 +41,26 @@ tmux_git_display_menu() {
 }
 
 
+git_add() {
+    git status -s 2>/dev/null
+    if git diff 2>/dev/null; then
+        if get_confirmation "Confirm 'git add .'"; then
+            git add .
+        fi
+    fi
+}
+
+
+git_commit() {
+    git status -s 2>/dev/null
+    if git diff --staged 2>/dev/null; then
+        if get_confirmation "Confirm 'git commit'"; then
+            git commit
+        fi
+    fi
+}
+
+
 main() {
     case "$*" in
         "display-menu") tmux_git_display_menu ;;
@@ -53,22 +73,8 @@ main() {
         "difftool --staged") git difftool --staged 2>/dev/null ;;
         "log --oneline") display_with_less "$(git log --oneline --color 2>/dev/null)" ;;
         "log") display_with_less "$(git log --oneline -p --color 2>/dev/null)" ;;
-        "add")
-            git status -s 2>/dev/null
-            if git diff 2>/dev/null; then
-                if get_confirmation "Confirm 'git add .'"; then
-                    git add .
-                fi
-            fi
-            ;;
-        "commit")
-            git status -s 2>/dev/null
-            if git diff --staged 2>/dev/null; then
-                if get_confirmation "Confirm 'git commit'"; then
-                    git commit
-                fi
-            fi
-            ;;
+        "add") git_add ;;
+        "commit") git_commit ;;
         *) exit 0 ;;
     esac
 }
