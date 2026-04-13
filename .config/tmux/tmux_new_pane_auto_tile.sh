@@ -1,10 +1,19 @@
 #!/bin/bash
 
+# Open a tmux new pane that is auto tiled.
+# Optionally can provide a directory path as argmument 1 open in that directory.
+
+directory="$1"
+
 if [[ "$TMUX" ]]; then
     num_panes="$(tmux list-panes | wc --lines)"
 
     if [[ "$num_panes" -le 1 ]]; then
-        tmux split-window -h
+        if [[ -d "$directory" ]]; then
+            tmux split-pane -h -c "$directory"
+        else
+            tmux split-pane -h
+        fi
     else
         current_pane="$(tmux list-panes | grep "(active)$" | awk -F ":" '{print $1}')"
 
@@ -14,9 +23,15 @@ if [[ "$TMUX" ]]; then
 
         # Create new pane from final pane so the way it spawns is consistent
         if [[ $(( num_panes %2 )) -eq 0 ]]; then
-            tmux split-window -v
+            direction="v"
         else
-            tmux split-window -h
+            direction="h"
+        fi
+
+        if [[ -d "$directory" ]]; then
+            tmux split-pane -$direction -c "$directory"
+        else
+            tmux split-pane -$direction
         fi
 
         # Return to original pane, and then back to newly created pane.
