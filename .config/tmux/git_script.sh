@@ -36,6 +36,7 @@ tmux_git_display_menu() {
         " \
         "Log" l "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log --oneline\"" \
         "Log (Full)" L "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log\"" \
+        "Branch" b "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh branch\"" \
         "Add" a "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh add\"" \
         "Commit" c "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh commit\""
 }
@@ -73,6 +74,7 @@ main() {
         "difftool --staged") git difftool --staged 2>/dev/null ;;
         "log --oneline") display_with_less "$(git log --oneline --color 2>/dev/null)" ;;
         "log") display_with_less "$(git log --oneline -p --color 2>/dev/null)" ;;
+        "branch") display_with_less "$(git branch --list --color 2>/dev/null)" ;;
         "add") git_add ;;
         "commit") git_commit ;;
         *) exit 0 ;;
