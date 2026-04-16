@@ -28,6 +28,7 @@ else
 ~"
 
     selected="$(echo "$files" | sort | fzf)"
+    [[ -z "$selected" ]] && exit 1
 
     # Re-add '/home/$USER' prefix
     case "$selected" in
