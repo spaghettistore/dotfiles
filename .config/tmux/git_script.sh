@@ -60,8 +60,8 @@ tmux_git_display_menu() {
 
 
 git_add() {
-    git status -s 2>/dev/null
     if git diff 2>/dev/null; then
+        git status -s 2>/dev/null
         if get_confirmation "Confirm 'git add .'"; then
             git add .
         fi
@@ -70,8 +70,8 @@ git_add() {
 
 
 git_commit() {
-    git status -s 2>/dev/null
     if git diff --staged 2>/dev/null; then
+        git status -s 2>/dev/null
         if get_confirmation "Confirm 'git commit'"; then
             git commit
         fi
