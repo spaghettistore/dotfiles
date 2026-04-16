@@ -23,8 +23,25 @@ display_with_less() {
 }
 
 
+get_title() {
+    local branch
+    branch="$(git branch --list | grep "^\*")"
+    if [[ -z "$branch" ]]; then
+        echo "Git"
+        exit 0
+    fi
+    branch="${branch:2}"  # Remove '* ' prefix
+    local status_num
+    status_num="$(git status -s | wc --lines)"
+    echo "Git (${branch}) (${status_num})"
+}
+
+
 tmux_git_display_menu() {
-    tmux display-menu -T "Git" \
+    local title
+    title="$(get_title)"
+
+    tmux display-menu -T "$title" \
         "Status (Short)" s "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh status -s\"" \
         "Status (Full)" S "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh status\"" \
         "Difftool" D "new-window -n difftool \"~/.config/tmux/git_script.sh difftool\"" \
