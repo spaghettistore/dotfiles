@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # This script will symlink the following:
-# '~/dotfiles/.config/*' -> '~/.config/'
-# '~/dotfiles/home/*' -> '~/'
+# '~/resources/dotfiles/.config/*' -> '~/.config/'
+# '~/resources/dotfiles/home/*' -> '~/'
 
 dry_run="false"
-dotfiles_directory="$HOME"/dotfiles
+dotfiles_directory="$HOME/resources/dotfiles"
 
 # Echo, but prefixed with '[DRY_RUN]: ' if global variable 'dry_run' is 'true'.
 # Globals:

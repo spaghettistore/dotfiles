@@ -16,10 +16,8 @@ if [[ -z "$selected" ]]; then
         dirs=(
             "$HOME/inbox"
             "$HOME/projects"
-            "$HOME/refs"
+            "$HOME/resources"
             "$HOME/bin"
-            "$HOME/scripts"
-            "$HOME/dotfiles"
         )
         files="$(find -L "${dirs[@]}" -type f)
 $(find -L "$HOME" -maxdepth 1 -type f)"

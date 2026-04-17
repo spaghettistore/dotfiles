@@ -17,5 +17,5 @@ tmux display-menu -T "Find Files ($title_mode)" \
     "Home" h "display-popup -w 80% -h 80% -E \"$script_name ~\"" \
     "Inbox" i "display-popup -w 80% -h 80% -E \"$script_name ~/inbox\"" \
     "Projects" p "display-popup -w 80% -h 80% -E \"$script_name ~/projects\"" \
-    "Refs" r "display-popup -w 80% -h 80% -E \"$script_name ~/refs\"" \
-    "Dotfiles" d "display-popup -w 80% -h 80% -E \"$script_name ~/dotfiles\""
+    "Resources" r "display-popup -w 80% -h 80% -E \"$script_name ~/resources\"" \
+    "Dotfiles" d "display-popup -w 80% -h 80% -E \"$script_name ~/resources/dotfiles\""

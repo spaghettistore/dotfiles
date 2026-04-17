@@ -12,9 +12,9 @@ else
         "$HOME"
         "$HOME/inbox"
         "$HOME/projects"
-        "$HOME/refs"
+        "$HOME/resources"
         "$HOME/archive"
-        "$HOME/scripts"
+        "$HOME/resources/code/scripts"
         "$HOME/media"
     )
 

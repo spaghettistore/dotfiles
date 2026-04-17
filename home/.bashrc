@@ -120,7 +120,7 @@ fi
 # Functions
 # ---------
 
-source "$HOME"/dotfiles/home/.bashrc_functions.sh
+source "$HOME/resources/dotfiles/home/.bashrc_functions.sh"
 
 # GNU Readline Keybinds
 # ---------------------

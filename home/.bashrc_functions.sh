@@ -30,9 +30,9 @@ fzed() {
             dirs=(
                 "$HOME/inbox"
                 "$HOME/projects"
-                "$HOME/refs"
+                "$HOME/resources"
                 "$HOME/bin"
-                "$HOME/scripts"
+                "$HOME/resources/code/scripts"
                 "$HOME/dotfiles"
             )
             files="$(find -L "${dirs[@]}" -type f)
