@@ -14,6 +14,7 @@ else
         "$HOME/projects"
         "$HOME/resources"
         "$HOME/archive"
+        "$HOME/resources/code"
         "$HOME/resources/code/scripts"
         "$HOME/media"
     )
