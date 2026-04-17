@@ -1,18 +1,20 @@
 #!/bin/bash
 
+# Dependencies: tmux_fzed.sh tmux_fzf_editor_new_pane.sh
+
 case "$1" in
-    "$HOME/.config/tmux/tmux_fzf_editor_new_pane.sh")
-        script_name="$1"
-        title_mode="split-pane"
+    "window")
+        script_name="$HOME/.config/tmux/tmux_fzed.sh"
+        title="new-window"
         ;;
-    "$HOME/.config/tmux/tmux_fzed.sh")
-        script_name="$1"
-        title_mode="new-window"
+    "pane")
+        script_name="$HOME/.config/tmux/tmux_fzf_editor_new_pane.sh"
+        title="split-pane"
         ;;
     *) exit 0 ;;
 esac
 
-tmux display-menu -T "Find Files ($title_mode)" \
+tmux display-menu -T "Find Files ($title)" \
     "Current Directory" "." "display-popup -w 80% -h 80% -E \"$script_name\"" \
     "Home" h "display-popup -w 80% -h 80% -E \"$script_name ~\"" \
     "Inbox" i "display-popup -w 80% -h 80% -E \"$script_name ~/inbox\"" \
