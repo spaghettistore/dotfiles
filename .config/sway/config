@@ -316,7 +316,7 @@ show_marks yes
 # Scripts Keybinds
 # ----------------
 
-bindsym $mod+alt+b exec pkill wofi || ~/bin/bmks "wofi"
+bindsym $mod+alt+b exec pkill wofi || ~/.local/bin/bmks "wofi"
 
 # ------------
 # Custom Modes

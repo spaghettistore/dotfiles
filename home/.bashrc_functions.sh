@@ -31,9 +31,6 @@ fzed() {
                 "$HOME/inbox"
                 "$HOME/projects"
                 "$HOME/resources"
-                "$HOME/bin"
-                "$HOME/resources/code/scripts"
-                "$HOME/dotfiles"
             )
             files="$(find -L "${dirs[@]}" -type f)
 $(find -L "$HOME" -maxdepth 1 -type f)"
@@ -106,8 +103,8 @@ fzls() {
         cd "$selected" \
             || return 1
     elif [[ -f "$selected" ]]; then
-        [[ -e "$HOME/bin/open_thing.sh" ]] \
-            && "$HOME"/bin/open_thing.sh "$selected"
+        [[ -e "$HOME/.local/bin/open_thing.sh" ]] \
+            && "$HOME"/.local/bin/open_thing.sh "$selected"
     fi
 }
 
