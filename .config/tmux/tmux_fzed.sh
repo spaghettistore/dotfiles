@@ -4,6 +4,7 @@ if [[ "$#" -eq 1 ]]; then
     if [[ -f "$1" ]]; then
         # If provided argument is a file, use that and skip fzf
         selected="$1"
+        provided_file="True"
     elif [[ -d "$1" ]]; then
         # If provided argument is a directory, open fzf using that directory
         cd "$1" || exit 1
@@ -20,6 +21,8 @@ if [[ -z "$selected" ]]; then
         )
         files="$(find -L "${dirs[@]}" -type f)
 $(find -L "$HOME" -maxdepth 1 -type f)"
+        # Remove '/home/$USER' prefix during fzf from ~
+        files="$(echo "$files" | sed "s|^$HOME/||")"
     else
         # Search recursively
         files="$(find -L ./ -type f)"
@@ -72,12 +75,16 @@ $(find -L "$HOME" -maxdepth 1 -type f)"
 fi
 
 [[ -z "$selected" ]] && exit 1
-
 [[ -z "$EDITOR" ]] && EDITOR="nvim"
+
+# Re-add '/home/$USER' prefix, don't do this if there was a provided
+# file, or if fzf search was not done from home
+if [[ "$(pwd)" == "$HOME" ]] && [[ "$provided_file" != "True" ]]; then
+    selected_file="$HOME/${selected_file}"
+fi
 
 file_name=$(basename -- "$selected")
 clean_name=$(echo "$file_name" | tr "./" "__")
-
 dir_path="$(echo "$selected" | sed "s/\/$file_name$//")"
 dir_name="$(echo "$dir_path" | awk -F/ '{print $NF}')"
 clean_dir="$(echo "$dir_name" | tr "./" "__")"
