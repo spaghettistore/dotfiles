@@ -4,6 +4,7 @@ if [[ "$#" -eq 1 ]]; then
     if [[ -f "$1" ]]; then
         # If provided argument is a file, use that and skip fzf
         selected="$1"
+        provided_file="True"
     elif [[ -d "$1" ]]; then
         # If provided argument is a directory, open fzf using that directory
         cd "$1" || exit 1
@@ -77,9 +78,10 @@ fi
 
 [[ -z "$EDITOR" ]] && EDITOR="nvim"
 
-if [[ "$(pwd)" == "$HOME" ]]; then
-    # Re-add '/home/$USER' prefix
-    selected="$HOME/${selected}"
+# Re-add '/home/$USER' prefix, don't do this if there was a provided
+# file, or if fzf search was not done from home
+if [[ "$(pwd)" == "$HOME" ]] && [[ "$provided_file" != "True" ]]; then
+    selected_file="$HOME/${selected_file}"
 fi
 
 if [[ "$TMUX" ]]; then
