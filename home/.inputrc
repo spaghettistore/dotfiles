@@ -80,12 +80,15 @@ set keymap vi
 
 # Show vim mode in terminal prompt
 set show-mode-in-prompt on
+# Change default mode indicator prompt prefix
 #set vi-ins-mode-string "+"  # Change from default '(ins)' prompt prefix
 #set vi-cmd-mode-string ":"  # Change from default '(cmd)' prompt prefix
 # Change cursor from block to line when in insert (like nvim)
 set vi-cmd-mode-string "\1\e[2 q\2"
 set vi-ins-mode-string "\1\e[6 q\2"
-
+# Change cursor depending on mode, and add mode indicator to prompt prefix
+#set vi-cmd-mode-string "\1\e[2 q\2(cmd)"
+#set vi-ins-mode-string "\1\e[6 q\2(ins)"
 
 # Add the ctrl+l keybinding to vi mode, to both normal mode and insert mode
 $if mode=vi
