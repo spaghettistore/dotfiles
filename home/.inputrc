@@ -70,4 +70,32 @@ $endif
 
 $endif
 
-set editing-mode vi  # Use this instead of 'set -o vi' in '~/.bashrc', so that all readline() based apps use vi keybinds
+# ------------
+# Vim Keybinds
+# ------------
+
+# Use this instead of 'set -o vi' in '~/.bashrc', so that all readline() based apps use vi keybinds
+set editing-mode vi
+set keymap vi
+
+# Show vim mode in terminal prompt
+set show-mode-in-prompt on
+#set vi-ins-mode-string "+"  # Change from default '(ins)'
+#set vi-cmd-mode-string ":"  # Change from default '(cmd)'
+
+# Add the ctrl+l keybinding to vi mode, to both normal mode and insert mode
+$if mode=vi
+    # This sets keybinds for normal(cmd) mode
+    set keymap vi-command
+    #K: history-search-backward
+    #J: history-search-forward
+    control-l: clear-screen
+    # This sets keybinds for normal(ins) mode
+    set keymap vi-insert
+    #K: history-search-backward
+    #J: history-search-forward
+    control-l: clear-screen
+    # Arrow keys up/down use what is in prompt to search history 
+    "\e[A": history-search-backward
+    "\e[B": history-search-forward
+$endif
