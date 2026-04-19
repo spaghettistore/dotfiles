@@ -21,6 +21,13 @@ set mouse=a
 set scrolloff=8
 set nowrap
 
+" Change cursor when in insert mode (like in nvim), (note there is a small
+" delay when going from insert mode to normal mode)
+"" Set cursor to line in insert mode
+"let &t_SI = "\e[6 q"
+"" Set cursor to block in normal mode
+"let &t_EI = "\e[2 q"
+
 " Searching
 " ---------
 " Show and highlight matching words during a search
