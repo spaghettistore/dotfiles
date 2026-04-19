@@ -10,6 +10,7 @@ else
 fi
 
 notify-send \
+    --transient \
     "Volume" "$volume" \
     --urgency=low \
     --app-name="current_volume_notification.sh" \

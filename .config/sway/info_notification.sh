@@ -29,6 +29,7 @@ notify_send() {
     local body="$2"
     local urgency="$3"
     notify-send \
+        --transient \
         "$header" \
         "$body" \
         --app-name="${script_name}" \

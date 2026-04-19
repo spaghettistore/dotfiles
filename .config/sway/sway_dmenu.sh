@@ -78,6 +78,7 @@ main() {
             ;;
         " battery")
             notify-send \
+                --transient \
                 "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" \
                 --app-name="battery_capacity_status" \
                 --urgency=low \
@@ -189,6 +190,7 @@ main() {
             ;;
         " datetime")
             notify-send "$(date "+%a %d %b %H:%M")" \
+                --transient \
                 --urgency=low \
                 --app-name="datetime_notification" \
                 --hint=string:x-canonical-private-synchronous:"datetime_notification"
@@ -199,6 +201,7 @@ main() {
         "what bin day")
             [[ -e "$what_bin_day_script" ]] \
                 && notify-send "$("$what_bin_day_script")" \
+                    --transient \
                     --urgency=low \
                     --app-name="what_bin_day_notification" \
                     --hint=string:x-canonical-private-synchronous:"what_bin_day_notification"

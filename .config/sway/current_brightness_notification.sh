@@ -8,6 +8,7 @@ brightness="$(brightnessctl \
 )"
 
 notify-send \
+    --transient \
     "Brightness" "$brightness" \
     --urgency=low \
     --app-name="current_brightness_notification.sh" \
