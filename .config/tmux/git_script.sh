@@ -51,11 +51,13 @@ tmux_git_display_menu() {
             \"Difftool\" t \"new-window -n difftool '~/.config/tmux/git_script.sh difftool'\" \
             \"Difftool (Staged)\" T \"new-window -n difftool '~/.config/tmux/git_script.sh difftool --staged'\" \
         " \
-        "Log" l "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log --oneline\"" \
+        "Log (fzf)" l "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log fzf\"" \
         "Log (Full)" L "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log\"" \
         "Branch" b "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh branch\"" \
         "Add" a "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh add\"" \
         "Commit" c "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh commit\""
+
+        #"Log" l "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log --oneline\"" \
 }
 
 
@@ -79,6 +81,15 @@ git_commit() {
 }
 
 
+git_log_fzf() {
+    if git status -s 2>/dev/null >/dev/null; then
+        # Get ID from: git log --oneline | awk '{print $1}'
+        # Preview ID with: git show ID
+        git log --oneline | fzf --preview="git show --color \$(echo {} | awk '{print \$1}')"
+    fi
+}
+
+
 main() {
     case "$*" in
         "display-menu") tmux_git_display_menu ;;
@@ -91,6 +102,7 @@ main() {
         "difftool --staged") git difftool --staged 2>/dev/null ;;
         "log --oneline") display_with_less "$(git log --oneline --color 2>/dev/null)" ;;
         "log") display_with_less "$(git log --oneline -p --color 2>/dev/null)" ;;
+        "log fzf") git_log_fzf ;;
         "branch") display_with_less "$(git branch --list --color 2>/dev/null)" ;;
         "add") git_add ;;
         "commit") git_commit ;;
