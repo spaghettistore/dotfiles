@@ -51,7 +51,7 @@ tmux_git_display_menu() {
             \"Difftool\" t \"new-window -n difftool '~/.config/tmux/git_script.sh difftool'\" \
             \"Difftool (Staged)\" T \"new-window -n difftool '~/.config/tmux/git_script.sh difftool --staged'\" \
         " \
-        "Log (fzf)" l "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log fzf\"" \
+        "Log (fzf)" l "new-window -n git_log \"~/.config/tmux/git_script.sh log fzf\"" \
         "Log (Full)" L "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log\"" \
         "Branch" b "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh branch\"" \
         "Add" a "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh add\"" \
