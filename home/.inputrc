@@ -102,6 +102,8 @@ $if mode=vi
     #K: history-search-backward
     #J: history-search-forward
     control-l: clear-screen
+    control-p: history-search-backward
+    control-n: history-search-forward
     # Arrow keys up/down use what is in prompt to search history 
     "\e[A": history-search-backward
     "\e[B": history-search-forward
