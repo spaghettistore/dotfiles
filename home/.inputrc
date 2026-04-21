@@ -105,6 +105,7 @@ $if mode=vi
     control-n: history-search-forward
     control-a: beginning-of-line
     control-e: end-of-line
+    control-k: kill-line
 
     # Arrow keys up/down use what is in prompt to search history 
     "\e[A": history-search-backward
