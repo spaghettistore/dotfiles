@@ -82,8 +82,11 @@ def get_wofi_response(bash_list: str, prompt: str) -> str:
 
 
 def notify_send(body: str) -> None:
-    subprocess.run(["notify-send",
-        "Wifi", body,
+    subprocess.run([
+        "notify-send",
+        "Wifi",
+        body,
+        "--transient",
         "--urgency=low",
         "--app-name=wofi_wifi_menu",
         "--hint=string:x-canonical-private-synchronous:'wofi_wifi_menu'"])
