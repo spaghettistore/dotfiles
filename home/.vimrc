@@ -164,6 +164,53 @@ noremap J J^
 noremap <leader>+x <cmd>!chmod +x %<CR>
 noremap <leader>cd <cmd>cd %:h<CR><cmd>pwd<CR>
 
+" Surround word with
+" ------------------
+" Double Quote
+noremap gsw" ciw""<Esc>P
+noremap gsW" ciW""<Esc>P
+vnoremap gs" c""<Esc>P
+" Single Quote
+noremap gsw' ciw''<Esc>P
+noremap gsW' ciW''<Esc>P
+vnoremap gs' c''<Esc>P
+" Backtick
+noremap gsw` ciw``<Esc>P
+noremap gsW` ciW``<Esc>P
+vnoremap gs` c``<Esc>P
+" Parenthesis
+noremap gsw( ciw()<Esc>P
+noremap gsw) ciw()<Esc>P
+noremap gswb ciw()<Esc>P
+noremap gsW( ciW()<Esc>P
+noremap gsW) ciW()<Esc>P
+noremap gsWb ciW()<Esc>P
+vnoremap gs( c()<Esc>P
+vnoremap gs) c()<Esc>P
+vnoremap gsb c()<Esc>P
+" Square Bracket
+noremap gsw[ ciw[]<Esc>P
+noremap gsw] ciw[]<Esc>P
+noremap gsW[ ciW[]<Esc>P
+noremap gsW] ciW[]<Esc>P
+vnoremap gs[ c[]<Esc>P
+vnoremap gs] c[]<Esc>P
+" Brace (Curly Bracket
+noremap gsw{ ciw{}<Esc>P
+noremap gsw} ciw{}<Esc>P
+noremap gsW{ ciW{}<Esc>P
+noremap gsW} ciW{}<Esc>P
+vnoremap gs{ c{}<Esc>P
+vnoremap gs} c{}<Esc>P
+" Angle Brackets
+noremap gsw< ciw<><Esc>P
+noremap gsw> ciw<><Esc>P
+noremap gsW< ciW<><Esc>P
+noremap gsW> ciW<><Esc>P
+vnoremap gs< c<><Esc>P
+vnoremap gs> c<><Esc>P
+
+
 " Tmux
 " ----
 noremap <Leader>f <cmd>!tmux display-popup -E ~/.config/tmux/tmux_fzed.sh<CR>
