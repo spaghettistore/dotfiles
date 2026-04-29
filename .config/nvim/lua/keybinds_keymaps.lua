@@ -50,6 +50,52 @@ vim.keymap.set("n", "J", "J^")
 vim.keymap.set("n", "<leader>+x", "<cmd>!chmod +x %<CR>")
 vim.keymap.set("n", "<leader>cd", "<cmd>cd %:h|pwd<CR>")
 
+-- Surround word with
+-- ------------------
+-- Double Quote
+vim.keymap.set("n", "gsw\"", "ciw\"\"<Esc>P")
+vim.keymap.set("n", "gsW\"", "ciW\"\"<Esc>P")
+vim.keymap.set("v", "gs\"", "c\"\"<Esc>P")
+-- Single Quote
+vim.keymap.set("n", "gsw'", "ciw''<Esc>P")
+vim.keymap.set("n", "gsW'", "ciW''<Esc>P")
+vim.keymap.set("v", "gs'", "c''<Esc>P")
+-- Backtick
+vim.keymap.set("n", "gsw`", "ciw``<Esc>P")
+vim.keymap.set("n", "gsW`", "ciW``<Esc>P")
+vim.keymap.set("v", "gs`", "c``<Esc>P")
+-- Parenthesis
+vim.keymap.set("n", "gsw(", "ciw()<Esc>P")
+vim.keymap.set("n", "gsw)", "ciw()<Esc>P")
+vim.keymap.set("n", "gswb", "ciw()<Esc>P")
+vim.keymap.set("n", "gsW(", "ciW()<Esc>P")
+vim.keymap.set("n", "gsW)", "ciW()<Esc>P")
+vim.keymap.set("n", "gsWb", "ciW()<Esc>P")
+vim.keymap.set("v", "gs(", "c()<Esc>P")
+vim.keymap.set("v", "gs)", "c()<Esc>P")
+vim.keymap.set("v", "gsb", "c()<Esc>P")
+-- Square Bracket
+vim.keymap.set("n", "gsw[", "ciw[]<Esc>P")
+vim.keymap.set("n", "gsw]", "ciw[]<Esc>P")
+vim.keymap.set("n", "gsW[", "ciW[]<Esc>P")
+vim.keymap.set("n", "gsW]", "ciW[]<Esc>P")
+vim.keymap.set("v", "gs[", "c[]<Esc>P")
+vim.keymap.set("v", "gs]", "c[]<Esc>P")
+-- Brace (Curly Bracket)
+vim.keymap.set("n", "gsw{", "ciw{}<Esc>P")
+vim.keymap.set("n", "gsw}", "ciw{}<Esc>P")
+vim.keymap.set("n", "gsW{", "ciW{}<Esc>P")
+vim.keymap.set("n", "gsW}", "ciW{}<Esc>P")
+vim.keymap.set("v", "gs{", "c{}<Esc>P")
+vim.keymap.set("v", "gs}", "c{}<Esc>P")
+-- Angle Brackets
+vim.keymap.set("n", "gsw<", "ciw<><Esc>P")
+vim.keymap.set("n", "gsw>", "ciw<><Esc>P")
+vim.keymap.set("n", "gsW<", "ciW<><Esc>P")
+vim.keymap.set("n", "gsW>", "ciW<><Esc>P")
+vim.keymap.set("v", "gs<", "c<><Esc>P")
+vim.keymap.set("v", "gs>", "c<><Esc>P")
+
 -- Clipboard
 -- ---------
 vim.keymap.set({"n", "v"}, "<Leader>y", "\"+y")
