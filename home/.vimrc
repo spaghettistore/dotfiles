@@ -213,7 +213,7 @@ vnoremap gs> c<><Esc>P
 
 " Tmux
 " ----
-noremap <Leader>f <cmd>!tmux display-popup -E ~/.config/tmux/tmux_fzed.sh<CR>
+noremap <Leader>f <cmd>!tmux display-popup -E ~/.config/tmux/tmux_fzf_file_picker.sh -o window<CR>
 noremap <Leader>g <cmd>!tmux display-popup -E ~/.config/tmux/tmux_fzcd.sh<CR>
 noremap <Leader>ot <cmd>silent !tmux display-popup -E "~/.config/tmux/tmux_new_pane_auto_tile.sh $(realpath -- %:h)"<CR>
 
