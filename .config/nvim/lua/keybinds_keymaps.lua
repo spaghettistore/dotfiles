@@ -96,6 +96,19 @@ vim.keymap.set("n", "gsW>", "ciW<><Esc>P")
 vim.keymap.set("v", "gs<", "c<><Esc>P")
 vim.keymap.set("v", "gs>", "c<><Esc>P")
 
+-- Operator Inside/Around '/' Forward Slashes
+-- ------------------------------------------
+vim.keymap.set("n", "di/", "lT/dt/")
+vim.keymap.set("n", "da/", "lF/df/")
+vim.keymap.set("n", "ci/", "lT/ct/")
+vim.keymap.set("n", "ca/", "lF/cf/")
+vim.keymap.set("n", "vi/", "lT/vt/")
+vim.keymap.set("n", "va/", "lF/vf/")
+vim.keymap.set("n", "yi/", "lT/yt/")
+vim.keymap.set("n", "ya/", "lF/yf/")
+vim.keymap.set("n", "<Leader>yi/", "lT/\"+yt/")
+vim.keymap.set("n", "<Leader>ya/", "lF/\"+yf/")
+
 -- Clipboard
 -- ---------
 vim.keymap.set({"n", "v"}, "<Leader>y", "\"+y")

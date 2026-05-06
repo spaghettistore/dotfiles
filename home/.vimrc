@@ -210,6 +210,19 @@ noremap gsW> ciW<><Esc>P
 vnoremap gs< c<><Esc>P
 vnoremap gs> c<><Esc>P
 
+" Operator Inside/Around '/' Forward Slashes
+" ------------------------------------------
+noremap di/ lT/dt/
+noremap da/ lF/df/
+noremap ci/ lT/ct/
+noremap ca/ lF/cf/
+noremap vi/ lT/vt/
+noremap va/ lF/vf/
+noremap yi/ lT/yt/
+noremap ya/ lF/yf/
+noremap <Leader>yi/ lT/\"+yt/
+noremap <Leader>ya/ lF/\"+yf/
+
 
 " Tmux
 " ----
