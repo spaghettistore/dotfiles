@@ -173,7 +173,7 @@ echo_error() {
 # Globals:
 #   EDITOR
 get_editor() {
-    if command -v "$EDITOR"; then
+    if [[ "$EDITOR" ]]; then
         echo "$EDITOR"
     elif command -v nvim; then
         echo "nvim"
