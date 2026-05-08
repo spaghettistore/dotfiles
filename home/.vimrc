@@ -198,10 +198,13 @@ vnoremap gs] c[]<Esc>P
 " Brace (Curly Bracket
 noremap gsw{ ciw{}<Esc>P
 noremap gsw} ciw{}<Esc>P
+noremap gswB ciw{}<Esc>P
 noremap gsW{ ciW{}<Esc>P
 noremap gsW} ciW{}<Esc>P
+noremap gsWB ciW{}<Esc>P
 vnoremap gs{ c{}<Esc>P
 vnoremap gs} c{}<Esc>P
+vnoremap gsB c{}<Esc>P
 " Angle Brackets
 noremap gsw< ciw<><Esc>P
 noremap gsw> ciw<><Esc>P
