@@ -4,9 +4,8 @@ fzcd() {
     local selected
     selected="$(find . -mindepth 1 -type d \
         | grep -v -e "/\.steam/" -e "/\.git/" \
-        | fzf --preview 'ls {}')" \
-            && cd "$selected" \
-            || return 1
+        | fzf --preview 'ls {}')"
+    cd "$selected" || return 1
 }
 
 
@@ -93,15 +92,13 @@ $(find -L "$HOME" -maxdepth 1 -type f)"
 
 fzls() {
     local selected
-    selected="$(ls -Ap1 \
+    selected="$(find . -maxdepth 1 \
         | fzf --preview "if [[ -f {} ]]; then cat {}; else ls {}; fi")"
 
-    [[ -z "$selected" ]] \
-        && return 1
+    [[ -z "$selected" ]] && return 1
 
     if [[ -d "$selected" ]]; then
-        cd "$selected" \
-            || return 1
+        cd "$selected" || return 1
     elif [[ -f "$selected" ]]; then
         [[ -e "$HOME/.local/bin/open_thing.sh" ]] \
             && "$HOME"/.local/bin/open_thing.sh "$selected"
@@ -115,12 +112,10 @@ goto() {
     if [[ "$1" ]]; then
         target="$1"
     else
-        target="$(find . -mindepth 1 \
-            | fzf)"
+        target="$(find . -mindepth 1 | fzf)"
     fi
 
-    [[ -z "$target" ]] \
-        && return 1
+    [[ -z "$target" ]] && return 1
 
     target="$(realpath -- "$target")"
 
@@ -133,6 +128,5 @@ goto() {
         return 1
     fi
 
-    cd "$directory" \
-        || return 1
+    cd "$directory" || return 1
 }
