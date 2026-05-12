@@ -9,6 +9,12 @@
     padding: 3px;
 }
 
+/* This is the text/font of the currently highlighted item */
+#text:selected {
+    color: #d65d0e;  /* Gruvbox Orange */
+    font-weight: bold;
+}
+
 #img {
     padding: 5px;
 }
@@ -26,10 +32,11 @@
     padding: 2px 3px 2px 3px;
 }
 
-/* This is an item of the list that is hovered over */
+/* This is the background box of an item of the list that is hovered over */
 #entry:selected {
     background: rgb(60, 56, 54); /* Gruvbox CursorLine */
-    /*font-weight: bold */
+    color: rgb(60, 56, 54); /* Gruvbox CursorLine (this is the dash outline
+    color of the box that appears when using arrow keys up/down) */
 }
 
 /* This is the text entry box */
