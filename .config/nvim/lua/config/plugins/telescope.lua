@@ -76,7 +76,7 @@ return {
             vim.keymap.set("n", "<leader>sM", require('telescope.builtin').man_pages, {desc = ":Telescope man_pages"})
             vim.keymap.set("n", "<leader>f?", require('telescope.builtin').builtin, {desc = ":Telescope builtin"})
             vim.keymap.set("n", "<leader>s?", require('telescope.builtin').builtin, {desc = ":Telescope builtin"})
-            vim.keymap.set("n", "<leader>uC", function() require('telescope.builtin').colorscheme {enable_preview=true} end, {desc = ":Telescope colorscheme enable_preview=true"})
+            --vim.keymap.set("n", "<leader>uC", function() require('telescope.builtin').colorscheme {enable_preview=true} end, {desc = ":Telescope colorscheme enable_preview=true"})
             vim.keymap.set("n", "<leader>z=", require('telescope.builtin').spell_suggest, {desc = ":Telescope spell_suggest"})
             vim.keymap.set("n", "<leader>en", function() require('telescope.builtin').find_files {cwd = vim.fn.stdpath("config")} end, {desc = "Telescope edit nvim config files"})
         end

@@ -123,6 +123,8 @@ vim.keymap.set({"n", "v"}, "<Leader>P", "\"+P")
 -- -------
 vim.keymap.set("n", "<Leader>us", "<CMD>setlocal spell!<CR>")
 vim.keymap.set("n", "<Leader>uw", "<CMD>set wrap!<CR>")
+vim.keymap.set("n", "<Leader>uc", "<CMD>set colorcolumn=80<CR>")
+vim.keymap.set("n", "<Leader>uC", "<CMD>set colorcolumn=0<CR>")
 
 -- Tmux
 -- ----

@@ -248,6 +248,8 @@ vnoremap <Leader>P "+P
 " -------
 noremap <Leader>us <cmd>setlocal spell!<CR>
 noremap <Leader>uw <cmd>set wrap!<CR>
+noremap <Leader>uc <cmd>set colorcolumn=80<CR>
+noremap <Leader>uC <cmd>set colorcolumn=0<CR>
 
 " Movement
 " --------
