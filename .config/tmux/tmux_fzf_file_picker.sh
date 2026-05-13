@@ -643,7 +643,7 @@ main() {
         else
             local files
             fzf_prompt="(${open_in:0:1}) > "  # Use first character of open method
-            
+
             if [[ "$(pwd)" == "$HOME" ]]; then
                 # If in ~ only search specific directories to reduce clutter
                 files="$({ find -L "${DESIRED_HOME_DIRECTORIES[@]}" -type f
