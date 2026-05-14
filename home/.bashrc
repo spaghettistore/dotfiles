@@ -160,6 +160,7 @@ export FZF_DEFAULT_OPTS="--color=16 --style=minimal"
 # ---------------------
 
 export EDITOR="nvim"
+export BROWSER="firefox"
 
 # Open man pages with vim instead of less
 #export MANPAGER="nvim +Man!"
