@@ -154,7 +154,7 @@ export FZF_CTRL_R_OPTS="
   --header 'Press CTRL-Y to copy command into clipboard'"
 
 # Default fzf options, changing vanity
-export FZF_DEFAULT_OPTS="--color=16 --style=minimal"
+export FZF_DEFAULT_OPTS="--color=16 --style=minimal --ansi"
 
 # Environment Variables
 # ---------------------
