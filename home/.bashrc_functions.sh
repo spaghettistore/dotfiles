@@ -130,38 +130,3 @@ goto() {
 
     cd "$directory" || return 1
 }
-
-
-cal() {
-  local calendar_file="$HOME/.local/share/calcurse/apts"
-  case "$1" in
-      "") calcurse ;;
-      "ls") calcurse --range=14 --appointment ;;
-      "cat" | "la") cat "$calendar_file" ;;
-      "in") calcurse --range="$2";;
-      "e" | "edit") "$EDITOR" "$calendar_file" ;;
-      "-h" | "--help")
-          echo "cal: alias for calcurse
-
-USAGE
-  cal [ls|cat|in <NUM>|e]
-
-OPTIONS
-  no arguments
-    calcurse
-  ls
-    calcurse --range=14 --appointment
-  cat, la
-    cat CALENDAR_FILE
-  in <NUM>
-    calcurse --range=NUM
-  e, edit
-    EDITOR CALENDAR_FILE
-
-CALENDAR_FILE
-  uses calcurse's default path for appointments:
-    $calendar_file"
-          ;;
-      *) exit 1 ;;
-  esac
-}
