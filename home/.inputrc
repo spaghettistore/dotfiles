@@ -194,6 +194,13 @@ $if mode=vi
     "ca>": "lF<cf>"
     "ya<": "lF<yf>"
     "ya>": "lF<yf>"
+    # {operator} {inside/around} forward slashes
+    "di/": "lT/dt/"
+    "ci/": "lT/ct/"
+    "yi/": "lT/yt/"
+    "da/": "lF/df/"
+    "ca/": "lF/cf/"
+    "ya/": "lF/yf/"
     # Surround {word/WORD} with things (depends on custom made 'ciw' and 'ciW')
     "gsw\"": "ciw\"\"P"
     "gsW\"": "ciW\"\"P"
