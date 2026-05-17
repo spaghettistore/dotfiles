@@ -1,0 +1,98 @@
+# Table of Content:
+#   1. KEYBINDS
+#   2. OPTIONS / VARIABLES
+#   3. MACROS
+#   4. FILTERS / IGNORE
+
+# 1. KEYBINDS
+# -----------
+
+bind-key RIGHT open
+bind-key LEFT quit
+
+## Vim binds
+bind-key h quit
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key g home
+bind-key G end
+bind-key d pagedown
+bind-key u pageup
+bind-key N prev-unread
+
+## Fix overwritten
+bind-key J next-feed
+bind-key K prev-feed
+bind-key a toggle-show-read-feeds
+
+
+# 2. OPTIONS / VARIABLES
+# ----------------------
+
+## Default browser
+browser "firefox"
+
+## Use 'Reload All' on startup, so you don't need to press 'R'
+auto-reload yes
+wrap-scroll yes
+show-title-bar no
+
+## Colour / Theme
+# The default color configuration of Newsboat looks like this:
+#   color <thing>             <fg>    <bg>   <bold>
+#   color background          white   black
+#   color listnormal          white   black
+#   color listfocus           yellow  blue   bold
+#   color listnormal_unread   white   black  bold
+#   color listfocus_unread    yellow  blue   bold
+#   color title               yellow  blue   bold
+#   color info                yellow  blue   bold
+#   color hint-key            yellow  blue   bold
+#   color hint-keys-delimiter white   blue
+#   color hint-separator      white   blue   bold
+#   color hint-description    white   blue
+#   color article             white   black
+
+### Custom theme
+#     <thing>             <fg>    <bg>     <bold>
+color background          white   default        # default=none/transpaerent
+color listnormal          white   default
+color listfocus           black   cyan
+color listnormal_unread   white   default  bold
+color listfocus_unread    black   cyan     bold
+color title               white   default  bold  # Removed with 'show-title-bar no'
+color info                white   default  bold  # This bg is the bottom bar
+color hint-key            cyan    default  bold
+color hint-keys-delimiter white   default
+color hint-separator      white   default  bold
+color hint-description    white   default
+color article             white   default
+
+
+# 3. MACROS
+# ---------
+
+# Default macro prefix = ","
+
+## Open with w3m
+macro v set browser "w3m" ; open-in-browser ; set browser "firefox"
+#macro v set browser "w3m" ; open-in-browser ; set browser "$BROWSER"  # Use ENVIRONMENT VARIABLE
+macro V set browser "w3m" ; open-in-browser-and-mark-read ; set browser "firefox"
+
+## Open with mpv
+macro o set browser "mpv" ; open-in-browser ; set browser "firefox"
+macro O set browser "mpv" ; open-in-browser-and-mark-read ; set browser "firefox"
+
+
+# 4. FILTERS / IGNORE
+# -------------------
+
+## Try to ignore shorts in YouTube (is flawed, only works if hashtag added, and no check to see if it's from YouTube):
+#ignore-article "*" "title =~ \"#shorts\""
+#ignore-article "*" "content =~ \"#shorts\""
+
+## Ignore YouTube shorts:
+# Only applies to newly pulled articles, not existing entries (as default 'ignore-mode' = 'download').
+# To change to ignore existing entries, set 'ignore-mode' to 'display'.
+ignore-article "*" "link =~ \"www.youtube.com/shorts/\""
