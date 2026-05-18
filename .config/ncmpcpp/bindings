@@ -630,3 +630,29 @@ def_key "D"
   delete_browser_items
 def_key "D"
   delete_stored_playlist
+
+def_key "K"
+  select_item
+  scroll_up
+
+def_key "J"
+  select_item
+  scroll_down
+
+def_key "space"
+  select_item
+  scroll_down
+
+## Changing default stop
+### Override default key 's' as 'stop' to prevent accidental presses (swapped with 'ctrl-s')
+def_key "s"
+  sort_playlist
+def_key "s"
+  toggle_browser_sort_mode
+def_key "s"
+  toggle_media_library_sort_mode
+def_key "S"
+  stop
+### Fix override of default key 'S'
+def_key "ctrl-s"
+  save_playlist
