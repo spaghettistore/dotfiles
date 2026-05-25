@@ -8,12 +8,13 @@
 directory="$1"
 num_panes="$(tmux list-panes | wc --lines)"
 
+if [[ ! -d "$directory" ]]; then
+    # If no directory provided by argument, use the current pane's directory
+    directory='#{pane_current_path}'
+fi
+
 if (( num_panes <= 1 )); then
-    if [[ -d "$directory" ]]; then
-        tmux split-pane -h -c "$directory"
-    else
-        tmux split-pane -h
-    fi
+    tmux split-pane -h -c "$directory"
 else
     current_pane="$(tmux display -p "#{pane_index}")"
 
@@ -28,11 +29,7 @@ else
         direction="h"
     fi
 
-    if [[ -d "$directory" ]]; then
-        tmux split-pane "-$direction" -c "$directory"
-    else
-        tmux split-pane "-$direction"
-    fi
+    tmux split-pane "-$direction" -c "$directory"
 
     # Return to original pane, and then back to newly created pane.
     # We do this to keep tmux's last pane the same (as otherwise the last
