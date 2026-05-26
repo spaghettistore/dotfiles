@@ -342,11 +342,11 @@ mpd_music_dir = ~/media/music
 ##
 #playlist_display_mode = columns
 #
-#browser_display_mode = classic
+browser_display_mode = columns
 #
-#search_engine_display_mode = classic
+search_engine_display_mode = columns
 #
-#playlist_editor_display_mode = classic
+playlist_editor_display_mode = columns
 #
 #discard_colors_if_item_is_selected = yes
 #
