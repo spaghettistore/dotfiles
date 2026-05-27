@@ -590,6 +590,17 @@ def_key "ctrl-d"
 def_key "ctrl-u"
   page_up
 
+# Add 'n' and 'N' for next/previous search (defaults are '.' and ',')
+def_key "n"
+  next_found_item
+def_key "N"
+  previous_found_item
+# Fix override of default key 'n'
+def_key "alt-n"
+  move_sort_order_down
+def_key "alt-n"
+  move_selected_items_down
+
 
 # Less Keybinds
 # -------------
