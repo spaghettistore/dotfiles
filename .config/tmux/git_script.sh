@@ -55,7 +55,7 @@ tmux_git_display_menu() {
         "Log (Full)" L "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log\"" \
         "Branch" b "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh branch\"" \
         "Add" a "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh add\"" \
-        "Commit" c "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh commit\""
+        "Commit" c "new-window -n gitcommit \"~/.config/tmux/git_script.sh commit\""
 
         #"Log" l "display-popup -w 80% -h 80% -E \"~/.config/tmux/git_script.sh log --oneline\"" \
 }
