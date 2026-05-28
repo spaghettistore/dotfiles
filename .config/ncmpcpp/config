@@ -358,7 +358,7 @@ playlist_editor_display_mode = columns
 #
 #volume_change_step = 2
 #
-#autocenter_mode = no
+autocenter_mode = yes
 #
 #centered_cursor = no
 #
