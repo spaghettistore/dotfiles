@@ -116,10 +116,10 @@
         // We have no space between icon and format source as we want to hide it when muted, so the unmuted icon must have a leading space
         "format": "{volume}% {icon}{format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {format_source}",
-        "format-muted": "{format_source}",
+        "format-bluetooth-muted": "🔇 {format_source}",
+        "format-muted": "🔇{format_source}",
         "format-source": " {volume}% ", // Leading space due to hiding the muted mic icon
-        "format-source-muted": "",  // We hide the muted icon
+        "format-source-muted": "",  // We hide the muted mic icon
         "format-icons": {
             "headphone": "",
             "hands-free": "",
