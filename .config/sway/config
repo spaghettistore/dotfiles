@@ -19,7 +19,7 @@ set $right l
 set $term alacritty
 set $browser firefox
 set $file_manager ranger
-set $menu pkill rofi || rofi -i -show drun
+set $menu pkill rofi || rofi -i -show drun -show-icons
 set $menu2 pkill rofi || rofi -i -show run
 
 # ----------

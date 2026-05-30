@@ -136,7 +136,7 @@
     "custom/appmenu": {
         "format": "",
         "tooltip": false,
-        "on-click": "pkill rofi || rofi -i -show drun",
+        "on-click": "pkill rofi || rofi -i -show drun -show-icons",
         "on-click-right": "pkill rofi || ~/.config/sway/sway_dmenu.sh"
     },
     "custom/powermenu": {
