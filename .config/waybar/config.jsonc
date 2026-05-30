@@ -6,9 +6,29 @@
     //"width": 1366, // Waybar width (commented out for auto height)
     "spacing": 0, // Gaps between modules (0px)
     // Choose the order of the modules
-    "modules-left": ["custom/appmenu", "sway/workspaces", "sway/scratchpad", "sway/mode", "sway/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "idle_inhibitor", "custom/notification", "cpu", "memory", "temperature", "pulseaudio", "network", "battery", "custom/powermenu"],
+    "modules-left": [
+        "custom/appmenu",
+        "sway/workspaces",
+        "sway/scratchpad",
+        "sway/mode",
+        "sway/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "mpd",
+        "tray",
+        "idle_inhibitor",
+        "custom/notification",
+        "cpu",
+        "memory",
+        "temperature",
+        "pulseaudio",
+        "network",
+        "battery",
+        "custom/powermenu"
+    ],
     // Modules configuration
     "sway/workspaces": {
        "disable-scroll": true,
@@ -132,6 +152,33 @@
         "on-click": "pavucontrol",
         //"on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
         "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+    "mpd": {
+        //"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 5,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
     },
     "custom/appmenu": {
         "format": "",
