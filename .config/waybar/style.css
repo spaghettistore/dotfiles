@@ -121,7 +121,7 @@ button:hover {
     background-color: transparent;
 }
 
-#custom-appmenu, #clock, #tray, #idle-inhibitor, #custom-notification, #cpu, #memory, #temperature, #pulseaudio, #network, #battery, #custom-powermenu {
+#custom-appmenu, #clock, #tray, #idle-inhibitor, #custom-notification, #cpu, #memory, #temperature, #pulseaudio, #network, #battery, #custom-powermenu, #mpd{
     padding: 0 4px;
     margin: 0 1px;
     background: rgb(40, 40, 40); /* Gruvbox BG */

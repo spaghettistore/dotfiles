@@ -5,6 +5,7 @@
     "height": 24, // Waybar height (commented out for auto height)
     //"width": 1366, // Waybar width (commented out for auto height)
     "spacing": 0, // Gaps between modules (0px)
+
     // Choose the order of the modules
     "modules-left": [
         "custom/appmenu",
@@ -29,6 +30,7 @@
         "battery",
         "custom/powermenu"
     ],
+
     // Modules configuration
     "sway/workspaces": {
        "disable-scroll": true,
@@ -154,8 +156,8 @@
         "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
     "mpd": {
-        //"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+        //"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",  // Default
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
         "format-disconnected": "Disconnected ",
         "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
         "unknown-tag": "N/A",
@@ -178,7 +180,8 @@
             "playing": ""
         },
         "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
+        "tooltip-format-disconnected": "MPD (disconnected)",
+        "on-click": "alacritty -e ncmpcpp"
     },
     "custom/appmenu": {
         "format": "",
