@@ -10,7 +10,7 @@ class Window:
         self.pid = pid
         self.full_line = f"{pid} {app_id}"
         # Name has been removed from full line as it needs to be piped into
-        # wofi, so if name contains weird characters then bash will explode.
+        # rofi, so if name contains weird characters then bash will explode.
 
 
 def get_windows() -> list:
@@ -59,7 +59,7 @@ def make_window_class(data: dict):
     return window
 
 
-def get_wofi_response(windows: list):
+def get_rofi_response(windows: list):
     # This function returns a class Window
 
     # Make a bash new line separated string list
@@ -69,12 +69,13 @@ def get_wofi_response(windows: list):
     bash_string_list = bash_string_list.strip()
 
     prompt = "Select a window"
-    command = f'printf "{bash_string_list}" | wofi --matching="fuzzy" -ip "{prompt}" --show dmenu'
+    command = f'printf "{bash_string_list}" | rofi -matching "fuzzy" -p "{prompt}" -dmenu -i'
+
     try:
         response = subprocess.check_output(command, shell=True, encoding="UTF-8")
         response = response.strip()
     except subprocess.CalledProcessError:
-        # This happens if escaping wofi without selecting anything.
+        # This happens if escaping rofi without selecting anything.
         # We want to quit immediately if this happens.
         exit(1)
 
@@ -89,7 +90,7 @@ def get_wofi_response(windows: list):
 def main():
     windows = get_windows()
 
-    selection = get_wofi_response(windows)
+    selection = get_rofi_response(windows)
 
     # Focus window
     command = ["swaymsg", f'[pid="{selection.pid}"]', "focus"]

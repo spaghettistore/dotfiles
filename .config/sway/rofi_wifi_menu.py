@@ -6,12 +6,12 @@ import subprocess
 import sys
 
 HOME = os.environ.get("HOME")
-FILE_NAME=f"{HOME}/.config/wofi_wifi_menu/ssid_list.json"
+FILE_NAME=f"{HOME}/.config/rofi_wifi_menu/ssid_list.json"
 
 def check_if_ssid_file_exists() -> None:
     # If file containing ssids does not exist, use nmtui instead
     if not os.path.exists(FILE_NAME):
-        print(f"wofi_wifi_menu.py: os.path.exists: '{FILE_NAME}': No such file or directory")
+        print(f"rofi_wifi_menu.py: os.path.exists: '{FILE_NAME}': No such file or directory")
         print("Using 'nmtui' instead")
         subprocess.run("nmtui")
         exit()
@@ -50,7 +50,7 @@ def get_wifi_name() -> str:
 
 
 def get_status_prompt() -> str:
-    # Will return a str to be used as the prompt for wofi.
+    # Will return a str to be used as the prompt for rofi.
     # E.g. 'enabled: SSID_NAME'
     prompt = get_wifi_status()
 
@@ -61,12 +61,12 @@ def get_status_prompt() -> str:
     return prompt
 
 
-def get_wofi_response(bash_list: str, prompt: str) -> str:
-    # This function calls wofi and returns the response, or exits if wofi is
+def get_rofi_response(bash_list: str, prompt: str) -> str:
+    # This function calls rofi and returns the response, or exits if rofi is
     # quit without selecting anything. It will return entered text even if it
     # is not an option, as long as enter is pressed.
     process = subprocess.run(
-        ["wofi", "--matching=fuzzy", "-ip", prompt, "--show", "dmenu"],
+        ["rofi", "-matching", "fuzzy", "-p", prompt, "-dmenu", "-i"],
         input=bash_list,
         text=True,
         capture_output=True
@@ -88,8 +88,8 @@ def notify_send(body: str) -> None:
         body,
         "--transient",
         "--urgency=low",
-        "--app-name=wofi_wifi_menu",
-        "--hint=string:x-canonical-private-synchronous:'wofi_wifi_menu'"])
+        "--app-name=rofi_wifi_menu",
+        "--hint=string:x-canonical-private-synchronous:'rofi_wifi_menu'"])
 
 
 def toggle_wifi() -> None:
@@ -107,11 +107,11 @@ def main():
 
     # Read file containing json dictionary of saved ssids. With the value being
     # the SSID to connect to, and the key being the nickname (e.g. "home" and
-    # "ext") that will be displayed in wofi menu.
+    # "ext") that will be displayed in rofi menu.
     with open(FILE_NAME, "r") as file:
         data = json.load(file)
 
-    # If no external arguments provided, read selection with wofi, else use
+    # If no external arguments provided, read selection with rofi, else use
     # provided arg.
     if len(all_args) == 0:
         # Convert python list of ssid nicknames to bash list, and append extra
@@ -120,7 +120,7 @@ def main():
         bash_list += "\non\noff\ntoggle"
 
         prompt = get_status_prompt()
-        response = get_wofi_response(bash_list, prompt)
+        response = get_rofi_response(bash_list, prompt)
     else:
         response = all_args[0]
 
@@ -140,7 +140,7 @@ def main():
     elif response == "toggle":
         toggle_wifi()
     else:
-        print(f"wofi_wifi_menu: '{response}': Invalid option")
+        print(f"rofi_wifi_menu: '{response}': Invalid option")
         exit(1)
 
 

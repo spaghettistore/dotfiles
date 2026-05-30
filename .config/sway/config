@@ -19,8 +19,8 @@ set $right l
 set $term alacritty
 set $browser firefox
 set $file_manager ranger
-set $menu pkill wofi || wofi -i --show drun
-set $menu2 pkill wofi || wofi -i --show run
+set $menu pkill rofi || rofi -i -show drun
+set $menu2 pkill rofi || rofi -i -show run
 
 # ----------
 # Status Bar
@@ -150,7 +150,7 @@ focus_follows_mouse yes
 # Key bindings
 # ------------
 
-bindsym $mod+apostrophe exec pkill wofi || ~/.config/sway/sway_wofi_focus_window.py
+bindsym $mod+apostrophe exec pkill rofi || ~/.config/sway/sway_rofi_focus_window.py
 
 ### System
 # Basic
@@ -316,7 +316,7 @@ show_marks yes
 # Scripts Keybinds
 # ----------------
 
-bindsym $mod+alt+b exec pkill wofi || ~/.local/bin/bmks "wofi"
+bindsym $mod+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
 
 # ------------
 # Custom Modes

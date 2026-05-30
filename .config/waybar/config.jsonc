@@ -101,7 +101,7 @@
         "format-plugged": "{capacity}% ",
         "format-icons": ["", "", "", "", ""],
         "tooltip-format": "{timeTo}",
-        "on-click": "pkill wofi || ~/.config/sway/wofi_power_profiles.sh"
+        "on-click": "pkill rofi || ~/.config/sway/rofi_power_profiles.sh"
     },
     "network": {
         "format-wifi": "{signalStrength}% ",
@@ -109,7 +109,7 @@
         "tooltip-format": "{signalStrength}% {essid}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "⚠",
-        "on-click": "pkill wofi || ~/.config/sway/wofi_wifi_menu.py"
+        "on-click": "pkill rofi || ~/.config/sway/rofi_wifi_menu.py"
     },
     "pulseaudio": {
         "tooltip": false,
@@ -136,12 +136,12 @@
     "custom/appmenu": {
         "format": "",
         "tooltip": false,
-        "on-click": "pkill wofi || wofi -i --show drun",
-        "on-click-right": "pkill wofi || ~/.config/sway/sway_dmenu.sh"
+        "on-click": "pkill rofi || rofi -i -show drun",
+        "on-click-right": "pkill rofi || ~/.config/sway/sway_dmenu.sh"
     },
     "custom/powermenu": {
         "format": "",
         "tooltip": false,
-        "on-click": "pkill wofi || ~/.config/sway/wofi_power_menu.sh"
+        "on-click": "pkill rofi || ~/.config/sway/rofi_power_menu.sh"
     }
 }

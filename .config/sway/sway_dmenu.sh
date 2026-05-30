@@ -1,15 +1,16 @@
 #!/bin/bash
 
 # Kill already running processes
-already_running="$(pgrep -c 'wofi')"
-if [[ $already_running -gt 0 ]]; then
-    pkill 'wofi'
+already_running="$(pgrep -c 'rofi')"
+# With wofi you could use '-gt 0', but rofi seems to always have one process running
+if [[ $already_running -gt 1 ]]; then
+    pkill 'rofi'
     exit 0
 fi
 
-power_menu="$HOME/.config/sway/wofi_power_menu.sh"
-wifi_menu="$HOME/.config/sway/wofi_wifi_menu.py"
-power_profiles_menu="$HOME/.config/sway/wofi_power_profiles.sh"
+power_menu="$HOME/.config/sway/rofi_power_menu.sh"
+wifi_menu="$HOME/.config/sway/rofi_wifi_menu.py"
+power_profiles_menu="$HOME/.config/sway/rofi_power_profiles.sh"
 info_notifications_script="$HOME/.config/sway/info_notification.sh"
 what_bin_day_script="$HOME/.local/bin/bin_day.py"
 
@@ -55,10 +56,8 @@ main() {
     prompt="$(basename -- "$0")"
 
     local input
-    input="$(
-        printf "%s\n" "${options[@]}" \
-            | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
-    )"
+    input="$(printf -- '%s\n' "${options[@]}" \
+        | rofi -matching "fuzzy" -p "$prompt" -dmenu -i)"
 
     case "$input" in
         " suspend" | "suspend")

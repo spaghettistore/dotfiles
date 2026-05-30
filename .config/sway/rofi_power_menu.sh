@@ -7,10 +7,8 @@ get_confirmation() {
         "no"
     )
     local response
-    response="$(
-        printf "%s\n" "${options[@]}" \
-            | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
-    )"
+    response="$(printf -- '%s\n' "${options[@]}" \
+        | rofi -matching "fuzzy" -p "$prompt" -dmenu -i)"
 
     if [[ "$response" == "yes" ]]; then
         return 0
@@ -32,15 +30,13 @@ main() {
             " lock"
         )
         local prompt="Select power option"
-        selected_option="$(
-            printf "%s\n" "${options[@]}" \
-                | wofi -p "$prompt" --show dmenu
-        )"
+        selected_option="$(printf -- '%s\n' "${options[@]}" \
+            | rofi -matching "fuzzy" -p "$prompt" -dmenu -i)"
     else
         selected_option="$1"
     fi
 
-    # Clear icons if used by wofi, and make get_confirmation easier
+    # Clear icons if used by rofi, and make get_confirmation easier
     case "$selected_option" in
         " suspend" | "suspend")
             selected_option="suspend"

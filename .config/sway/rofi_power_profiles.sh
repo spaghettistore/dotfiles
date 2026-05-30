@@ -16,10 +16,8 @@ main() {
         charging_status="$(cat /sys/class/power_supply/BAT0/status)"
 
         prompt="${capacity}% ${charging_status} (${current_profile})"
-        selected_profile="$(
-            printf "%s\n" "${options[@]}" \
-                | wofi --matching="fuzzy" -ip "$prompt" --show dmenu
-        )"
+        selected_profile="$(printf -- '%s\n' "${options[@]}" \
+            | rofi -matching "fuzzy" -p "$prompt" -dmenu -i)"
     else
         selected_profile="$1"
     fi
