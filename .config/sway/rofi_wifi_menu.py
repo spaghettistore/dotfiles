@@ -4,9 +4,44 @@ import os
 import json
 import subprocess
 import sys
+import getopt
 
 HOME = os.environ.get("HOME")
-FILE_NAME=f"{HOME}/.config/rofi_wifi_menu/ssid_list.json"
+FILE_NAME = f"{HOME}/.config/rofi_wifi_menu/ssid_list.json"
+DEFAULT_MENU = "rofi"
+SCRIPT_NAME = os.path.basename(sys.argv[0])
+
+def usage() -> None:
+    print(f"""{SCRIPT_NAME} - Wifi menu script
+
+USAGE
+  {SCRIPT_NAME} [-h] [-m <fzf|rofi>] [OPTION]
+
+DESCRIPTION
+  The json file '{FILE_NAME}'
+  should contain a dictionary containing all connections to add to the list of
+  options.
+  The key is the name of the connection that will be used as an available OPTION.
+  The value is the connection's SSID.
+
+OPTIONS
+  on
+    turn off wifi
+  off
+    turn on wifi
+  toggle
+    toggle wifi
+  NAME
+    name of connection loaded from json file, attempt to connect to the SSID
+
+FLAGS
+  -h, --help
+    show this help message and exit
+  -m <fzf|rofi>
+    use specified menu (default={DEFAULT_MENU})
+    menu will be skipped if an OPTION argument is provided"""
+    )
+
 
 def check_if_ssid_file_exists() -> None:
     # If file containing ssids does not exist, use nmtui instead
@@ -81,6 +116,26 @@ def get_rofi_response(bash_list: str, prompt: str) -> str:
     return selected_item
 
 
+def get_fzf_response(bash_list: str, prompt: str) -> str:
+    # This function calls rofi and returns the response, or exits if rofi is
+    # quit without selecting anything. It will return entered text even if it
+    # is not an option, as long as enter is pressed.
+    process = subprocess.run(
+        ["fzf", "--prompt", f"{prompt}: "],
+        input=bash_list,
+        text=True,
+        capture_output=True
+    )
+
+    # Check if the user made a selection
+    if process.returncode == 0:
+        selected_item = process.stdout.strip()
+    else:
+        exit(1)
+
+    return selected_item
+
+
 def notify_send(body: str) -> None:
     subprocess.run([
         "notify-send",
@@ -102,7 +157,27 @@ def toggle_wifi() -> None:
 
 
 def main():
-    all_args = sys.argv[1:]
+    menu = DEFAULT_MENU
+
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "m:h", ["help", "output="])
+    except getopt.GetoptError as err:
+        print(err)
+        sys.exit(2)
+
+    for opt, optarg in opts:
+        if opt == "-m":
+            if optarg in ("fzf", "rofi"):
+                menu = optarg
+            else:
+                print(f"'{optarg}': Invalid option for menu. Expects: fzf, rofi")
+                sys.exit(1)
+        elif opt in ("-h", "--help"):
+            usage()
+            sys.exit()
+        else:
+            assert False, "unhandled option"
+
     check_if_ssid_file_exists()
 
     # Read file containing json dictionary of saved ssids. With the value being
@@ -113,16 +188,19 @@ def main():
 
     # If no external arguments provided, read selection with rofi, else use
     # provided arg.
-    if len(all_args) == 0:
+    if len(args) == 0:
         # Convert python list of ssid nicknames to bash list, and append extra
         # options to toggle wifi.
         bash_list = "\n".join(data.keys())
         bash_list += "\non\noff\ntoggle"
 
         prompt = get_status_prompt()
-        response = get_rofi_response(bash_list, prompt)
+        if menu == "fzf":
+            response = get_fzf_response(bash_list, prompt)
+        else:
+            response = get_rofi_response(bash_list, prompt)
     else:
-        response = all_args[0]
+        response = args[0]
 
     if response in data.keys():
         selected_ssid = data[response]
