@@ -130,3 +130,23 @@ goto() {
 
     cd "$directory" || return 1
 }
+
+
+cu() {
+    local number="$1"
+
+    case "$number" in
+        "") number=1 ;;
+        *[!0-9]*) echo "cu: '$number': Not a number" >&2 ; return 1 ;;
+    esac
+
+    if (( number < 1 )); then
+        return 1
+    else
+        local cd_string=''
+        for _ in $(seq 1 "$number"); do
+            cd_string+='../'
+        done
+        cd "$cd_string" || return 1
+    fi
+}
