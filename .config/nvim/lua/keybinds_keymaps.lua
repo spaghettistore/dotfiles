@@ -118,7 +118,8 @@ vim.keymap.set({"n", "v"}, "<Leader>y", "\"+y")
 vim.keymap.set("n", "<Leader>Y", "\"+y$")
 vim.keymap.set({"n", "v"}, "<Leader>p", "\"+p")
 vim.keymap.set({"n", "v"}, "<Leader>P", "\"+P")
-
+-- Copy full file path to system clipboard
+vim.keymap.set("n", "<Leader>yp", "<CMD>let @+ = expand(\"%:p\")<CR>")
 -- Toggles
 -- -------
 vim.keymap.set("n", "<Leader>us", "<CMD>setlocal spell!<CR>")
