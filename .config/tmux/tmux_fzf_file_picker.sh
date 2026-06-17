@@ -675,6 +675,7 @@ main() {
                 -e "\.djvu$" \
                 -e "\.docx$" \
                 -e "\.mp4$" \
+                -e "\.mkv$" \
                 -e "\.wav$" \
                 -e "\.mmpz" \
                 -e "\.tdb$" \

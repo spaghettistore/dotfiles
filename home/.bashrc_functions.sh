@@ -57,6 +57,7 @@ $(find -L "$HOME" -maxdepth 1 -type f)"
             -e "\.djvu$" \
             -e "\.docx$" \
             -e "\.mp4$" \
+            -e "\.mkv$" \
             -e "\.wav$" \
             -e "\.mmpz" \
             -e "\.tdb$" \
