@@ -442,7 +442,8 @@ mode "[mc]" {
 
 # Resize Mode
 mode "[r]" {
-    bindsym Escape mode "[ ]"
+    #bindsym Escape mode "[ ]"
+    bindsym Escape mode "default"
     bindsym m mode "[m]"
     # Resize, vim keybinds
     bindsym $left resize shrink width 10px
@@ -487,41 +488,41 @@ mode "[o]" {
     bindsym c exec "$term -e bc -l", mode "default"
 }
 
-# Quick Move Mode
-mode ":m" {
-    bindsym Escape mode "default"
-    # Move focused container to workspace
-    bindsym 1 move container to workspace number 1, mode "default"
-    bindsym 2 move container to workspace number 2, mode "default"
-    bindsym 3 move container to workspace number 3, mode "default"
-    bindsym 4 move container to workspace number 4, mode "default"
-    bindsym 5 move container to workspace number 5, mode "default"
-    bindsym 6 move container to workspace number 6, mode "default"
-    bindsym 7 move container to workspace number 7, mode "default"
-    bindsym 8 move container to workspace number 8, mode "default"
-    bindsym 9 move container to workspace number 9, mode "default"
-    bindsym 0 move container to workspace number 0, mode "default"
-    bindsym p move container to workspace prev, mode "default"
-    bindsym n move container to workspace next, mode "default"
-    # Move the focused window, vim keybinds
-    bindsym $left move left, mode "default"
-    bindsym $down move down, mode "default"
-    bindsym $up move up, mode "default"
-    bindsym $right move right, mode "default"
-    # Toggle Layout
-    bindsym f fullscreen, mode "default"
-    bindsym t layout tabbed, mode "default"
-    bindsym s layout stacking, mode "default"
-    bindsym z layout toggle split, mode "default"
-    # Window Type
-    bindsym Space floating toggle, mode "default"
-    bindsym minus move scratchpad, mode "default"
-}
+## Quick Move Mode
+#mode ":m" {
+#    bindsym Escape mode "default"
+#    # Move focused container to workspace
+#    bindsym 1 move container to workspace number 1, mode "default"
+#    bindsym 2 move container to workspace number 2, mode "default"
+#    bindsym 3 move container to workspace number 3, mode "default"
+#    bindsym 4 move container to workspace number 4, mode "default"
+#    bindsym 5 move container to workspace number 5, mode "default"
+#    bindsym 6 move container to workspace number 6, mode "default"
+#    bindsym 7 move container to workspace number 7, mode "default"
+#    bindsym 8 move container to workspace number 8, mode "default"
+#    bindsym 9 move container to workspace number 9, mode "default"
+#    bindsym 0 move container to workspace number 0, mode "default"
+#    bindsym p move container to workspace prev, mode "default"
+#    bindsym n move container to workspace next, mode "default"
+#    # Move the focused window, vim keybinds
+#    bindsym $left move left, mode "default"
+#    bindsym $down move down, mode "default"
+#    bindsym $up move up, mode "default"
+#    bindsym $right move right, mode "default"
+#    # Toggle Layout
+#    bindsym f fullscreen, mode "default"
+#    bindsym t layout tabbed, mode "default"
+#    bindsym s layout stacking, mode "default"
+#    bindsym z layout toggle split, mode "default"
+#    # Window Type
+#    bindsym Space floating toggle, mode "default"
+#    bindsym minus move scratchpad, mode "default"
+#}
 
 # Mode Keybinds
 bindsym $mod+Shift+semicolon mode "[ ]"
 bindsym $mod+r mode "[r]"
-bindsym $mod+m mode ":m"
+#bindsym $mod+m mode ":m"
 
 # -----------------
 # Floating Defaults
