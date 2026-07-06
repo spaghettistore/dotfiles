@@ -9,7 +9,11 @@ return {
         config = function()
             require('telescope').setup {
                 pickers = {
-                    find_files = {theme = "ivy"},
+                    find_files = {
+                        theme = "ivy",
+                        -- Follow symlinks
+                        follow = true
+                    },
                     live_grep = {theme = "ivy"},
                     current_buffer_fuzzy_find = {theme = "ivy"},
                     grep_string = {theme = "ivy"}
