@@ -137,6 +137,7 @@ source "$HOME/resources/dotfiles/home/.bashrc_functions.sh"
 # Script keybinds (with vim mode this only works in insert mode)
 bind -x '"\C-F": "~/.config/tmux/tmux_fzf_file_picker.sh -o window"'
 bind -x '"\C-G": ". ~/.config/tmux/tmux_fzf_directory_picker.sh"'
+bind -x '"\C-O": ". ~/.config/tmux/tmux_files_and_directory_picker.sh"'
 
 # Fzf
 # ---
