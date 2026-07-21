@@ -230,7 +230,7 @@ noremap <Leader>ya/ lF/\"+yf/
 " Tmux
 " ----
 noremap <Leader>f <cmd>!tmux display-popup -E ~/.config/tmux/tmux_fzf_file_picker.sh -o window<CR>
-noremap <Leader>g <cmd>!tmux display-popup -E ~/.config/tmux/tmux_fzcd.sh<CR>
+noremap <Leader>g <cmd>!tmux display-popup -E ~/.config/tmux/tmux_fzf_directory_picker.sh<CR>
 noremap <Leader>ot <cmd>silent !tmux display-popup -E "~/.config/tmux/tmux_new_pane_auto_tile.sh $(realpath -- %:h)"<CR>
 
 " Clipboard (Tmux) Does not seem to work in vim, only nvim

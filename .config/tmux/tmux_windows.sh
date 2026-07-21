@@ -2,7 +2,7 @@
 
 # This script is intended to be used as a tmux keybind bind. It will provide a
 # fzf list of all windows, excluding the empty terminals that are there to keep
-# the tmux session alive for use with tmux_fzcd.sh
+# the tmux session alive for use with tmux_fzf_directory_picker.sh
 # Use case is for when you have a lot of sessions and want to jump between the open windows
 
 if [[ ! "$TMUX" ]]; then
