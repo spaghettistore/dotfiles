@@ -10,8 +10,8 @@ main() {
     local fzf_full_response
     fzf_full_response="$(find . \
         | fzf \
-            --header "ENTER:$fzf_enter_key_default_value  C-t:window  C-v:pane  C-o:current  C-g:session/goto" \
-            --bind "enter:print($fzf_enter_key_default_value)+accept,ctrl-t:print(window)+accept,ctrl-v:print(pane)+accept,ctrl-o:print(current)+accept,ctrl-g:print(goto)+accept" \
+            --header "ENTER:$fzf_enter_key_default_value  C-t:window  C-v:pane  C-o:current  C-g:session/goto  C-x:xdg-open" \
+            --bind "enter:print($fzf_enter_key_default_value)+accept,ctrl-t:print(window)+accept,ctrl-v:print(pane)+accept,ctrl-o:print(current)+accept,ctrl-g:print(goto)+accept,ctrl-x:print(xdg-open)+accept" \
     )"
 
     # We use return instead of exit as we plan to source script this with a
@@ -36,6 +36,10 @@ main() {
             $TMUX_FILE_PICKER_SCRIPT -o "$fzf_keybind_response" "$selected"
         else
             exit 1
+        fi
+    elif [[ "$fzf_keybind_response" == "xdg-open" ]]; then
+        if [[ -f "$selected" ]]; then
+            xdg-open "$selected"
         fi
     else
         if [[ -d "$selected" ]]; then
