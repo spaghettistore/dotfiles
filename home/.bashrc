@@ -165,8 +165,8 @@ export BROWSER="firefox"
 # Open man pages with vim instead of less
 #export MANPAGER="nvim +Man!"
 
-# Add '~/bin' to PATH (Not needed on Debian, but needed on RaspberryPiOS and Fedora)
-#export PATH="/home/$USER/bin:$PATH"
+# Add '~/.local/bin' to PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # New versions of Python replaced REPL, so it no longer reads GNU readline from
 # ~/.inputrc, this env var allows you to use the old REPL that allows using
