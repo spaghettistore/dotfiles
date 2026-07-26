@@ -569,7 +569,8 @@ set {
 client.focused          $color_orange   $color_cyan     $color_fg   $color_green    $color_cyan
 
 # Font
-font DejaVu Sans Mono:monospace 14px
+#font DejaVu Sans Mono:monospace 14px
+font JetBrains Mono NL:monospace 14px
 
 # --------
 # Xwayland

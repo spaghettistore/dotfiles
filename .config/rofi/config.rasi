@@ -2,7 +2,8 @@
 
 configuration {
     /*    modes: "window,drun,run,ssh";*/
-    font: "DejaVu Sans Mono 18";
+    /*font: "DejaVu Sans Mono 18"; */
+    font: "JetBrains Mono NL 18";
     /*    location: 0;*/
     /*    yoffset: 0;*/
     /*    xoffset: 0;*/
