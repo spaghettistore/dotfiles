@@ -37,7 +37,8 @@ size = 19
 #offset.y = 0  # For line spacing (default: 0)
 
 [font.normal]
-family = "DejaVu Sans Mono"
+#family = "DejaVu Sans Mono"
+family = "JetBrains Mono NL"
 style = "Regular"
 
 [window]

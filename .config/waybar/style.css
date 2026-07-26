@@ -2,7 +2,8 @@
     /* `otf-font-awesome` is required to be installed for icons */
     /*font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
     /*font-family: Noto Sans Mono; Default Alacritty font */
-    font-family: DejaVu Sans Mono;
+    /*font-family: DejaVu Sans Mono; */
+    font-family: JetBrains Mono NL;
     font-size: 14px;
     color: #ebdbb2; /* Gruvbox Foreground */
 }
