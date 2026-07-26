@@ -159,7 +159,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Log out?' -B 'Yes, exit sway' 'swaymsg exit'
 # Launcher
 bindsym $mod+d exec $menu
-bindsym $mod+Slash exec ~/.config/sway/sway_dmenu.sh
+bindsym $mod+Slash exec pkill rofi || ~/.config/sway/sway_dmenu.sh
 bindsym $mod+Shift+d exec $menu2
 # Volume
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2% && ~/.config/sway/current_volume_notification.sh

@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Kill already running processes
-already_running="$(pgrep -c 'rofi')"
-# With wofi you could use '-gt 0', but rofi seems to always have one process running
-if [[ $already_running -gt 1 ]]; then
-    pkill 'rofi'
-    exit 0
-fi
-
 power_menu="$HOME/.config/sway/rofi_power_menu.sh"
 wifi_menu="$HOME/.config/sway/rofi_wifi_menu.py"
 power_profiles_menu="$HOME/.config/sway/rofi_power_profiles.sh"
