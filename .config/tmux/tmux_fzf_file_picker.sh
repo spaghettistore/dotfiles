@@ -190,6 +190,8 @@ get_editor() {
 get_fzf_file_preview_command() {
     if command -v batcat; then
         echo "batcat -n --theme=gruvbox-dark --color=always -- {}"
+    elif command -v bat; then
+        echo "bat -n --theme=gruvbox-dark --color=always -- {}"
     else
         echo "cat -- {}"
     fi
