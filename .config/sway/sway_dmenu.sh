@@ -1,6 +1,6 @@
 #!/bin/bash
 
-power_menu="$HOME/.config/sway/rofi_power_menu.sh"
+power_menu="$HOME/.config/sway/power_menu_dmenu.sh"
 wifi_menu="$HOME/.config/sway/wifi_menu_dmenu.py"
 power_profiles_menu="$HOME/.config/sway/power_profiles_dmenu.sh"
 info_notifications_script="$HOME/.config/sway/info_notification.sh"
