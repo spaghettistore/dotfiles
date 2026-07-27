@@ -123,7 +123,7 @@
         "format-plugged": "{capacity}% ",
         "format-icons": ["", "", "", "", ""],
         "tooltip-format": "{timeTo}",
-        "on-click": "pkill rofi || ~/.config/sway/rofi_power_profiles.sh"
+        "on-click": "pkill rofi || ~/.config/sway/power_profiles_dmenu.sh -m rofi"
     },
     "network": {
         "format-wifi": "{signalStrength}% ",

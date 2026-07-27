@@ -2,7 +2,7 @@
 
 power_menu="$HOME/.config/sway/rofi_power_menu.sh"
 wifi_menu="$HOME/.config/sway/rofi_wifi_menu.py"
-power_profiles_menu="$HOME/.config/sway/rofi_power_profiles.sh"
+power_profiles_menu="$HOME/.config/sway/power_profiles_dmenu.sh"
 info_notifications_script="$HOME/.config/sway/info_notification.sh"
 what_bin_day_script="$HOME/.local/bin/bin_day.py"
 
@@ -76,16 +76,16 @@ main() {
                 --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
             ;;
         " powerprofiles" | "powerprofiles")
-            $power_profiles_menu
+            $power_profiles_menu -m rofi
             ;;
         " performance" | "performance")
-            $power_profiles_menu "performance"
+            $power_profiles_menu -m rofi "performance"
             ;;
         " balanced" | "balanced")
-            $power_profiles_menu "balanced"
+            $power_profiles_menu -m rofi "balanced"
             ;;
         " power-saver" | "power-saver")
-            $power_profiles_menu "power-saver"
+            $power_profiles_menu -m rofi "power-saver"
             ;;
         " wifi" | "wifi")
             $wifi_menu
