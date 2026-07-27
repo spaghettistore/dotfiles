@@ -38,9 +38,7 @@ main() {
             exit 1
         fi
     elif [[ "$fzf_keybind_response" == "xdg-open" ]]; then
-        if [[ -f "$selected" ]]; then
-            xdg-open "$selected"
-        fi
+        xdg-open "$selected"
     else
         if [[ -d "$selected" ]]; then
             if [[ "$fzf_keybind_response" == "goto" ]]; then
