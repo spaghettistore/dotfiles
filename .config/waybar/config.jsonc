@@ -193,6 +193,6 @@
     "custom/powermenu": {
         "format": "",
         "tooltip": false,
-        "on-click": "pkill rofi || ~/.config/sway/power_menu_dmenu.sh"
+        "on-click": "pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi"
     }
 }

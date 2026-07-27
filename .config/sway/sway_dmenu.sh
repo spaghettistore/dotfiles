@@ -53,19 +53,19 @@ main() {
 
     case "$input" in
         " suspend" | "suspend")
-            $power_menu "suspend"
+            $power_menu -m rofi "suspend"
             ;;
         " poweroff" | "poweroff")
-            $power_menu "poweroff"
+            $power_menu -m rofi "poweroff"
             ;;
         " reboot" | "reboot")
-            $power_menu "reboot"
+            $power_menu -m rofi "reboot"
             ;;
         " logout" | "logout")
-            $power_menu "logout"
+            $power_menu -m rofi "logout"
             ;;
         " lock" | "lock")
-            $power_menu "lock"
+            $power_menu -m rofi "lock"
             ;;
         " battery")
             notify-send \
