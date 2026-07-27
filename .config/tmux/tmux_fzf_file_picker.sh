@@ -667,6 +667,7 @@ main() {
                 -e "\.mp3$" \
                 -e "\.wma$" \
                 -e "\.flac$" \
+                -e "\.webm$" \
                 -e "\.m4a$" \
                 -e "\.png$" \
                 -e "\.jpg$" \
