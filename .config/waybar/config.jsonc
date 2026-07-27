@@ -131,7 +131,7 @@
         "tooltip-format": "{signalStrength}% {essid}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "⚠",
-        "on-click": "pkill rofi || ~/.config/sway/rofi_wifi_menu.py"
+        "on-click": "pkill rofi || ~/.config/sway/wifi_menu_dmenu.py"
     },
     "pulseaudio": {
         "tooltip": false,

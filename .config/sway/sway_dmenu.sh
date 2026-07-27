@@ -1,7 +1,7 @@
 #!/bin/bash
 
 power_menu="$HOME/.config/sway/rofi_power_menu.sh"
-wifi_menu="$HOME/.config/sway/rofi_wifi_menu.py"
+wifi_menu="$HOME/.config/sway/wifi_menu_dmenu.py"
 power_profiles_menu="$HOME/.config/sway/power_profiles_dmenu.sh"
 info_notifications_script="$HOME/.config/sway/info_notification.sh"
 what_bin_day_script="$HOME/.local/bin/bin_day.py"

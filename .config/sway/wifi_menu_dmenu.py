@@ -7,7 +7,7 @@ import sys
 import getopt
 
 HOME = os.environ.get("HOME")
-FILE_NAME = f"{HOME}/.config/rofi_wifi_menu/ssid_list.json"
+FILE_NAME = f"{HOME}/.config/wifi_menu_dmenu/ssid_list.json"
 DEFAULT_MENU = "rofi"
 SCRIPT_NAME = os.path.basename(sys.argv[0])
 
@@ -46,7 +46,7 @@ FLAGS
 def check_if_ssid_file_exists() -> None:
     # If file containing ssids does not exist, use nmtui instead
     if not os.path.exists(FILE_NAME):
-        print(f"rofi_wifi_menu.py: os.path.exists: '{FILE_NAME}': No such file or directory")
+        print(f"wifi_menu_dmenu.py: os.path.exists: '{FILE_NAME}': No such file or directory")
         print("Using 'nmtui' instead")
         subprocess.run("nmtui")
         exit()
@@ -143,8 +143,8 @@ def notify_send(body: str) -> None:
         body,
         "--transient",
         "--urgency=low",
-        "--app-name=rofi_wifi_menu",
-        "--hint=string:x-canonical-private-synchronous:'rofi_wifi_menu'"])
+        "--app-name=wifi_menu_dmenu",
+        "--hint=string:x-canonical-private-synchronous:'wifi_menu_dmenu'"])
 
 
 def toggle_wifi() -> None:
@@ -218,7 +218,7 @@ def main():
     elif response == "toggle":
         toggle_wifi()
     else:
-        print(f"rofi_wifi_menu: '{response}': Invalid option")
+        print(f"wifi_menu_dmenu: '{response}': Invalid option")
         exit(1)
 
 
