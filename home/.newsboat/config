@@ -34,7 +34,8 @@ bind-key a toggle-show-read-feeds
 browser "firefox"
 
 ## Use 'Reload All' on startup, so you don't need to press 'R'
-auto-reload yes
+auto-reload no
+
 wrap-scroll yes
 show-title-bar no
 
