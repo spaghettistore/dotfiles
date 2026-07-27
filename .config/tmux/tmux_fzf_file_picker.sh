@@ -666,6 +666,7 @@ main() {
                 -e "/\.config/libreoffice/" \
                 -e "\.mp3$" \
                 -e "\.wma$" \
+                -e "\.flac$" \
                 -e "\.m4a$" \
                 -e "\.png$" \
                 -e "\.jpg$" \
