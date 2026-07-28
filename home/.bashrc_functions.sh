@@ -175,6 +175,16 @@ cdi() {
     [[ ! -f "$script" ]] \
         && echo "cdi: '$script': Failed to find python script" 1>&2 \
         && return 1
+
+    local opt
+    while getopts "h" opt; do
+        case "$opt" in
+            "h") "$script" -h ; return 0 ;;
+            *) echo "See 'cdi -h' for more information." >&2 ; return 1 ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
     local dir
     dir="$("$script" "$1")"
     [[ -z "$dir" ]] && return 0
