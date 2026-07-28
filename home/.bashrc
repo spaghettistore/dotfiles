@@ -156,10 +156,20 @@ export FZF_CTRL_R_OPTS="
 # Default fzf options, changing vanity
 export FZF_DEFAULT_OPTS="--color=16 --style=minimal --ansi"
 
+# Zoxide
+# ------
+eval "$(zoxide init bash)"
+
 # Environment Variables
 # ---------------------
-
-export EDITOR="nvim"
+if command -v "nvim" &>/dev/null; then
+    export EDITOR="nvim"
+elif command -v "nvim" &>/dev/null; then
+    export EDITOR="vim"
+else
+    export EDITOR="vi"
+fi
+#export EDITOR="nvim"
 export BROWSER="firefox"
 
 # Open man pages with vim instead of less
@@ -176,3 +186,4 @@ export PYTHON_BASIC_REPL=1
 # Aliases
 # -------
 alias bc="bc -lq"
+alias v="\$EDITOR"
