@@ -1,5 +1,11 @@
 home/.vim/.netrwhist
-.config/mpv/watch_later/
-.config/ncmpcpp/
-.config/mpd/
-home/.newsboat/
+.config/ncmpcpp/error.log
+.config/mpd/mpd.log
+.config/mpd/pid
+.config/mpd/state
+.config/mpd/sticker.sql
+.config/mpd/tag_cache
+home/.newsboat/cache.db
+home/.newsboat/history.cmdline
+home/.newsboat/history.search
+home/.newsboat/urls
