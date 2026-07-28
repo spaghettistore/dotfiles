@@ -175,9 +175,9 @@ echo_error() {
 get_editor() {
     if [[ "$EDITOR" ]]; then
         echo "$EDITOR"
-    elif command -v nvim; then
+    elif command -v "nvim" &>/dev/null; then
         echo "nvim"
-    elif command -v vim; then
+    elif command -v "vim" &>/dev/null; then
         echo "vim"
     else
         echo "vi"
@@ -188,9 +188,9 @@ get_editor() {
 # Return the fzf preview command for viewing content of files, to be used with:
 # fzf --preview="$(get_fzf_file_preview_command)"
 get_fzf_file_preview_command() {
-    if command -v batcat; then
+    if command -v batcat &>/dev/null; then
         echo "batcat -n --theme=gruvbox-dark --color=always -- {}"
-    elif command -v bat; then
+    elif command -v bat &>/dev/null; then
         echo "bat -n --theme=gruvbox-dark --color=always -- {}"
     else
         echo "cat -- {}"

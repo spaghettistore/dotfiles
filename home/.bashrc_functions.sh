@@ -48,9 +48,9 @@ fzed() {
 
         # Some distros call it 'batcat' or 'bat'
         local cat_cmd
-        if command -v "batcat"; then
+        if command -v "batcat" &>/dev/null; then
             cat_cmd="batcat ${batcat_flags[*]}"
-        elif command -v "bat"; then
+        elif command -v "bat" &>/dev/null; then
             cat_cmd="bat ${batcat_flags[*]}"
         else
             cat_cmd="cat"
