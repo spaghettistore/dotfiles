@@ -614,7 +614,7 @@ def_key "u"
 def_key "U"
   update_database
 # Fix override of default key 'U'
-def_key "alt-u"
+def_key "alt-o"
   toggle_playing_song_centering
 
 def_key "g"
@@ -653,6 +653,11 @@ def_key "J"
 def_key "space"
   select_item
   scroll_down
+
+def_key "alt-j"
+  move_selected_items_down
+def_key "alt-k"
+  move_selected_items_up
 
 ## Changing default stop
 ### Override default key 's' as 'stop' to prevent accidental presses (swapped with 'ctrl-s')
