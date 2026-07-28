@@ -11,6 +11,8 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<Leader>'h", "<cmd>edit ~/.bash_history<CR>")
 vim.keymap.set("n", "<Leader>'n", "<cmd>edit ~/inbox/notepad.txt<CR>")
 vim.keymap.set("n", "<Leader>'t", "<cmd>edit ~/projects/todo.txt<CR>")
+vim.keymap.set("n", "<Leader>'s", "<cmd>edit ~/resources/someday_maybe/someday_maybe.txt<CR>")
+vim.keymap.set("n", "<Leader>'d", "<cmd>edit ~/archive/done.txt<CR>")
 
 -- File Explorer
 -- -------------
