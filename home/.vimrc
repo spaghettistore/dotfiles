@@ -121,6 +121,7 @@ let mapleader = "\<Space>"
 " -----
 noremap <Leader>'h <cmd>edit ~/.bash_history<CR>
 noremap <Leader>'n <cmd>edit ~/inbox/notepad.txt<CR>
+noremap <Leader>'t <cmd>edit ~/projects/todo.txt<CR>
 
 " File Explorer
 " -------------

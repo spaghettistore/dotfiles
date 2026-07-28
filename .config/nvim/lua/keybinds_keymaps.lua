@@ -9,7 +9,7 @@ vim.g.mapleader = " "
 -- Marks
 -- -----
 vim.keymap.set("n", "<Leader>'h", "<cmd>edit ~/.bash_history<CR>")
-vim.keymap.set("n", "<Leader>'i", "<cmd>edit ~/inbox/notepad.txt<CR>")
+vim.keymap.set("n", "<Leader>'n", "<cmd>edit ~/inbox/notepad.txt<CR>")
 vim.keymap.set("n", "<Leader>'t", "<cmd>edit ~/projects/todo.txt<CR>")
 
 -- File Explorer
@@ -24,7 +24,7 @@ vim.keymap.set("n", "<Leader>fo", ":find ")
 vim.keymap.set("n", "<Leader>bd", "<cmd>bdelete<CR>")
 vim.keymap.set("n", "<Leader>ls", "<cmd>ls<CR>:b<space>")  -- Not needed due to telescope
 vim.keymap.set("n", "<Leader>bb", "<cmd>b#<CR>")  -- Switch to Other buffer (like CTRL-^)
-vim.keymap.set("n", "<Leader>bo", "<cmd>%bd|e#|bd#<CR>")  -- Delete all bufferes except current buffer
+vim.keymap.set("n", "<Leader>bo", "<cmd>%bd|e#|bd#<CR>")  -- Delete all buffers except current buffer
 
 -- Quickfix list
 -- -------------
