@@ -11,7 +11,6 @@ fzcd() {
 
 fzed() {
     local selected=""
-    local files
 
     if [[ "$#" -eq 1 ]]; then
         if [[ -f "$1" ]]; then
@@ -26,16 +25,35 @@ fzed() {
     if [[ -z "$selected" ]]; then
         # If we are in ~, only search specific directories to reduce clutter
         if [[ "$(pwd)" == "$HOME" ]]; then
+            local dirs
             dirs=(
                 "$HOME/inbox"
                 "$HOME/projects"
                 "$HOME/resources"
             )
-            files="$(find -L "${dirs[@]}" -type f)
-$(find -L "$HOME" -maxdepth 1 -type f)"
+            local files
+            files="$({ find -L "${dirs[@]}" -type f
+                find -L "$HOME" -maxdepth 1 -type f
+            })"
         else
             # Search recursively
             files="$(find -L ./ -type f)"
+        fi
+
+        local batcat_flags=(
+            "--number"
+            "--theme=gruvbox-dark"
+            "--color=always"
+        )
+
+        # Some distros call it 'batcat' or 'bat'
+        local cat_cmd
+        if command -v "batcat"; then
+            cat_cmd="batcat ${batcat_flags[*]}"
+        elif command -v "bat"; then
+            cat_cmd="bat ${batcat_flags[*]}"
+        else
+            cat_cmd="cat"
         fi
 
         # Filter out non-text files
@@ -80,8 +98,7 @@ $(find -L "$HOME" -maxdepth 1 -type f)"
             -e "a\.out" \
             -e "\.gitignore" \
             | sort \
-            | fzf --preview="batcat -n --theme=gruvbox-dark --color=always {}")"
-            #| fzf --preview 'cat {}')"
+            | fzf --preview="$cat_cmd {}")"
     fi
 
     [[ -z "$selected" ]] && return 1
