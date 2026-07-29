@@ -125,10 +125,3 @@ if [[ -d "$HOME/.bashrc.d" ]]; then
     done
     unset "$file"
 fi
-
-
-# TEST
-# ----
-# Gives access to the 'cdi' bash function that allows script to change
-# directory of terminal that called it without creating a subprocess
-eval "$(change_directory_interactively.py init bash)"
