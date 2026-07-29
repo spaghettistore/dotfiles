@@ -1,7 +1,7 @@
 # Set EDITOR
 if command -v "nvim" &>/dev/null; then
     export EDITOR="nvim"
-elif command -v "nvim" &>/dev/null; then
+elif command -v "vim" &>/dev/null; then
     export EDITOR="vim"
 else
     export EDITOR="vi"
