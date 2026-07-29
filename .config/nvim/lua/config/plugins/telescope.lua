@@ -79,6 +79,7 @@ return {
             vim.keymap.set("n", "<leader>sj", require('telescope.builtin').jumplist, {desc = ":Telescope jumplist"})
             vim.keymap.set("n", "<leader>s\"", require('telescope.builtin').registers, {desc = ":Telescope registers"})
             vim.keymap.set("n", "<leader>sm", require('telescope.builtin').marks, {desc = ":Telescope marks"})
+            vim.keymap.set("n", "<leader>s'", require('telescope.builtin').marks, {desc = ":Telescope marks"})
             vim.keymap.set("n", "<leader>fg", require('telescope.builtin').git_files, {desc = ":Telescope git_files"})
             vim.keymap.set("n", "<leader>gs", require('telescope.builtin').git_status, {desc = ":Telescope git_status"})
             vim.keymap.set("n", "<leader>gS", require('telescope.builtin').git_stash, {desc = ":Telescope git_stash"})
