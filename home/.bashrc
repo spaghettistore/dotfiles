@@ -187,3 +187,9 @@ export PYTHON_BASIC_REPL=1
 # -------
 alias bc="bc -lq"
 alias v="\$EDITOR"
+
+# TEST
+# ----
+# Gives access to the 'cdi' bash function that allows script to change
+# directory of terminal that called it without creating a subprocess
+eval "$(change_directory_interactively.py init bash)"
