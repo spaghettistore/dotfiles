@@ -23,6 +23,8 @@ vim.keymap.set("n", "<Leader>fo", ":find ")
 -- ------
 vim.keymap.set("n", "<Leader><Tab>", "<cmd>bnext<CR>")
 vim.keymap.set("n", "<Leader><S-Tab>", "<cmd>bprevious<CR>")
+vim.keymap.set("n", "<Leader>bn", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<Leader>bp", "<cmd>bprevious<CR>")
 vim.keymap.set("n", "<Leader>bd", "<cmd>bdelete<CR>")
 vim.keymap.set("n", "<Leader>ls", "<cmd>ls<CR>:b<space>")  -- Not needed due to telescope
 vim.keymap.set("n", "<Leader>bb", "<cmd>b#<CR>")  -- Switch to Other buffer (like CTRL-^)
@@ -30,8 +32,8 @@ vim.keymap.set("n", "<Leader>bo", "<cmd>%bd|e#|bd#<CR>")  -- Delete all buffers 
 
 -- Quickfix list
 -- -------------
---vim.keymap.set("n", "<Leader>cn", "<cmd>cnext<CR>")  -- Use ]q
---vim.keymap.set("n", "<Leader>cp", "<cmd>cprev<CR>")  -- Use [q
+vim.keymap.set("n", "<Leader>cn", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<Leader>cp", "<cmd>cprev<CR>")
 vim.keymap.set("n", "<Leader>co", "<cmd>copen<CR>")
 vim.keymap.set("n", "<Leader>cc", "<cmd>cclose<CR>")
 

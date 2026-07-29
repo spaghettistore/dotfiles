@@ -134,6 +134,8 @@ noremap <Leader>fo :find
 " ------
 noremap <Leader><Tab> <cmd>bnext<CR>
 noremap <Leader><S-Tab> <cmd>bprevious<CR>
+noremap <Leader>bn <cmd>bnext<CR>
+noremap <Leader>bp <cmd>bprevious<CR>
 noremap ]b <cmd>bnext<CR>
 noremap [b <cmd>bprevious<CR>
 noremap <Leader>bd <cmd>bdelete<CR>
@@ -146,6 +148,8 @@ noremap <Leader>bo <cmd>%bd<CR><cmd>e#<CR><cmd>bd#<CR>
 " -------------
 noremap ]q <cmd>cnext<CR>
 noremap [q <cmd>cprev<CR>
+noremap cn <Leader><cmd>cnext<CR>
+noremap cp <Leader><cmd>cprev<CR>
 noremap <Leader>co <cmd>copen<CR>
 noremap <Leader>cc <cmd>cclose<CR>
 
