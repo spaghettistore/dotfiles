@@ -21,18 +21,16 @@ main() {
             "$HOME/media"
         )
 
-        local files
-        files="$(find -L "${dirs[@]}" -mindepth 1 -maxdepth 1 -type d)"
+        mapfile -t files < <(find -L "${dirs[@]}" -mindepth 1 -maxdepth 1 -type d)
 
         # Remove '/home/$USER' prefix during fzf
-        files="$(echo "$files" | sed "s|^$HOME/||")"
+        files=("${files[@]#"$HOME"/}")
 
         # Add ~ as final option (so it will be highlighted by default)
-        files="$files
-~"
+        files+=('~')
 
         local fzf_full_response
-        fzf_full_response="$(echo "$files" | sort \
+        fzf_full_response="$(printf -- '%s\n' "${files[@]}" | sort \
             | fzf \
                 --header "ENTER:session  C-t:window  C-v:pane  C-o:current" \
                 --bind "enter:print($fzf_enter_key_default_value)+accept,ctrl-t:print(window)+accept,ctrl-v:print(pane)+accept,ctrl-o:print(current)+accept" \
