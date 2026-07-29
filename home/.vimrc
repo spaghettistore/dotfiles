@@ -132,6 +132,8 @@ noremap <Leader>fo :find
 
 " Buffer
 " ------
+noremap <Leader><Tab> <cmd>bnext<CR>
+noremap <Leader><S-Tab> <cmd>bprevious<CR>
 noremap ]b <cmd>bnext<CR>
 noremap [b <cmd>bprevious<CR>
 noremap <Leader>bd <cmd>bdelete<CR>

@@ -21,8 +21,8 @@ vim.keymap.set("n", "<Leader>fo", ":find ")
 
 -- Buffer
 -- ------
---vim.keymap.set("n", "<Leader>bn", "<cmd>bnext<CR>")  -- Use [b
---vim.keymap.set("n", "<Leader>bp", "<cmd>bprevious<CR>")  -- Use ]b
+vim.keymap.set("n", "<Leader><Tab>", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<Leader><S-Tab>", "<cmd>bprevious<CR>")
 vim.keymap.set("n", "<Leader>bd", "<cmd>bdelete<CR>")
 vim.keymap.set("n", "<Leader>ls", "<cmd>ls<CR>:b<space>")  -- Not needed due to telescope
 vim.keymap.set("n", "<Leader>bb", "<cmd>b#<CR>")  -- Switch to Other buffer (like CTRL-^)
