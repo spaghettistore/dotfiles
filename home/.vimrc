@@ -248,6 +248,8 @@ noremap <Leader>p "+p
 vnoremap <Leader>p "+p
 noremap <Leader>P "+P
 vnoremap <Leader>P "+P
+" Copy full file path to system clipboard
+noremap <Leader>yp <CMD>let @+ = expand("%:p")<CR>
 
 " Toggles
 " -------
