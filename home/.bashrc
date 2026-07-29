@@ -119,74 +119,13 @@ fi
 # Custom Config
 # -------------
 
-# Functions
-# ---------
-
-source "$HOME/resources/dotfiles/home/.bashrc_functions.sh"
-
-# GNU Readline Keybinds
-# ---------------------
-
-# Vim Keybinds
-#set -o vi  # Use 'set editing-mode vi' in '~/.inputrc' instead, so that all readline() based apps use vi keybinds
-#bind -x '"\C-L": "clear"'  # Vim mode clear (is setup inside '~/.inputrc' now)
-## Arrow keys up/down use what is in prompt to search history (is setup inside '~/.inputrc' now)
-#bind '"\e[A": history-search-backward'
-#bind '"\e[B": history-search-forward'
-
-# Script keybinds (with vim mode this only works in insert mode)
-bind -x '"\C-F": "~/.config/tmux/tmux_fzf_file_picker.sh -o window"'
-bind -x '"\C-G": ". ~/.config/tmux/tmux_fzf_directory_picker.sh"'
-bind -x '"\C-O": ". ~/.config/tmux/tmux_files_and_directory_picker.sh"'
-
-# Fzf
-# ---
-
-# Set up fzf key bindings
-# Disable 'ALT+c' as pressing 'Esc' then 'c' will trigger it, which sucks in vim mode
-FZF_ALT_C_COMMAND=""
-eval "$(fzf --bash)"
-
-# CTRL-Y to copy the command into clipboard using wl-copy
-export FZF_CTRL_R_OPTS="
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'
-  --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
-
-# Default fzf options, changing vanity
-export FZF_DEFAULT_OPTS="--color=16 --style=minimal --ansi"
-
-# Zoxide
-# ------
-eval "$(zoxide init bash)"
-
-# Environment Variables
-# ---------------------
-if command -v "nvim" &>/dev/null; then
-    export EDITOR="nvim"
-elif command -v "nvim" &>/dev/null; then
-    export EDITOR="vim"
-else
-    export EDITOR="vi"
+if [[ -d "$HOME/.bashrc.d" ]]; then
+    for file in "$HOME"/.bashrc.d/*.sh; do
+        [[ -r "$file" ]] && source "$file"
+    done
+    unset "$file"
 fi
-#export EDITOR="nvim"
-export BROWSER="firefox"
 
-# Open man pages with vim instead of less
-#export MANPAGER="nvim +Man!"
-
-# Add '~/.local/bin' to PATH
-export PATH="$HOME/.local/bin:$PATH"
-
-# New versions of Python replaced REPL, so it no longer reads GNU readline from
-# ~/.inputrc, this env var allows you to use the old REPL that allows using
-# ~/.inputrc for vim bindings
-export PYTHON_BASIC_REPL=1
-
-# Aliases
-# -------
-alias bc="bc -lq"
-alias v="\$EDITOR"
 
 # TEST
 # ----
