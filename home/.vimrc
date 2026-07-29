@@ -141,7 +141,7 @@ noremap [b <cmd>bprevious<CR>
 noremap <Leader>bd <cmd>bdelete<CR>
 noremap <Leader>ls <cmd>ls<CR>:b<space>
 noremap <Leader>bb <cmd>b#<CR>
-noremap <Leader>bo <cmd>%bd<CR><cmd>e#<CR><cmd>bd#<CR>
+noremap <Leader>bo <cmd>%bd\|e#\|bd#<CR>
 
 
 " Quickfix list
