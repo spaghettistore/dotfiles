@@ -76,20 +76,18 @@ color article             white   default
 
 # Default macro prefix = ","
 
+#set browser "$BROWSER"  # Use ENVIRONMENT VARIABLE
+
 ## Open with w3m
-#macro w set browser "w3m" ; open-in-browser ; set browser "$BROWSER"  # Use ENVIRONMENT VARIABLE
-#macro w set browser "w3m" ; open-in-browser ; set browser "firefox"
+# Can use 'open-in-browser' or 'open-in-browser-and-mark-read'
 macro w set browser "w3m" ; open-in-browser-and-mark-read ; set browser "firefox"
 
 ## Open with mpv
-#macro m set browser "mpv" ; open-in-browser ; set browser "firefox"
-#macro m set browser "mpv" ; open-in-browser-and-mark-read ; set browser "firefox"
 # Limit resolution to be no higher than 1080p, and prefering 60fps
 macro m set browser "mpv --ytdl-format='bv[height<=1080][fps<=60]+ba'" ; open-in-browser-and-mark-read ; set browser "firefox"
 
-# Download highest quality available video with yt-dlp
-macro y set browser "yt-dlp -f 'bv+ba/b'" ; open-in-browser-and-mark-read ; set browser "firefox"
-
+# Download highest quality available (no higher than 1080p 60fps) video with yt-dlp
+macro y set browser "yt-dlp -f 'bv[height<=1080][fps<=60]+ba'" ; open-in-browser-and-mark-read ; set browser "firefox"
 
 # 4. FILTERS / IGNORE
 # -------------------
