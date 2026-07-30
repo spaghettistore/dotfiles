@@ -77,13 +77,13 @@ color article             white   default
 # Default macro prefix = ","
 
 ## Open with w3m
-macro v set browser "w3m" ; open-in-browser ; set browser "firefox"
-#macro v set browser "w3m" ; open-in-browser ; set browser "$BROWSER"  # Use ENVIRONMENT VARIABLE
-macro V set browser "w3m" ; open-in-browser-and-mark-read ; set browser "firefox"
+#macro w set browser "w3m" ; open-in-browser ; set browser "$BROWSER"  # Use ENVIRONMENT VARIABLE
+#macro w set browser "w3m" ; open-in-browser ; set browser "firefox"
+macro w set browser "w3m" ; open-in-browser-and-mark-read ; set browser "firefox"
 
 ## Open with mpv
-macro o set browser "mpv" ; open-in-browser ; set browser "firefox"
-macro O set browser "mpv" ; open-in-browser-and-mark-read ; set browser "firefox"
+#macro m set browser "mpv" ; open-in-browser ; set browser "firefox"
+macro m set browser "mpv" ; open-in-browser-and-mark-read ; set browser "firefox"
 
 # Download highest quality available video with yt-dlp
 macro y set browser "yt-dlp -f 'bv+ba/b'" ; open-in-browser-and-mark-read ; set browser "firefox"
