@@ -1,7 +1,6 @@
 ##############################################################
-## This is an example configuration file. Copy it to        ##
-## $XDG_CONFIG_HOME/ncmpcpp/config or $HOME/.ncmpcpp/config ##
-## and set up your preferences.                             ##
+## Example config file can be found at                      ##
+## /usr/share/doc/ncmpcpp/examples/config                   ##
 ##############################################################
 #
 ##### directories ######
