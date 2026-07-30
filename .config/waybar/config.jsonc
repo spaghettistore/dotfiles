@@ -15,7 +15,6 @@
         "sway/window"
     ],
     "modules-center": [
-        "clock"
     ],
     "modules-right": [
         "mpd",
@@ -28,7 +27,7 @@
         "pulseaudio",
         "network",
         "battery",
-        "custom/powermenu"
+        "clock"
     ],
 
     // Modules configuration
@@ -59,8 +58,8 @@
     },
     "clock": {
         "timezone": "Europe/London",
-        "tooltip-format": "<big>{:%Y %B %d  (#%V)}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%a %d %h %H:%M}",
+        "tooltip-format": "<big>{:%a %d %b  (#%V)}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%H:%M}",
         "on-click": "alacritty -e calcurse"
     },
     "tray": {
@@ -188,11 +187,7 @@
         "format": "",
         "tooltip": false,
         "on-click": "pkill rofi || rofi -i -show drun -show-icons",
-        "on-click-right": "pkill rofi || ~/.config/sway/sway_dmenu.sh"
-    },
-    "custom/powermenu": {
-        "format": "",
-        "tooltip": false,
-        "on-click": "pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi"
+        "on-click-right": "pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi"
+        //"on-click-right": "pkill rofi || ~/.config/sway/sway_dmenu.sh"
     }
 }
