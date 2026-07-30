@@ -156,16 +156,16 @@
     },
     "mpd": {
         //"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",  // Default
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
         "unknown-tag": "N/A",
         "interval": 5,
         "consume-icons": {
             "on": " "
         },
         "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
+            //"off": "<span color=\"#f53c3c\"></span> ",  // Red icon
             "on": " "
         },
         "repeat-icons": {
@@ -179,7 +179,7 @@
             "playing": ""
         },
         "tooltip-format": "MPD (connected)",
-        "tooltip-format": "Artist: {artist}\nTitle: {title}\nAlbum: {album}\n({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "tooltip-format": "Artist: {artist}\nTitle: {title}\nAlbum: {album}\n({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}%",
         "tooltip-format-disconnected": "MPD (disconnected)",
         "on-click": "alacritty -e ncmpcpp"
     },
