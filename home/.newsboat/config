@@ -9,6 +9,7 @@
 
 bind-key RIGHT open
 bind-key LEFT quit
+#bind-key q hard-quit
 
 ## Vim binds
 bind-key h quit
@@ -84,10 +85,10 @@ macro w set browser "w3m" ; open-in-browser-and-mark-read ; set browser "firefox
 
 ## Open with mpv
 # Limit resolution to be no higher than 1080p, and prefering 60fps
-macro m set browser "mpv --ytdl-format='bv[height<=1080][fps<=60]+ba'" ; open-in-browser-and-mark-read ; set browser "firefox"
+macro m set browser "setsid --fork mpv --ytdl-format='bv[height<=1080][fps<=60]+ba'" ; open-in-browser-and-mark-read ; set browser "firefox" ; hard-quit
 
 # Download highest quality available (no higher than 1080p 60fps) video with yt-dlp
-macro y set browser "yt-dlp -f 'bv[height<=1080][fps<=60]+ba'" ; open-in-browser-and-mark-read ; set browser "firefox"
+macro y set browser "setsid --fork yt-dlp -f 'bv[height<=1080][fps<=60]+ba'" ; open-in-browser-and-mark-read ; set browser "firefox" ; hard-quit
 
 # 4. FILTERS / IGNORE
 # -------------------
