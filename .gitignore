@@ -9,3 +9,4 @@ home/.newsboat/cache.db
 home/.newsboat/history.cmdline
 home/.newsboat/history.search
 home/.newsboat/urls
+home/.newsboat/cache.db.lock
