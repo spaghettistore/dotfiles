@@ -85,6 +85,9 @@ macro V set browser "w3m" ; open-in-browser-and-mark-read ; set browser "firefox
 macro o set browser "mpv" ; open-in-browser ; set browser "firefox"
 macro O set browser "mpv" ; open-in-browser-and-mark-read ; set browser "firefox"
 
+# Download highest quality available video with yt-dlp
+macro y set browser "yt-dlp -f 'bv+ba/b'" ; open-in-browser-and-mark-read ; set browser "firefox"
+
 
 # 4. FILTERS / IGNORE
 # -------------------
