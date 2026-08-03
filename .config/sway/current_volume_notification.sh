@@ -1,12 +1,12 @@
 #!/bin/bash
 
+#volume="$(pactl list sinks | grep "Volume" | head -n1 | awk '{print $5}')"
+volume="$(pactl get-sink-volume @DEFAULT_SINK@ \
+    | head -n1 \
+    | awk '{print $5}')"
+
 if [[ "$(pactl get-sink-mute @DEFAULT_SINK@)" == "Mute: yes" ]]; then
-    volume="Muted"
-else
-    #volume="$(pactl list sinks | grep "Volume" | head -n1 | awk '{print $5}')"
-    volume="$(pactl get-sink-volume @DEFAULT_SINK@ \
-        | head -n1 \
-        | awk '{print $5}')"
+    volume="Muted  (${volume})"
 fi
 
 notify-send \
