@@ -10,6 +10,6 @@ FZF_CTRL_R_OPTS="
   --header 'Press CTRL-Y to copy command into clipboard'"
 
 # Default fzf options, changing vanity
-FZF_DEFAULT_OPTS="--color=16 --style=minimal --ansi"
+export FZF_DEFAULT_OPTS="--color=16 --style=minimal --ansi"
 
 eval "$(fzf --bash)"
