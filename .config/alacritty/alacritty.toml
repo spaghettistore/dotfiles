@@ -31,9 +31,7 @@ foreground = "#ebdbb2"  # Gruvbox: Foreground
 TERM = "alacritty"
 
 [font]
-#size = 15
-#size = 16.5
-size = 18
+size = 16.9
 #offset.y = 0  # For line spacing (default: 0)
 
 [font.normal]
