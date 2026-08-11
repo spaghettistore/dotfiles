@@ -111,6 +111,8 @@ main() {
         "--dry" | "--dry-run") dry_run="true" ;;
     esac
 
+    [[ ! -d "$dotfiles_directory" ]] && echo "'$dotfiles_directory': No such directory" >&2 && exit 1
+
     echo "This script will symlink the following:
 '$dotfiles_directory/.config/*' -> '~/.config/'
 '$dotfiles_directory/home/*' -> '~/'
