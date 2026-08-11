@@ -1,3 +1,3 @@
 # Set up zoxide shell integration
 
-eval "$(zoxide init bash)"
+command -v "zoxide" &>/dev/null && eval "$(zoxide init bash)"
