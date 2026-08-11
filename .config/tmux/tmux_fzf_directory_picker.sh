@@ -11,7 +11,6 @@ main() {
         selected_directory="$1"
     else
         local dirs=(
-            "$HOME"
             "$HOME/files"
             "$HOME/files/inbox"
             "$HOME/files/projects"
@@ -27,8 +26,8 @@ main() {
         # Remove '/home/$USER' prefix during fzf
         files=("${files[@]#"$HOME"/}")
 
-        # Add ~ as final option (so it will be highlighted by default)
-        files+=('~')
+        # Add as final option (so it will be highlighted by default)
+        files+=('files')
 
         local fzf_binds=(
             --bind "enter:print($fzf_enter_key_default_value)+accept"
@@ -40,7 +39,8 @@ main() {
         fzf_full_response="$(printf -- '%s\n' "${files[@]}" | sort \
             | fzf \
                 --header "ENTER:session  C-t:window  C-v:pane  C-o:current" \
-                "${fzf_binds[@]}"
+                "${fzf_binds[@]}" \
+                --preview="ls -Cp --color=always -- $HOME/{}" --preview-window=up,1%
         )"
 
         [[ -z "$fzf_full_response" ]] && return 0
