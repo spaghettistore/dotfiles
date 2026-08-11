@@ -12,6 +12,7 @@ main() {
     else
         local dirs=(
             "$HOME"
+            "$HOME/files"
             "$HOME/files/inbox"
             "$HOME/files/projects"
             "$HOME/files/resources"
