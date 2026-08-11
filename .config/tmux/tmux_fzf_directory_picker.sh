@@ -29,11 +29,17 @@ main() {
         # Add ~ as final option (so it will be highlighted by default)
         files+=('~')
 
+        local fzf_binds=(
+            --bind "enter:print($fzf_enter_key_default_value)+accept"
+            --bind "ctrl-t:print(window)+accept"
+            --bind "ctrl-v:print(pane)+accept"
+            --bind "ctrl-o:print(current)+accept"
+        )
         local fzf_full_response
         fzf_full_response="$(printf -- '%s\n' "${files[@]}" | sort \
             | fzf \
                 --header "ENTER:session  C-t:window  C-v:pane  C-o:current" \
-                --bind "enter:print($fzf_enter_key_default_value)+accept,ctrl-t:print(window)+accept,ctrl-v:print(pane)+accept,ctrl-o:print(current)+accept" \
+                "${fzf_binds[@]}"
         )"
 
         [[ -z "$fzf_full_response" ]] && return 0

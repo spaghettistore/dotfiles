@@ -7,11 +7,19 @@ main() {
     readonly TMUX_FILE_PICKER_SCRIPT
     local fzf_enter_key_default_value="current"
 
+    local fzf_binds=(
+        --bind "enter:print($fzf_enter_key_default_value)+accept"
+        --bind "ctrl-t:print(window)+accept"
+        --bind "ctrl-v:print(pane)+accept"
+        --bind "ctrl-o:print(current)+accept"
+        --bind "ctrl-g:print(goto)+accept"
+        --bind "ctrl-x:print(xdg-open)+accept"
+    )
     local fzf_full_response
     fzf_full_response="$(find . \
         | fzf \
             --header "ENTER:$fzf_enter_key_default_value  C-t:window  C-v:pane  C-o:current  C-g:session/goto  C-x:xdg-open" \
-            --bind "enter:print($fzf_enter_key_default_value)+accept,ctrl-t:print(window)+accept,ctrl-v:print(pane)+accept,ctrl-o:print(current)+accept,ctrl-g:print(goto)+accept,ctrl-x:print(xdg-open)+accept" \
+            "${fzf_binds[@]}"
     )"
 
     # We use return instead of exit as we plan to source script this with a

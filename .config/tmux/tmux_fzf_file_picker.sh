@@ -704,6 +704,20 @@ main() {
                 | sort
             )"
         fi
+        local fzf_binds=(
+            --bind "enter:print($fzf_enter_key_default_value)+accept"
+            --bind "ctrl-t:print(window)+accept"
+            --bind "ctrl-v:print(pane)+accept"
+            --bind "ctrl-o:print(current)+accept"
+            --bind "ctrl-g:print(goto)+accept"
+            --bind "ctrl-l:print(last)+accept"
+            --bind "ctrl-f:print(favourites)+accept"
+            --bind "ctrl-r:print(recent)+accept"
+            --bind "ctrl-y:execute(wl-copy {})"
+            --bind "ctrl-s:execute($SCRIPT_PATH -s {})"
+            --bind "ctrl-x:execute($SCRIPT_PATH -x {})"
+            --bind "ctrl-i:toggle-preview"
+        )
         local fzf_full_response
         # Optional fzf header to use:
         #--header "C-t window C-v pane C-o current C-g goto C-l last C-f favs C-r recent C-i toggle-preview C-y yank C-s save C-x rm" \
@@ -711,7 +725,7 @@ main() {
             | fzf \
                 --prompt="$fzf_prompt" \
                 --preview="$(get_fzf_file_preview_command)" \
-                --bind "enter:print($fzf_enter_key_default_value)+accept,ctrl-t:print(window)+accept,ctrl-v:print(pane)+accept,ctrl-o:print(current)+accept,ctrl-g:print(goto)+accept,ctrl-l:print(last)+accept,ctrl-f:print(favourites)+accept,ctrl-r:print(recent)+accept,ctrl-y:execute(wl-copy {}),ctrl-s:execute($SCRIPT_PATH -s {}),ctrl-x:execute($SCRIPT_PATH -x {}),ctrl-i:toggle-preview" \
+                "${fzf_binds[@]}" \
                 "${fzf_strip_home_delimiter[@]}"
         )"
 
