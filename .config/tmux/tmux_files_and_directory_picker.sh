@@ -3,7 +3,7 @@
 main() {
     local TMUX_DIRECTORY_OPENER_SCRIPT="$HOME/.config/tmux/tmux_directory_opener.sh"
     readonly TMUX_DIRECTORY_OPENER_SCRIPT
-    local TMUX_FILE_PICKER_SCRIPT="$HOME/resources/dotfiles/.config/tmux/tmux_fzf_file_picker.sh"
+    local TMUX_FILE_PICKER_SCRIPT="$HOME/.config/tmux/tmux_fzf_file_picker.sh"
     readonly TMUX_FILE_PICKER_SCRIPT
     local fzf_enter_key_default_value="current"
 
