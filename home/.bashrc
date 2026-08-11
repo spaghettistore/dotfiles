@@ -59,18 +59,23 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 export GIT_PS1_SHOWDIRTYSTATE=1  # This is needed to display when current state is modified
+export GIT_PS1_SHOWCOLORHINTS=1  # Auto colour
 if [ "$color_prompt" = yes ]; then
     # Default
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
     # With git status
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s) ")\$ '
+    # With git status with input on new line
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n└─\$ '
 else
     # Default
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 
     # With git status
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 " (%s) ")\$ '
+    # With git status with input on new line
+    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 " (%s)")\n└─\$ '
 fi
 unset color_prompt force_color_prompt
 
