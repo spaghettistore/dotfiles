@@ -14,9 +14,9 @@ readonly HISTORY_FILE
 HISTORY_MAX_LINE_SIZE=1000
 readonly HISTORY_MAX_LINE_SIZE
 DESIRED_HOME_DIRECTORIES=(
-    "$HOME/inbox"
-    "$HOME/projects"
-    "$HOME/resources"
+    "$HOME/files/inbox"
+    "$HOME/files/projects"
+    "$HOME/files/resources"
 )
 readonly DESIRED_HOME_DIRECTORIES
 
@@ -32,7 +32,7 @@ show_help() {
   ${SCRIPT_NAME} - Tmux fzf file picker script
 
 USAGE:
-  ${SCRIPT_NAME} [-h] [-s <PATH>] [-x <PATH>] [-m] [-l] [-f] [-r] [-o <window|pane|current|goto>] [PATH]
+  ${SCRIPT_NAME} [-h] [-s <PATH>] [-x <PATH>] [-m] [-l] [-q] [-r] [-o <window|pane|current|goto>] [PATH]
 
 DESCRIPTION:
   A fzf find files script that can open the selected file in a new tmux window,
@@ -80,7 +80,7 @@ OPTIONS:
     Will open in new window by default.
     '-o <window|pane|current|goto>' option will be respected as the default
     open option.
-    If this flag is used, the '-l', '-f', and '-r' flags will be ignored, and
+    If this flag is used, the '-l', '-q', and '-r' flags will be ignored, and
     menu result will be used instead.
     The '-s' and '-x' flags take priority over this flag.
   -l
@@ -90,8 +90,8 @@ OPTIONS:
     Will open in new window by default.
     If '-o pane' was used, the 'window' and 'pane' options will be respected.
     If '-s', '-x', or '-m' flag was used, this flag will be ignored.
-    If this flag is used, the '-r', and '-f' flags will be ignored.
-  -f
+    If this flag is used, the '-r', and '-q' flags will be ignored.
+  -q
     Search a list of favourited files.
     '-o <window|pane|current|goto>' option will be respected as the default
     open option.
@@ -130,7 +130,7 @@ FZF KEYBINDS:
     Open last opened file.
     If '-o pane' was used, this keybind will respect that and open in a new
     pane.
-  ctrl+f
+  ctrl+q
     Search a list of favourited files.
   ctrl+r
     Search a list of files from history, sorted by most recently opened.
@@ -150,7 +150,7 @@ FZF KEYBINDS:
 # Globals:
 #   SCRIPT_NAME
 show_usage() {
-    echo "USAGE: ${SCRIPT_NAME} [-h] [-s <PATH>] [-x <PATH>] [-m] [-l] [-f] [-r] [-o <window|pane|current|goto>] [PATH]
+    echo "USAGE: ${SCRIPT_NAME} [-h] [-s <PATH>] [-x <PATH>] [-m] [-l] [-q] [-r] [-o <window|pane|current|goto>] [PATH]
 See '${SCRIPT_NAME} -h' for help."
 }
 
@@ -433,13 +433,14 @@ tmux_display_menu() {
         "Current Directory" "." "display-popup -w 80% -h 80% -E \"$command\"" \
         "Last" l "display-popup -w 80% -h 80% -E \"$SCRIPT_PATH -l -o $open_in\"" \
         "Recent" R "display-popup -w 80% -h 80% -E \"$SCRIPT_PATH -r -o $open_in\"" \
-        "Favourites" f "display-popup -w 80% -h 80% -E \"$SCRIPT_PATH -f -o $open_in\"" \
+        "Favourites" q "display-popup -w 80% -h 80% -E \"$SCRIPT_PATH -q -o $open_in\"" \
         "Home" h "display-popup -w 80% -h 80% -E \"$command ~\"" \
-        "Inbox" i "display-popup -w 80% -h 80% -E \"$command ~/inbox\"" \
-        "Projects" p "display-popup -w 80% -h 80% -E \"$command ~/projects\"" \
-        "Resources" r "display-popup -w 80% -h 80% -E \"$command ~/resources\"" \
-        "Code" c "display-popup -w 80% -h 80% -E \"$command ~/resources/code\"" \
-        "Dotfiles" d "display-popup -w 80% -h 80% -E \"$command ~/resources/dotfiles\""
+        "Files" f "display-popup -w 80% -h 80% -E \"$command ~/files\"" \
+        "Inbox" i "display-popup -w 80% -h 80% -E \"$command ~/files/inbox\"" \
+        "Projects" p "display-popup -w 80% -h 80% -E \"$command ~/files/projects\"" \
+        "Resources" r "display-popup -w 80% -h 80% -E \"$command ~/files/resources\"" \
+        "Code" c "display-popup -w 80% -h 80% -E \"$command ~/files/resources/code\"" \
+        "Dotfiles" d "display-popup -w 80% -h 80% -E \"$command ~/files/resources/dotfiles\""
 }
 
 
@@ -535,7 +536,7 @@ main() {
     local show_favourites="False"
 
     local opt
-    while getopts ":ho:mlfrs:x:" opt; do
+    while getopts ":ho:mlqrs:x:" opt; do
         case $opt in
             "h")
                 show_help
@@ -556,7 +557,7 @@ main() {
                 ;;
             "m") use_menu="True" ;;
             "l") jump_last="True" ;;
-            "f") show_favourites="True" ;;
+            "q") show_favourites="True" ;;
             "r") show_recent="True" ;;
             "s")
                 if [[ -e "$OPTARG" ]]; then
@@ -654,6 +655,11 @@ main() {
 
                 # Strip the '/home/$USER/' prefix for cleaner fzf results from ~
                 fzf_strip_home_delimiter=( "--delimiter" "/" "--with-nth" "4.." )
+            elif [[ "$(pwd)" == "$HOME/files" ]]; then
+                # This is to ignore ~/files/archive
+                files="$(find -L "${DESIRED_HOME_DIRECTORIES[@]}" -type f)"
+                # Strip the '/home/$USER/files' prefix for cleaner fzf results from ~/files
+                fzf_strip_home_delimiter=( "--delimiter" "/" "--with-nth" "5.." )
             else
                 files="$(find -L ./ -type f)"
             fi
@@ -711,7 +717,7 @@ main() {
             --bind "ctrl-o:print(current)+accept"
             --bind "ctrl-g:print(goto)+accept"
             --bind "ctrl-l:print(last)+accept"
-            --bind "ctrl-f:print(favourites)+accept"
+            --bind "ctrl-q:print(favourites)+accept"
             --bind "ctrl-r:print(recent)+accept"
             --bind "ctrl-y:execute(wl-copy {})"
             --bind "ctrl-s:execute($SCRIPT_PATH -s {})"
@@ -720,7 +726,7 @@ main() {
         )
         local fzf_full_response
         # Optional fzf header to use:
-        #--header "C-t window C-v pane C-o current C-g goto C-l last C-f favs C-r recent C-i toggle-preview C-y yank C-s save C-x rm" \
+        #--header "C-t window C-v pane C-o current C-g goto C-l last C-q favs C-r recent C-i toggle-preview C-y yank C-s save C-x rm" \
         fzf_full_response="$(echo "$fzf_input_stream" \
             | fzf \
                 --prompt="$fzf_prompt" \
@@ -745,7 +751,7 @@ main() {
                 exit 1
             fi
         elif [[ "$fzf_keybind_response" == "favourites" ]]; then
-            "$SCRIPT_PATH" -f -o "$open_in"
+            "$SCRIPT_PATH" -q -o "$open_in"
             exit 0
         elif [[ "$fzf_keybind_response" == "recent" ]]; then
             "$SCRIPT_PATH" -r -o "$open_in"

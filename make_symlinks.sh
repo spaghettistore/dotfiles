@@ -8,7 +8,7 @@
 # that directory instead of overrwriting it.
 
 dry_run="false"
-dotfiles_directory="$HOME/resources/dotfiles"
+dotfiles_directory="$HOME/files/resources/dotfiles"
 
 # Echo, but prefixed with '[DRY_RUN]: ' if global variable 'dry_run' is 'true'.
 #

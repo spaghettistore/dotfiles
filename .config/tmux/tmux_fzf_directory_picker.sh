@@ -12,12 +12,12 @@ main() {
     else
         local dirs=(
             "$HOME"
-            "$HOME/inbox"
-            "$HOME/projects"
-            "$HOME/resources"
-            "$HOME/archive"
-            "$HOME/resources/code"
-            "$HOME/resources/code/scripts"
+            "$HOME/files/inbox"
+            "$HOME/files/projects"
+            "$HOME/files/resources"
+            "$HOME/files/archive"
+            "$HOME/files/resources/code"
+            "$HOME/files/resources/code/scripts"
             "$HOME/media"
         )
 
