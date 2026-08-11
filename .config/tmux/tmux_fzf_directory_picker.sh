@@ -40,7 +40,7 @@ main() {
             | fzf \
                 --header "ENTER:session  C-t:window  C-v:pane  C-o:current" \
                 "${fzf_binds[@]}" \
-                --preview="ls -Cp --color=always -- $HOME/{}" --preview-window=down,1%
+                --preview="ls -Cp --color=always -- $HOME/{}" --preview-window=down,1
         )"
 
         [[ -z "$fzf_full_response" ]] && return 0
