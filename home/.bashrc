@@ -58,6 +58,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+[[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]] && source /usr/share/git-core/contrib/completion/git-prompt.sh  # Fedora needs this, Debian doesn't
 export GIT_PS1_SHOWDIRTYSTATE=1  # This is needed to display when current state is modified
 export GIT_PS1_SHOWCOLORHINTS=1  # Auto colour
 if [ "$color_prompt" = yes ]; then
