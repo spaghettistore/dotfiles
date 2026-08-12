@@ -635,7 +635,7 @@ main() {
                 echo_error "'$FAVOURITES_FILE' does not exist or is empty"
                 exit 1
             fi
-            fzf_prompt="(f) > "
+            fzf_prompt="(q) > "
         elif [[ "$show_recent" == "True" ]]; then
             fzf_input_stream="$(cat -- "$HISTORY_FILE")"
             if [[ -z "$fzf_input_stream" ]]; then
@@ -664,49 +664,52 @@ main() {
                 files="$(find -L ./ -type f)"
             fi
 
+            local grep_filters=(
+                "-e" "/\.steam/"
+                "-e" "/GIMP/2\.10/"
+                "-e" "/\.config/libreoffice/"
+                "-e" "\.mp3$"
+                "-e" "\.wma$"
+                "-e" "\.flac$"
+                "-e" "\.webm$"
+                "-e" "\.m4a$"
+                "-e" "\.png$"
+                "-e" "\.jpg$"
+                "-e" "\.jpeg$"
+                "-e" "\.svg$"
+                "-e" "\.kra$"
+                "-e" "\.pdf$"
+                "-e" "\.epub$"
+                "-e" "\.djvu$"
+                "-e" "\.docx$"
+                "-e" "\.mp4$"
+                "-e" "\.mkv$"
+                "-e" "\.wav$"
+                "-e" "\.mmpz"
+                "-e" "\.tdb$"
+                "-e" "\.zip$"
+                "-e" "\.7z$"
+                "-e" "\.bin$"
+                "-e" "\.cue$"
+                "-e" "\.chd$"
+                "-e" "\.iso$"
+                "-e" "\.gba$"
+                "-e" "\.nes$"
+                "-e" "\.nds$"
+                "-e" "\.srm$"
+                "-e" "\.tar$"
+                "-e" "\.nvmem$"
+                "-e" "\.eeprom$"
+                "-e" "\.ps2$"
+                "-e" "/\.git/"
+                "-e" "/__pycache__/"
+                "-e" "a\.out"
+                "-e" "\.gitignore"
+            )
+
             # Filter out non-text files and sort
             fzf_input_stream="$(printf "%s\n" "${files[@]}" \
-                | grep -v \
-                -e "/\.steam/" \
-                -e "/GIMP/2\.10/" \
-                -e "/\.config/libreoffice/" \
-                -e "\.mp3$" \
-                -e "\.wma$" \
-                -e "\.flac$" \
-                -e "\.webm$" \
-                -e "\.m4a$" \
-                -e "\.png$" \
-                -e "\.jpg$" \
-                -e "\.jpeg$" \
-                -e "\.svg$" \
-                -e "\.kra$" \
-                -e "\.pdf$" \
-                -e "\.epub$" \
-                -e "\.djvu$" \
-                -e "\.docx$" \
-                -e "\.mp4$" \
-                -e "\.mkv$" \
-                -e "\.wav$" \
-                -e "\.mmpz" \
-                -e "\.tdb$" \
-                -e "\.zip$" \
-                -e "\.7z$" \
-                -e "\.bin$" \
-                -e "\.cue$" \
-                -e "\.chd$" \
-                -e "\.iso$" \
-                -e "\.gba$" \
-                -e "\.nes$" \
-                -e "\.nds$" \
-                -e "\.srm$" \
-                -e "\.tar$" \
-                -e "\.nvmem$" \
-                -e "\.eeprom$" \
-                -e "\.ps2$" \
-                -e "/\.git/" \
-                -e "/__pycache__/" \
-                -e "a\.out" \
-                -e "\.gitignore" \
+                | grep -v "${grep_filters[@]}" \
                 | sort
             )"
         fi
