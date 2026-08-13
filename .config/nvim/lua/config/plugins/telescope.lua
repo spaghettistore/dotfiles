@@ -11,15 +11,13 @@ return {
         },
         config = function()
             require('telescope').setup {
+                -- Apply {theme = "ivy"} to all pickers
+                defaults = require('telescope.themes').get_ivy {},
                 pickers = {
                     find_files = {
-                        theme = "ivy",
                         -- Follow symlinks
                         follow = true
-                    },
-                    live_grep = {theme = "ivy"},
-                    current_buffer_fuzzy_find = {theme = "ivy"},
-                    grep_string = {theme = "ivy"}
+                    }
                 },
                 extensions = {
                     fzf = {}
