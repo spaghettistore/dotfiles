@@ -26,8 +26,10 @@ main() {
         # Remove '/home/$USER' prefix during fzf
         files=("${files[@]#"$HOME"/}")
 
-        # Add as final option (so it will be highlighted by default)
-        files+=('files')
+        # We do this as we want to; add ~/Downloads, but we want ~/files to be
+        # at the top of the list
+        local sorted_files="$(printf -- '%s\n' "${files[@]}" | sort)"
+        sorted_files=("files" "${sorted_files[@]}" "Downloads")
 
         local fzf_binds=(
             --bind "enter:print($fzf_enter_key_default_value)+accept"
@@ -36,7 +38,7 @@ main() {
             --bind "ctrl-o:print(current)+accept"
         )
         local fzf_full_response
-        fzf_full_response="$(printf -- '%s\n' "${files[@]}" | sort \
+        fzf_full_response="$(printf -- '%s\n' "${sorted_files[@]}" \
             | fzf \
                 --header "ENTER:session  C-t:window  C-v:pane  C-o:current" \
                 "${fzf_binds[@]}" \
@@ -56,7 +58,7 @@ main() {
 
         # Re-add '/home/$USER' prefix
         case "$fzf_selection" in
-            "~") fzf_selection="$HOME" ;;
+            #"~") fzf_selection="$HOME" ;;  # Not needed now that we use ~/files as home
             "") return 1 ;;
             *) fzf_selection="$HOME/${fzf_selection}" ;;
         esac
