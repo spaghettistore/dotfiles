@@ -10,3 +10,4 @@ home/.newsboat/history.cmdline
 home/.newsboat/history.search
 home/.newsboat/urls
 home/.newsboat/cache.db.lock
+home/.bashrc.d/ofi_init_bash.sh
