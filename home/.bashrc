@@ -134,9 +134,15 @@ fi
 # Custom Config
 # -------------
 
-if [[ -d "$HOME/.bashrc.d" ]]; then
-    for file in "$HOME"/.bashrc.d/*.sh; do
-        [[ -r "$file" ]] && source "$file"
-    done
-    unset "$file"
-fi
+source_bashrc_directory() {
+    if [[ -d "$HOME/.bashrc.d" ]]; then
+        local file
+        for file in "$HOME"/.bashrc.d/*.sh; do
+            [[ -r "$file" ]] && source "$file"
+        done
+    fi
+}
+
+
+source_bashrc_directory
+unset source_bashrc_directory
