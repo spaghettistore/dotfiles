@@ -1,5 +1,6 @@
 home/.vim/.netrwhist
 .config/ncmpcpp/error.log
+.config/ncmpcpp/patterns.list
 .config/mpd/mpd.log
 .config/mpd/pid
 .config/mpd/state
