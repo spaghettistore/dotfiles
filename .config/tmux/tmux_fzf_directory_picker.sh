@@ -19,6 +19,7 @@ main() {
             "$HOME/files/resources/code"
             "$HOME/files/resources/code/scripts"
             "$HOME/media"
+            "$HOME/media/videos"
         )
 
         mapfile -t files < <(find -L "${dirs[@]}" -mindepth 1 -maxdepth 1 -type d)
