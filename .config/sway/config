@@ -68,7 +68,7 @@ for_window [app_id="."] inhibit_idle fullscreen
 
 ### Default wallpaper
 output * {
-    bg ~/.config/sway/background.png fill
+    bg ~/.config/sway/background.jpg fill
 }
 
 ### Monitor Configuration
