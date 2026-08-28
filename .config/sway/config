@@ -317,6 +317,7 @@ show_marks yes
 
 bindsym $mod+Slash exec pkill rofi || ~/.config/sway/sway_dmenu.sh
 bindsym $mod+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
+bindsym $mod+Shift+alt+b exec pkill rofi || ~/.local/bin/bmks -a "rofi"
 
 # System Controls
 bindsym $mod+ctrl+a exec pavucontrol
