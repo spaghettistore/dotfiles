@@ -317,16 +317,23 @@ show_marks yes
 
 bindsym $mod+Slash exec pkill rofi || ~/.config/sway/sway_dmenu.sh
 bindsym $mod+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
-bindsym $mod+ctrl+w exec pkill rofi || ~/.config/sway/wifi_menu_dmenu.py -m rofi
+
+# System Controls
 bindsym $mod+ctrl+a exec pavucontrol
-bindsym $mod+ctrl+m exec "if ! pgrep mpd &>/dev/null; then mpd; fi; alacritty -e ncmpcpp"
+bindsym $mod+ctrl+w exec pkill rofi || ~/.config/sway/wifi_menu_dmenu.py -m rofi
 bindsym $mod+ctrl+t exec alacritty -e btop
+bindsym $mod+Escape exec pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi
+bindsym $mod+ctrl+l exec systemctl suspend && swaylock
+
+# Applications
+bindsym $mod+ctrl+m exec "if ! pgrep mpd &>/dev/null; then mpd; fi; alacritty -e ncmpcpp"
 bindsym $mod+ctrl+n exec alacritty -e nvim
 bindsym $mod+ctrl+c exec alacritty -e calcurse
 bindsym $mod+ctrl+y exec firefox https://www.youtube.com/
-bindsym $mod+ctrl+alt+b exec notify-send --transient "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" --app-name="battery_capacity_status" --urgency=low --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
+
+# Notifications
 bindsym $mod+ctrl+alt+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
-bindsym $mod+Escape exec pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi
+bindsym $mod+ctrl+alt+b exec notify-send --transient "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" --app-name="battery_capacity_status" --urgency=low --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
 
 # ------------
 # Custom Modes
