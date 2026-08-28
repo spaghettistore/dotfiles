@@ -326,7 +326,7 @@ bindsym $mod+ctrl+c exec alacritty -e calcurse
 bindsym $mod+ctrl+y exec firefox https://www.youtube.com/
 bindsym $mod+ctrl+alt+b exec notify-send --transient "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" --app-name="battery_capacity_status" --urgency=low --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
 bindsym $mod+ctrl+alt+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
-bindsym $mod+Escape exec ~/.config/sway/power_menu_dmenu.sh -m rofi
+bindsym $mod+Escape exec pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi
 
 # ------------
 # Custom Modes
