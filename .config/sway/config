@@ -317,6 +317,9 @@ show_marks yes
 # ----------------
 
 bindsym $mod+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
+bindsym $mod+ctrl+w exec pkill rofi || ~/.config/sway/wifi_menu_dmenu.py -m rofi
+bindsym $mod+ctrl+a exec pavucontrol
+
 
 # ------------
 # Custom Modes
