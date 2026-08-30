@@ -705,6 +705,7 @@ main() {
                 "-e" "/__pycache__/"
                 "-e" "a\.out"
                 "-e" "\.gitignore"
+                "-e" "mpv/watch_later"
             )
 
             # Filter out non-text files and sort
