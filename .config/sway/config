@@ -334,10 +334,10 @@ bindsym $mod+ctrl+w exec pkill rofi || ~/.config/sway/wifi_menu_dmenu.py -m rofi
 bindsym $mod+ctrl+t exec alacritty -e btop
 bindsym $mod+Escape exec pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi
 bindsym $mod+ctrl+l exec systemctl suspend && swaylock
+bindsym $mod+ctrl+n exec swaync-client -t -sw
 
 # Applications
 bindsym $mod+ctrl+m exec "if ! pgrep mpd &>/dev/null; then mpd; fi; alacritty -e ncmpcpp"
-bindsym $mod+ctrl+n exec alacritty -e nvim
 bindsym $mod+ctrl+c exec alacritty -e calcurse
 bindsym $mod+ctrl+y exec firefox https://www.youtube.com/
 
