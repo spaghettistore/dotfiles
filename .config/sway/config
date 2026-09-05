@@ -219,7 +219,7 @@ bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 0
+bindsym $mod+0 workspace number 10
 bindsym $mod+p workspace prev
 bindsym $mod+n workspace next
 bindsym ctrl+alt+Left workspace prev
@@ -266,7 +266,7 @@ bindsym $mod+Shift+6 move container to workspace number 6
 bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 0
+bindsym $mod+Shift+0 move container to workspace number 10
 bindsym $mod+Shift+p move container to workspace prev
 bindsym $mod+Shift+n move container to workspace next
 bindsym Shift+ctrl+alt+Left move container to workspace prev
