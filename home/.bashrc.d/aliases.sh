@@ -1,4 +1,5 @@
 alias bc="bc -lq"
+alias fd="fdfind"
 alias v="\$EDITOR"
 alias n="\$EDITOR \$HOME/files/inbox/notepad.txt"
 alias c="clear"
