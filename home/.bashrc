@@ -66,17 +66,17 @@ if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
     # With git status
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$$(__git_ps1 " (%s)") '
     # With git status with input on new line
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n└─\$ '
+    PS1='\[\033[90m\]╭─\[\033[0m\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\[\033[90m\]╰─\[\033[0m\]\$ '
 else
     # Default
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 
     # With git status
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 " (%s)")\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$$(__git_ps1 " (%s)") '
     # With git status with input on new line
-    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 " (%s)")\n└─\$ '
+    #PS1='╭─${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 " (%s)")\n╰─\$ '
 fi
 unset color_prompt force_color_prompt
 
