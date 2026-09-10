@@ -94,7 +94,8 @@ $if mode=vi
     # This sets keybinds for normal(cmd) mode
     set keymap vi-command
 
-    control-l: clear-screen
+    #control-l: clear-screen  # Scroll the current line to the top. The scrollback is not erased
+    control-l: 'clear\n'  # Clear screen, erasing scrollback
 
     # {operator} {inside/around} {word/WORD}
     "diw": "lbdw"
@@ -233,7 +234,8 @@ $if mode=vi
     set keymap vi-insert
 
     # Like emacs
-    control-l: clear-screen
+    #control-l: clear-screen  # Scroll the current line to the top. The scrollback is not erased
+    control-l: 'clear\n'  # Clear screen, erasing scrollback
     control-p: history-search-backward
     control-n: history-search-forward
     control-a: beginning-of-line
