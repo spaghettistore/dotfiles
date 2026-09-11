@@ -23,11 +23,10 @@ include /etc/sway/config-vars.d/*
 set $super Mod4
 
 # Application Prefrences
-set $term alacritty
+set $terminal alacritty
 set $browser firefox
 set $file_manager ranger
-set $menu pkill rofi || rofi -i -show drun -show-icons
-set $menu2 pkill rofi || rofi -i -show run
+set $application_menu pkill rofi || rofi -i -show drun -show-icons
 
 # --------------
 # 02. STATUS BAR
@@ -45,11 +44,7 @@ include /etc/sway/config.d/*
 # -----------------
 
 exec swaync
-bindsym $super+i exec swaync-client -t -sw
 exec ~/.config/sway/bat_notify.sh
-
-bindsym $super+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
-bindsym $super+alt+i exec ~/.config/sway/info_notification.sh "time" "wifi" "battery"
 
 # ----------------------
 # 04. IDLE CONFIGURATION
@@ -157,16 +152,13 @@ focus_follows_mouse yes
 # 07. KEY BINDINGS
 # ----------------
 
-bindsym $super+apostrophe exec pkill rofi || ~/.config/sway/sway_rofi_focus_window.py
-
 ### System
 # Basic
 bindsym $super+c kill
 bindsym $super+Shift+c reload
-bindsym $super+Shift+e exec swaynag -t warning -m 'Log out?' -B 'Yes, exit sway' 'swaymsg exit'
+#bindsym $super+Shift+e exec swaynag -t warning -m 'Log out?' -B 'Yes, exit sway' 'swaymsg exit'
 # Launcher
-bindsym $super+d exec $menu
-bindsym $super+Shift+d exec $menu2
+bindsym $super+d exec $application_menu
 # Volume
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2% && ~/.config/sway/current_volume_notification.sh
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2% && ~/.config/sway/current_volume_notification.sh
@@ -180,14 +172,6 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 # Toggle enable/disable touchpad
 bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled, exec ~/.config/sway/info_notification.sh "touchpad"
-# Swaylock
-bindsym $super+Shift+x exec systemctl suspend && swaylock
-# Applications
-bindsym $super+Return exec $term
-bindsym $super+b exec $browser
-bindsym $super+e exec "$term -e $file_manager"
-bindsym $super+Equal exec "$term -e bc -l"
-bindsym XF86Calculator exec "$term -e bc -l"
 # Screenshot / printscreen
 bindsym Print exec grim /tmp/grim_temp_screenshot.png && wl-copy < /tmp/grim_temp_screenshot.png && rm /tmp/grim_temp_screenshot.png && notify-send "Screenshot saved to clipboard" --urgency=low --app-name="screenshot_to_clipboard_notification" --hint=string:x-canonical-private-synchronous:"screenshot_to_clipboard_notification"
 bindsym $super+Print exec grim && notify-send "Screenshot saved to file" --urgency=low --app-name="screenshot_saved_notification" --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
@@ -228,14 +212,14 @@ bindsym $super+q focus child
 # Monitor
 bindsym $super+bracketright focus output right
 bindsym $super+bracketleft focus output left
-bindsym $super+alt+l focus output right
 bindsym $super+alt+h focus output left
-bindsym $super+alt+k focus output up
 bindsym $super+alt+j focus output down
-bindsym $super+alt+Right focus output right
+bindsym $super+alt+k focus output up
+bindsym $super+alt+l focus output right
 bindsym $super+alt+Left focus output left
-bindsym $super+alt+Up focus output up
 bindsym $super+alt+Down focus output down
+bindsym $super+alt+Up focus output up
+bindsym $super+alt+Right focus output right
 bindsym $super+alt+n focus output next
 bindsym $super+alt+p focus output prev
 
@@ -263,21 +247,19 @@ bindsym $super+Shift+9 move container to workspace number 9
 bindsym $super+Shift+0 move container to workspace number 10
 bindsym $super+Shift+p move container to workspace prev
 bindsym $super+Shift+n move container to workspace next
-bindsym Shift+ctrl+alt+Left move container to workspace prev
-bindsym Shift+ctrl+alt+Right move container to workspace next
 bindsym $super+Shift+page_up move container to workspace prev
 bindsym $super+Shift+page_down move container to workspace next
 ### Move [Workspace] between monitors
 bindsym $super+Shift+bracketright move workspace to output right
 bindsym $super+Shift+bracketleft move workspace to output left
-bindsym $super+Shift+alt+l move workspace to output right
 bindsym $super+Shift+alt+h move workspace to output left
-bindsym $super+Shift+alt+k move workspace to output up
 bindsym $super+Shift+alt+j move workspace to output down
-bindsym $super+Shift+alt+Right move workspace to output right
+bindsym $super+Shift+alt+k move workspace to output up
+bindsym $super+Shift+alt+l move workspace to output right
 bindsym $super+Shift+alt+Left move workspace to output left
-bindsym $super+Shift+alt+Up move workspace to output up
 bindsym $super+Shift+alt+Down move workspace to output down
+bindsym $super+Shift+alt+Up move workspace to output up
+bindsym $super+Shift+alt+Right move workspace to output right
 bindsym $super+Shift+alt+n move workspace to output next
 bindsym $super+Shift+alt+p move workspace to output prev
 
@@ -323,21 +305,32 @@ bindsym $super+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
 bindsym $super+Shift+alt+b exec pkill rofi || ~/.local/bin/bmks -a "rofi"
 
 # System Controls
+bindsym $super+apostrophe exec pkill rofi || ~/.config/sway/sway_rofi_focus_window.py
+bindsym $super+Escape exec pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi
 bindsym $super+ctrl+a exec pavucontrol
 bindsym $super+ctrl+w exec pkill rofi || ~/.config/sway/wifi_menu_dmenu.py -m rofi
-bindsym $super+ctrl+t exec alacritty -e btop
-bindsym $super+Escape exec pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi
+bindsym $super+ctrl+t exec $terminal -e btop
 bindsym $super+ctrl+l exec systemctl suspend && swaylock
+bindsym $super+Shift+x exec systemctl suspend && swaylock
 bindsym $super+ctrl+n exec swaync-client -t -sw
 
 # Applications
-bindsym $super+ctrl+m exec "if ! pgrep mpd &>/dev/null; then mpd; fi; alacritty -e ncmpcpp"
-bindsym $super+ctrl+c exec alacritty -e calcurse
-bindsym $super+ctrl+y exec firefox https://www.youtube.com/
+bindsym XF86Calculator exec "$terminal -e bc -l"
+bindsym $super+Return exec $terminal
+bindsym $super+b exec $browser
+bindsym $super+e exec "$terminal -e $file_manager"
+bindsym $super+Equal exec "$terminal -e bc -l"
+bindsym $super+ctrl+m exec "if ! pgrep mpd &>/dev/null; then mpd; fi; $terminal -e ncmpcpp"
+bindsym $super+ctrl+c exec $terminal -e calcurse
+bindsym $super+ctrl+y exec $browser https://www.youtube.com/
 
 # Notifications
+bindsym $super+i exec swaync-client -t -sw
+bindsym $super+alt+i exec ~/.config/sway/info_notification.sh "time" "wifi" "battery"
+bindsym $super+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
 bindsym $super+ctrl+alt+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
 bindsym $super+ctrl+alt+b exec notify-send --transient "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" --app-name="battery_capacity_status" --urgency=low --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
+
 
 # ----------------
 # 08. CUSTOM MODES
@@ -502,11 +495,11 @@ mode "[d]" {
 # Open Mode
 mode "[o]" {
     bindsym Escape mode "[ ]"
-    bindsym d exec $menu, mode "default"
+    bindsym d exec $application_menu, mode "default"
     bindsym b exec $browser, mode "default"
-    bindsym t exec $term, mode "[ ]"
-    bindsym e exec $term -e $file_manager, mode "default"
-    bindsym c exec "$term -e bc -l", mode "default"
+    bindsym t exec $terminal, mode "[ ]"
+    bindsym e exec $terminal -e $file_manager, mode "default"
+    bindsym c exec "$terminal -e bc -l", mode "default"
 }
 
 ## Quick Move Mode
