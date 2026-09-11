@@ -152,42 +152,43 @@ focus_follows_mouse yes
 # 07. KEY BINDINGS
 # ----------------
 
-### System
 # Basic
+bindsym alt+F4 kill
 bindsym $super+c kill
 bindsym $super+Shift+c reload
 #bindsym $super+Shift+e exec swaynag -t warning -m 'Log out?' -B 'Yes, exit sway' 'swaymsg exit'
-# Launcher
 bindsym $super+d exec $application_menu
+
 # Volume
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2% && ~/.config/sway/current_volume_notification.sh
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2% && ~/.config/sway/current_volume_notification.sh
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && ~/.config/sway/current_volume_notification.sh
+
 # Brightness
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && ~/.config/sway/current_brightness_notification.sh
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && ~/.config/sway/current_brightness_notification.sh
+
 # Media
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
 # Toggle enable/disable touchpad
 bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled, exec ~/.config/sway/info_notification.sh "touchpad"
+
 # Screenshot / printscreen
 bindsym Print exec grim /tmp/grim_temp_screenshot.png && wl-copy < /tmp/grim_temp_screenshot.png && rm /tmp/grim_temp_screenshot.png && notify-send "Screenshot saved to clipboard" --urgency=low --app-name="screenshot_to_clipboard_notification" --hint=string:x-canonical-private-synchronous:"screenshot_to_clipboard_notification"
 bindsym $super+Print exec grim && notify-send "Screenshot saved to file" --urgency=low --app-name="screenshot_saved_notification" --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
 
-### Focus
-# Vim
+# Focus
 bindsym $super+h focus left
 bindsym $super+j focus down
 bindsym $super+k focus up
 bindsym $super+l focus right
-# Arrow Keys
 bindsym $super+Left focus left
 bindsym $super+Down focus down
 bindsym $super+Up focus up
 bindsym $super+Right focus right
-# Switch to workspace
 bindsym $super+1 workspace number 1
 bindsym $super+2 workspace number 2
 bindsym $super+3 workspace number 3
@@ -198,18 +199,16 @@ bindsym $super+7 workspace number 7
 bindsym $super+8 workspace number 8
 bindsym $super+9 workspace number 9
 bindsym $super+0 workspace number 10
-bindsym $super+p workspace prev
 bindsym $super+n workspace next
-bindsym ctrl+alt+Left workspace prev
+bindsym $super+p workspace prev
 bindsym ctrl+alt+Right workspace next
-bindsym $super+page_up workspace prev
+bindsym ctrl+alt+Left workspace prev
 bindsym $super+page_down workspace next
-bindsym $super+Shift+tab workspace prev
+bindsym $super+page_up workspace prev
 bindsym $super+tab workspace next
-# Parent Child
+bindsym $super+Shift+tab workspace prev
 bindsym $super+a focus parent
 bindsym $super+q focus child
-# Monitor
 bindsym $super+bracketright focus output right
 bindsym $super+bracketleft focus output left
 bindsym $super+alt+h focus output left
@@ -223,18 +222,15 @@ bindsym $super+alt+Right focus output right
 bindsym $super+alt+n focus output next
 bindsym $super+alt+p focus output prev
 
-### Move [Focused Container]
-# Vim
+# Move [Focused Container]
 bindsym $super+Shift+h move left
 bindsym $super+Shift+j move down
 bindsym $super+Shift+k move up
 bindsym $super+Shift+l move right
-# Arrow Keys
 bindsym $super+Shift+Left move left
 bindsym $super+Shift+Down move down
 bindsym $super+Shift+Up move up
 bindsym $super+Shift+Right move right
-# Workspace
 bindsym $super+Shift+1 move container to workspace number 1
 bindsym $super+Shift+2 move container to workspace number 2
 bindsym $super+Shift+3 move container to workspace number 3
@@ -245,11 +241,10 @@ bindsym $super+Shift+7 move container to workspace number 7
 bindsym $super+Shift+8 move container to workspace number 8
 bindsym $super+Shift+9 move container to workspace number 9
 bindsym $super+Shift+0 move container to workspace number 10
-bindsym $super+Shift+p move container to workspace prev
 bindsym $super+Shift+n move container to workspace next
-bindsym $super+Shift+page_up move container to workspace prev
+bindsym $super+Shift+p move container to workspace prev
 bindsym $super+Shift+page_down move container to workspace next
-### Move [Workspace] between monitors
+bindsym $super+Shift+page_up move container to workspace prev
 bindsym $super+Shift+bracketright move workspace to output right
 bindsym $super+Shift+bracketleft move workspace to output left
 bindsym $super+Shift+alt+h move workspace to output left
@@ -263,7 +258,7 @@ bindsym $super+Shift+alt+Right move workspace to output right
 bindsym $super+Shift+alt+n move workspace to output next
 bindsym $super+Shift+alt+p move workspace to output prev
 
-### Layout
+# Layout
 bindsym $super+f fullscreen
 bindsym $super+Shift+s layout stacking
 bindsym $super+Shift+t layout tabbed
@@ -271,18 +266,18 @@ bindsym $super+z layout toggle split
 bindsym $super+Shift+Equal sticky toggle
 #bindsym $super+Shift+z layout default
 
-### Split
+# Split
 bindsym $super+v splith
 bindsym $super+x splitv
 #bindsym t split toggle
 #bindsym n split none
 
-### Floating
+# Floating
 floating_modifier $super normal
 bindsym $super+Space focus mode_toggle
 bindsym $super+Shift+Space floating toggle
 
-### Scratchpad
+# Scratchpad
 bindsym $super+minus scratchpad show
 bindsym $super+shift+minus move scratchpad
 
@@ -290,7 +285,7 @@ bindsym $super+shift+minus move scratchpad
 bindgesture swipe:3:right workspace next
 bindgesture swipe:3:left workspace prev
 
-### Marks TODO
+# Marks (TODO)
 #bindsym $super+Shift+q [con_mark="test_mark"] focus; mode "default"
 #bindsym $super+Shift+z mark --add test_mark
 #bindsym $super+Shift+q unmark
@@ -300,6 +295,8 @@ show_marks yes
 
 #workspace_auto_back_and_forth yes
 
+# Scripts
+bindsym $super+Shift+Slash exec pkill rofi || ~/.config/sway/sway_keybinds.sh -m "rofi"
 bindsym $super+Slash exec pkill rofi || ~/.config/sway/sway_dmenu.sh
 bindsym $super+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
 bindsym $super+Shift+alt+b exec pkill rofi || ~/.local/bin/bmks -a "rofi"
