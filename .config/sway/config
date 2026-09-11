@@ -20,7 +20,7 @@ include /etc/sway/config-vars.d/*
 # -------------
 
 # Mod4=WindowsKey, Mod1=Alt, Mod5=AltGr, menu=KeyboardMenuKey
-set $mod Mod4
+set $super Mod4
 
 # Application Prefrences
 set $term alacritty
@@ -45,11 +45,11 @@ include /etc/sway/config.d/*
 # -----------------
 
 exec swaync
-bindsym $mod+i exec swaync-client -t -sw
+bindsym $super+i exec swaync-client -t -sw
 exec ~/.config/sway/bat_notify.sh
 
-bindsym $mod+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
-bindsym $mod+alt+i exec ~/.config/sway/info_notification.sh "time" "wifi" "battery"
+bindsym $super+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
+bindsym $super+alt+i exec ~/.config/sway/info_notification.sh "time" "wifi" "battery"
 
 # ----------------------
 # 04. IDLE CONFIGURATION
@@ -157,16 +157,16 @@ focus_follows_mouse yes
 # 07. KEY BINDINGS
 # ----------------
 
-bindsym $mod+apostrophe exec pkill rofi || ~/.config/sway/sway_rofi_focus_window.py
+bindsym $super+apostrophe exec pkill rofi || ~/.config/sway/sway_rofi_focus_window.py
 
 ### System
 # Basic
-bindsym $mod+c kill
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'Log out?' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $super+c kill
+bindsym $super+Shift+c reload
+bindsym $super+Shift+e exec swaynag -t warning -m 'Log out?' -B 'Yes, exit sway' 'swaymsg exit'
 # Launcher
-bindsym $mod+d exec $menu
-bindsym $mod+Shift+d exec $menu2
+bindsym $super+d exec $menu
+bindsym $super+Shift+d exec $menu2
 # Volume
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2% && ~/.config/sway/current_volume_notification.sh
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2% && ~/.config/sway/current_volume_notification.sh
@@ -181,163 +181,163 @@ bindsym XF86AudioPrev exec playerctl previous
 # Toggle enable/disable touchpad
 bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled, exec ~/.config/sway/info_notification.sh "touchpad"
 # Swaylock
-bindsym $mod+Shift+x exec systemctl suspend && swaylock
+bindsym $super+Shift+x exec systemctl suspend && swaylock
 # Applications
-bindsym $mod+Return exec $term
-bindsym $mod+b exec $browser
-bindsym $mod+e exec "$term -e $file_manager"
-bindsym $mod+Equal exec "$term -e bc -l"
+bindsym $super+Return exec $term
+bindsym $super+b exec $browser
+bindsym $super+e exec "$term -e $file_manager"
+bindsym $super+Equal exec "$term -e bc -l"
 bindsym XF86Calculator exec "$term -e bc -l"
 # Screenshot / printscreen
 bindsym Print exec grim /tmp/grim_temp_screenshot.png && wl-copy < /tmp/grim_temp_screenshot.png && rm /tmp/grim_temp_screenshot.png && notify-send "Screenshot saved to clipboard" --urgency=low --app-name="screenshot_to_clipboard_notification" --hint=string:x-canonical-private-synchronous:"screenshot_to_clipboard_notification"
-bindsym $mod+Print exec grim && notify-send "Screenshot saved to file" --urgency=low --app-name="screenshot_saved_notification" --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
+bindsym $super+Print exec grim && notify-send "Screenshot saved to file" --urgency=low --app-name="screenshot_saved_notification" --hint=string:x-canonical-private-synchronous:"screenshot_saved_notification"
 
 ### Focus
 # Vim
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $super+h focus left
+bindsym $super+j focus down
+bindsym $super+k focus up
+bindsym $super+l focus right
 # Arrow Keys
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
 # Switch to workspace
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
-bindsym $mod+p workspace prev
-bindsym $mod+n workspace next
+bindsym $super+1 workspace number 1
+bindsym $super+2 workspace number 2
+bindsym $super+3 workspace number 3
+bindsym $super+4 workspace number 4
+bindsym $super+5 workspace number 5
+bindsym $super+6 workspace number 6
+bindsym $super+7 workspace number 7
+bindsym $super+8 workspace number 8
+bindsym $super+9 workspace number 9
+bindsym $super+0 workspace number 10
+bindsym $super+p workspace prev
+bindsym $super+n workspace next
 bindsym ctrl+alt+Left workspace prev
 bindsym ctrl+alt+Right workspace next
-bindsym $mod+page_up workspace prev
-bindsym $mod+page_down workspace next
-bindsym $mod+Shift+tab workspace prev
-bindsym $mod+tab workspace next
+bindsym $super+page_up workspace prev
+bindsym $super+page_down workspace next
+bindsym $super+Shift+tab workspace prev
+bindsym $super+tab workspace next
 # Parent Child
-bindsym $mod+a focus parent
-bindsym $mod+q focus child
+bindsym $super+a focus parent
+bindsym $super+q focus child
 # Monitor
-bindsym $mod+bracketright focus output right
-bindsym $mod+bracketleft focus output left
-bindsym $mod+alt+l focus output right
-bindsym $mod+alt+h focus output left
-bindsym $mod+alt+k focus output up
-bindsym $mod+alt+j focus output down
-bindsym $mod+alt+Right focus output right
-bindsym $mod+alt+Left focus output left
-bindsym $mod+alt+Up focus output up
-bindsym $mod+alt+Down focus output down
-bindsym $mod+alt+n focus output next
-bindsym $mod+alt+p focus output prev
+bindsym $super+bracketright focus output right
+bindsym $super+bracketleft focus output left
+bindsym $super+alt+l focus output right
+bindsym $super+alt+h focus output left
+bindsym $super+alt+k focus output up
+bindsym $super+alt+j focus output down
+bindsym $super+alt+Right focus output right
+bindsym $super+alt+Left focus output left
+bindsym $super+alt+Up focus output up
+bindsym $super+alt+Down focus output down
+bindsym $super+alt+n focus output next
+bindsym $super+alt+p focus output prev
 
 ### Move [Focused Container]
 # Vim
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $super+Shift+h move left
+bindsym $super+Shift+j move down
+bindsym $super+Shift+k move up
+bindsym $super+Shift+l move right
 # Arrow Keys
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Right move right
 # Workspace
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
-bindsym $mod+Shift+p move container to workspace prev
-bindsym $mod+Shift+n move container to workspace next
+bindsym $super+Shift+1 move container to workspace number 1
+bindsym $super+Shift+2 move container to workspace number 2
+bindsym $super+Shift+3 move container to workspace number 3
+bindsym $super+Shift+4 move container to workspace number 4
+bindsym $super+Shift+5 move container to workspace number 5
+bindsym $super+Shift+6 move container to workspace number 6
+bindsym $super+Shift+7 move container to workspace number 7
+bindsym $super+Shift+8 move container to workspace number 8
+bindsym $super+Shift+9 move container to workspace number 9
+bindsym $super+Shift+0 move container to workspace number 10
+bindsym $super+Shift+p move container to workspace prev
+bindsym $super+Shift+n move container to workspace next
 bindsym Shift+ctrl+alt+Left move container to workspace prev
 bindsym Shift+ctrl+alt+Right move container to workspace next
-bindsym $mod+Shift+page_up move container to workspace prev
-bindsym $mod+Shift+page_down move container to workspace next
+bindsym $super+Shift+page_up move container to workspace prev
+bindsym $super+Shift+page_down move container to workspace next
 ### Move [Workspace] between monitors
-bindsym $mod+Shift+bracketright move workspace to output right
-bindsym $mod+Shift+bracketleft move workspace to output left
-bindsym $mod+Shift+alt+l move workspace to output right
-bindsym $mod+Shift+alt+h move workspace to output left
-bindsym $mod+Shift+alt+k move workspace to output up
-bindsym $mod+Shift+alt+j move workspace to output down
-bindsym $mod+Shift+alt+Right move workspace to output right
-bindsym $mod+Shift+alt+Left move workspace to output left
-bindsym $mod+Shift+alt+Up move workspace to output up
-bindsym $mod+Shift+alt+Down move workspace to output down
-bindsym $mod+Shift+alt+n move workspace to output next
-bindsym $mod+Shift+alt+p move workspace to output prev
+bindsym $super+Shift+bracketright move workspace to output right
+bindsym $super+Shift+bracketleft move workspace to output left
+bindsym $super+Shift+alt+l move workspace to output right
+bindsym $super+Shift+alt+h move workspace to output left
+bindsym $super+Shift+alt+k move workspace to output up
+bindsym $super+Shift+alt+j move workspace to output down
+bindsym $super+Shift+alt+Right move workspace to output right
+bindsym $super+Shift+alt+Left move workspace to output left
+bindsym $super+Shift+alt+Up move workspace to output up
+bindsym $super+Shift+alt+Down move workspace to output down
+bindsym $super+Shift+alt+n move workspace to output next
+bindsym $super+Shift+alt+p move workspace to output prev
 
 ### Layout
-bindsym $mod+f fullscreen
-bindsym $mod+Shift+s layout stacking
-bindsym $mod+Shift+t layout tabbed
-bindsym $mod+z layout toggle split
-bindsym $mod+Shift+Equal sticky toggle
-#bindsym $mod+Shift+z layout default
+bindsym $super+f fullscreen
+bindsym $super+Shift+s layout stacking
+bindsym $super+Shift+t layout tabbed
+bindsym $super+z layout toggle split
+bindsym $super+Shift+Equal sticky toggle
+#bindsym $super+Shift+z layout default
 
 ### Split
-bindsym $mod+v splith
-bindsym $mod+x splitv
+bindsym $super+v splith
+bindsym $super+x splitv
 #bindsym t split toggle
 #bindsym n split none
 
 ### Floating
-floating_modifier $mod normal
-bindsym $mod+Space focus mode_toggle
-bindsym $mod+Shift+Space floating toggle
+floating_modifier $super normal
+bindsym $super+Space focus mode_toggle
+bindsym $super+Shift+Space floating toggle
 
 ### Scratchpad
-bindsym $mod+minus scratchpad show
-bindsym $mod+shift+minus move scratchpad
+bindsym $super+minus scratchpad show
+bindsym $super+shift+minus move scratchpad
 
 # Touchpad Bindings
 bindgesture swipe:3:right workspace next
 bindgesture swipe:3:left workspace prev
 
 ### Marks TODO
-#bindsym $mod+Shift+q [con_mark="test_mark"] focus; mode "default"
-#bindsym $mod+Shift+z mark --add test_mark
-#bindsym $mod+Shift+q unmark
-#bindsym $mod+Shift+q move mark test_mark
-#bindsym $mod+Shift+a swap container with mark test_mark
+#bindsym $super+Shift+q [con_mark="test_mark"] focus; mode "default"
+#bindsym $super+Shift+z mark --add test_mark
+#bindsym $super+Shift+q unmark
+#bindsym $super+Shift+q move mark test_mark
+#bindsym $super+Shift+a swap container with mark test_mark
 show_marks yes
 
 #workspace_auto_back_and_forth yes
 
-bindsym $mod+Slash exec pkill rofi || ~/.config/sway/sway_dmenu.sh
-bindsym $mod+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
-bindsym $mod+Shift+alt+b exec pkill rofi || ~/.local/bin/bmks -a "rofi"
+bindsym $super+Slash exec pkill rofi || ~/.config/sway/sway_dmenu.sh
+bindsym $super+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
+bindsym $super+Shift+alt+b exec pkill rofi || ~/.local/bin/bmks -a "rofi"
 
 # System Controls
-bindsym $mod+ctrl+a exec pavucontrol
-bindsym $mod+ctrl+w exec pkill rofi || ~/.config/sway/wifi_menu_dmenu.py -m rofi
-bindsym $mod+ctrl+t exec alacritty -e btop
-bindsym $mod+Escape exec pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi
-bindsym $mod+ctrl+l exec systemctl suspend && swaylock
-bindsym $mod+ctrl+n exec swaync-client -t -sw
+bindsym $super+ctrl+a exec pavucontrol
+bindsym $super+ctrl+w exec pkill rofi || ~/.config/sway/wifi_menu_dmenu.py -m rofi
+bindsym $super+ctrl+t exec alacritty -e btop
+bindsym $super+Escape exec pkill rofi || ~/.config/sway/power_menu_dmenu.sh -m rofi
+bindsym $super+ctrl+l exec systemctl suspend && swaylock
+bindsym $super+ctrl+n exec swaync-client -t -sw
 
 # Applications
-bindsym $mod+ctrl+m exec "if ! pgrep mpd &>/dev/null; then mpd; fi; alacritty -e ncmpcpp"
-bindsym $mod+ctrl+c exec alacritty -e calcurse
-bindsym $mod+ctrl+y exec firefox https://www.youtube.com/
+bindsym $super+ctrl+m exec "if ! pgrep mpd &>/dev/null; then mpd; fi; alacritty -e ncmpcpp"
+bindsym $super+ctrl+c exec alacritty -e calcurse
+bindsym $super+ctrl+y exec firefox https://www.youtube.com/
 
 # Notifications
-bindsym $mod+ctrl+alt+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
-bindsym $mod+ctrl+alt+b exec notify-send --transient "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" --app-name="battery_capacity_status" --urgency=low --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
+bindsym $super+ctrl+alt+t exec notify-send --transient "$(date "+%a %d %b %H:%M")" --urgency=low --app-name="datetime_notification" --hint=string:x-canonical-private-synchronous:"datetime_notification"
+bindsym $super+ctrl+alt+b exec notify-send --transient "Battery" "$(cat /sys/class/power_supply/BAT0/capacity)% $(cat /sys/class/power_supply/BAT0/status)" --app-name="battery_capacity_status" --urgency=low --hint=string:x-canonical-private-synchronous:"battery_capacity_status"
 
 # ----------------
 # 08. CUSTOM MODES
@@ -541,9 +541,9 @@ mode "[o]" {
 #}
 
 # Mode Keybinds
-bindsym $mod+Shift+semicolon mode "[ ]"
-bindsym $mod+r mode "[r]"
-#bindsym $mod+m mode ":m"
+bindsym $super+Shift+semicolon mode "[ ]"
+bindsym $super+r mode "[r]"
+#bindsym $super+m mode ":m"
 
 # ---------------------
 # 09. FLOATING DEFAULTS
