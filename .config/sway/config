@@ -22,12 +22,6 @@ include /etc/sway/config-vars.d/*
 # Mod4=WindowsKey, Mod1=Alt, Mod5=AltGr, menu=KeyboardMenuKey
 set $mod Mod4
 
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
-
 # Application Prefrences
 set $term alacritty
 set $browser firefox
@@ -200,10 +194,10 @@ bindsym $mod+Print exec grim && notify-send "Screenshot saved to file" --urgency
 
 ### Focus
 # Vim
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 # Arrow Keys
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -234,10 +228,10 @@ bindsym $mod+q focus child
 # Monitor
 bindsym $mod+bracketright focus output right
 bindsym $mod+bracketleft focus output left
-bindsym $mod+alt+$right focus output right
-bindsym $mod+alt+$left focus output left
-bindsym $mod+alt+$up focus output up
-bindsym $mod+alt+$down focus output down
+bindsym $mod+alt+l focus output right
+bindsym $mod+alt+h focus output left
+bindsym $mod+alt+k focus output up
+bindsym $mod+alt+j focus output down
 bindsym $mod+alt+Right focus output right
 bindsym $mod+alt+Left focus output left
 bindsym $mod+alt+Up focus output up
@@ -247,10 +241,10 @@ bindsym $mod+alt+p focus output prev
 
 ### Move [Focused Container]
 # Vim
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 # Arrow Keys
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -276,10 +270,10 @@ bindsym $mod+Shift+page_down move container to workspace next
 ### Move [Workspace] between monitors
 bindsym $mod+Shift+bracketright move workspace to output right
 bindsym $mod+Shift+bracketleft move workspace to output left
-bindsym $mod+Shift+alt+$right move workspace to output right
-bindsym $mod+Shift+alt+$left move workspace to output left
-bindsym $mod+Shift+alt+$up move workspace to output up
-bindsym $mod+Shift+alt+$down move workspace to output down
+bindsym $mod+Shift+alt+l move workspace to output right
+bindsym $mod+Shift+alt+h move workspace to output left
+bindsym $mod+Shift+alt+k move workspace to output up
+bindsym $mod+Shift+alt+j move workspace to output down
 bindsym $mod+Shift+alt+Right move workspace to output right
 bindsym $mod+Shift+alt+Left move workspace to output left
 bindsym $mod+Shift+alt+Up move workspace to output up
@@ -371,10 +365,10 @@ mode "[ ]" {
     bindsym n workspace next
     # Focus
     # Move your focus, vim keybinds
-    bindsym $left focus left
-    bindsym $down focus down
-    bindsym $up focus up
-    bindsym $right focus right
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
     # Highlight window
     bindsym a focus parent
     bindsym q focus child
@@ -406,15 +400,15 @@ mode "[m]" {
     bindsym p move container to workspace prev, mode "[ ]"
     bindsym n move container to workspace next, mode "[ ]"
     # Move the focused window, vim keybinds
-    bindsym $left move left, mode "[ ]"
-    bindsym $down move down, mode "[ ]"
-    bindsym $up move up, mode "[ ]"
-    bindsym $right move right, mode "[ ]"
+    bindsym h move left, mode "[ ]"
+    bindsym j move down, mode "[ ]"
+    bindsym k move up, mode "[ ]"
+    bindsym l move right, mode "[ ]"
     # Fast Move with shift
-    bindsym Shift+$left move left 100px
-    bindsym Shift+$down move down 100px
-    bindsym Shift+$up move up 100px
-    bindsym Shift+$right move right 100px
+    bindsym Shift+h move left 100px
+    bindsym Shift+j move down 100px
+    bindsym Shift+k move up 100px
+    bindsym Shift+l move right 100px
     # Move Center
     bindsym m move position center, mode "[ ]"
     # Highlight window
@@ -456,15 +450,15 @@ mode "[mc]" {
     bindsym p move container to workspace prev
     bindsym n move container to workspace next
     # Continuous Movement
-    bindsym $left move left
-    bindsym $down move down
-    bindsym $up move up
-    bindsym $right move right
+    bindsym h move left
+    bindsym j move down
+    bindsym k move up
+    bindsym l move right
     # Fast Move with shift
-    bindsym Shift+$left move left 100px
-    bindsym Shift+$down move down 100px
-    bindsym Shift+$up move up 100px
-    bindsym Shift+$right move right 100px
+    bindsym Shift+h move left 100px
+    bindsym Shift+j move down 100px
+    bindsym Shift+k move up 100px
+    bindsym Shift+l move right 100px
 }
 
 # Resize Mode
@@ -473,15 +467,15 @@ mode "[r]" {
     bindsym Escape mode "default"
     bindsym m mode "[m]"
     # Resize, vim keybinds
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym h resize shrink width 10px
+    bindsym j resize grow height 10px
+    bindsym k resize shrink height 10px
+    bindsym l resize grow width 10px
     # Fast Resize, vim keybinds
-    bindsym Shift+$left resize shrink width 100px
-    bindsym Shift+$down resize grow height 100px
-    bindsym Shift+$up resize shrink height 100px
-    bindsym Shift+$right resize grow width 100px
+    bindsym Shift+h resize shrink width 100px
+    bindsym Shift+j resize grow height 100px
+    bindsym Shift+k resize shrink height 100px
+    bindsym Shift+l resize grow width 100px
     # Set width height, vim <zz|zt|zb>
     bindsym z mode "[rz]"
 }
@@ -532,10 +526,10 @@ mode "[o]" {
 #    bindsym p move container to workspace prev, mode "default"
 #    bindsym n move container to workspace next, mode "default"
 #    # Move the focused window, vim keybinds
-#    bindsym $left move left, mode "default"
-#    bindsym $down move down, mode "default"
-#    bindsym $up move up, mode "default"
-#    bindsym $right move right, mode "default"
+#    bindsym h move left, mode "default"
+#    bindsym j move down, mode "default"
+#    bindsym k move up, mode "default"
+#    bindsym l move right, mode "default"
 #    # Toggle Layout
 #    bindsym f fullscreen, mode "default"
 #    bindsym t layout tabbed, mode "default"
