@@ -296,7 +296,7 @@ show_marks yes
 #workspace_auto_back_and_forth yes
 
 # Scripts
-bindsym $super+Shift+Slash exec pkill rofi || ~/.config/sway/sway_keybinds.sh -m "rofi"
+bindsym $super+Shift+Slash exec pkill rofi || ~/.config/sway/sway_keybind_viewer.sh -m "rofi"
 bindsym $super+Slash exec pkill rofi || ~/.config/sway/sway_dmenu.sh
 bindsym $super+alt+b exec pkill rofi || ~/.local/bin/bmks "rofi"
 bindsym $super+Shift+alt+b exec pkill rofi || ~/.local/bin/bmks -a "rofi"
