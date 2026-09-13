@@ -21,3 +21,12 @@ vim.api.nvim_create_autocmd('FileType', {
         --vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end,
 })
+
+-- Use two spaces indents when editing a markdown file
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.softtabstop = 2
+  end,
+})
