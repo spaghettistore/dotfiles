@@ -168,3 +168,67 @@ cu() {
         cd "$cd_string" || return 1
     fi
 }
+
+
+# fdi - passes args and flags to fdfind and pipes output into fzf
+# Dependencies:
+#   fdfind
+#   fzf
+#   batcat
+#   eza
+fdi() {
+    local TMUX_DIR_SCRIPT="$HOME/files/resources/dotfiles/.config/tmux/tmux_directory_opener.sh"
+    local TMUX_FILE_SCRIPT="$HOME/files/resources/dotfiles/.config/tmux/tmux_fzf_file_picker.sh"
+    local FDFIND_FLAGS=(
+        --color always
+    )
+    local FZF_KEYBINDS=(
+        --bind "enter:execute([[ -f {} ]] && $EDITOR -- {})+accept"
+        --bind "ctrl-e:execute([[ -f {} ]] && $EDITOR -- {})+abort"
+        --bind "ctrl-g:execute(
+            if [[ -f {} ]]; then
+                $TMUX_FILE_SCRIPT -o goto -- {}
+            elif [[ -d {} ]]; then
+                $TMUX_DIR_SCRIPT -s -- {}
+            fi
+        )+abort"
+        --bind "ctrl-t:execute(
+            if [[ -f {} ]]; then
+                $TMUX_FILE_SCRIPT -o window -- {}
+            elif [[ -d {} ]]; then
+                $TMUX_DIR_SCRIPT -w -- {}
+            fi
+        )+abort"
+        --bind "ctrl-v:execute(
+            if [[ -f {} ]]; then
+                $TMUX_FILE_SCRIPT -o pane -- {}
+            elif [[ -d {} ]]; then
+                $TMUX_DIR_SCRIPT -p -- {}
+            fi
+        )+abort"
+        --bind "ctrl-x:execute(xdg-open -- {})+abort"
+    )
+    local FZF_HEADER=(
+        "C-e EDITOR"
+        "C-g session"
+        "C-t window"
+        "C-v pane"
+        "C-x xdg-open"
+    )
+    local FZF_PREVIEW="if [[ -f {} ]]; then
+                           batcat -n --theme=gruvbox-dark --color=always -- {}
+                       elif [[ -d {} ]]; then
+                           eza --icons always --color always -- {}
+                       fi"
+    local FZF_FLAGS=(
+        --ansi
+        --color dark
+        "${FZF_KEYBINDS[@]}"
+        --header "${FZF_HEADER[*]}"
+        --preview "$FZF_PREVIEW"
+    )
+
+    local directory
+    directory="$(fdfind "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")"
+    [[ -d "$directory" ]] && cd "$directory" || return 1
+}
