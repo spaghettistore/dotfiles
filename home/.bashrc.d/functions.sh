@@ -206,7 +206,7 @@ fdi() {
                 $TMUX_DIR_SCRIPT -p -- {}
             fi
         )+abort"
-        --bind "ctrl-x:execute(xdg-open -- {})+abort"
+        --bind "ctrl-x:execute(xdg-open {})+abort"
     )
     local FZF_HEADER=(
         "C-e EDITOR"
