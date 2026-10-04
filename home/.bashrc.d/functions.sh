@@ -189,21 +189,21 @@ fdi() {
             if [[ -f {} ]]; then
                 $TMUX_FILE_SCRIPT -o goto -- {}
             elif [[ -d {} ]]; then
-                $TMUX_DIR_SCRIPT -s -- {}
+                $TMUX_DIR_SCRIPT -s -- $(realpath -- {})
             fi
         )+abort"
         --bind "ctrl-t:execute(
             if [[ -f {} ]]; then
                 $TMUX_FILE_SCRIPT -o window -- {}
             elif [[ -d {} ]]; then
-                $TMUX_DIR_SCRIPT -w -- {}
+                $TMUX_DIR_SCRIPT -w -- $(realpath -- {})
             fi
         )+abort"
         --bind "ctrl-v:execute(
             if [[ -f {} ]]; then
                 $TMUX_FILE_SCRIPT -o pane -- {}
             elif [[ -d {} ]]; then
-                $TMUX_DIR_SCRIPT -p -- {}
+                $TMUX_DIR_SCRIPT -p -- $(realpath -- {})
             fi
         )+abort"
         --bind "ctrl-x:execute(xdg-open {})+abort"
