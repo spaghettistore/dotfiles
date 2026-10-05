@@ -34,7 +34,7 @@ return {
               "gitcommit", "gitignore", "html", "ini", "javascript", "json",
               "lua", "markdown", "markdown_inline", "python", "query",
               "rasi", "readline", "ssh_config", "toml", "vim",
-              "vimdoc", "xml"
+              "vimdoc", "xml", "rust"
           }
           local alreadyInstalled = require('nvim-treesitter.config').get_installed()
           local parsersToInstall = vim.iter(ensureInstalled)
