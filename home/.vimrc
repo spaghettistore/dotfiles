@@ -87,7 +87,7 @@ set splitright
 " -----------
 set cursorline
 "set cursorcolumn
-set colorcolumn=80
+"set colorcolumn=80
 "set colorcolumn=80,120
 
 " Not sure what this even does
