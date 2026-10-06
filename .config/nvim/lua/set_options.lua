@@ -81,7 +81,7 @@ vim.opt.splitright = true
 -- -----------
 vim.opt.cursorline = true
 --vim.opt.cursorcolumn = false
-vim.opt.colorcolumn = {80}
+--vim.opt.colorcolumn = {80}
 --vim.opt.colorcolumn = {80, 120}
 
 -- Netrw
