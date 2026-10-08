@@ -181,6 +181,7 @@ fdi() {
     local TMUX_FILE_SCRIPT="$HOME/files/resources/dotfiles/.config/tmux/tmux_fzf_file_picker.sh"
     local FDFIND_FLAGS=(
         --color always
+        --follow  # Follow symlinks
     )
     local FZF_KEYBINDS=(
         --bind "enter:execute([[ -f {} ]] && $EDITOR -- {})+accept"
