@@ -1,0 +1,113 @@
+# Make yazi quit without changing terminal's directory by default
+# Swap the default `q` with `Q` so we don't change terminal's directory
+[[mgr.prepend_keymap]]
+on = "q"
+run = "quit --no-cwd-file"
+desc = "Quit without outputting cwd-file"
+# Swap the default `Q` with `q` so we do change terminal's directory
+[[mgr.prepend_keymap]]
+on = "Q"
+run = "quit"
+desc = "Quit the process"
+# Make ctrl+c quit without changing terminal's directory
+[[mgr.prepend_keymap]]
+on = "<C-c>"
+run = "close --no-cwd-file"
+desc = "Close the current tab, or quit if it's last"
+
+# Bookmarks / jump to directory
+# -----------------------------
+[[mgr.prepend_keymap]]
+on = [ "g", "/" ]
+run = "cd /"
+desc = "Go to /"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "a" ]
+run = "cd ~/files/archive"
+desc = "Go to Archive"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "B" ]
+run = "cd ~/.local/bin"
+desc = "Go to Bin"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "c" ]
+run = "cd ~/files/resources/code"
+desc = "Go to Code"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "C" ]
+run = "cd ~/.config"
+desc = "Go to Config"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "d" ]
+run = "cd ~/files/resources/dotfiles"
+desc = "Go to Downloads"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "D" ]
+run = "cd ~/Downloads"
+desc = "Go to Downloads"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "f" ]
+run = "cd ~/files"
+desc = "Go to Files"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "F" ]
+run = "cd ~/.var/app"
+desc = "Go to Flatpak"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "h" ]
+run = "cd ~"
+desc = "Go to Home"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "i" ]
+run = "cd ~/files/inbox"
+desc = "Go to Inbox"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "m" ]
+run = "cd ~/media"
+desc = "Go to Media"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "M" ]
+run = "cd ~/media/music"
+desc = "Go to Music"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "p" ]
+run = "cd ~/files/projects"
+desc = "Go to Projects"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "P" ]
+run = "cd ~/media/pictures"
+desc = "Go to Pictures"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "r" ]
+run = "cd ~/files/resources"
+desc = "Go to Resources"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "R" ]
+run = "cd ~/media/roms"
+desc = "Go to Roms"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "u" ]
+run = "cd /media/$USER/usb_device"
+desc = "Go to USB"
+
+[[mgr.prepend_keymap]]
+on = [ "'", "V" ]
+run = "cd ~/media/videos"
+desc = "Go to Videos"
