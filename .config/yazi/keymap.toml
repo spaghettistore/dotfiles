@@ -1,4 +1,18 @@
+# Swap default `d` and `x`, making `d` cut and `x` send to trash
+# --------------------------------------------------------------
+# Make `d` cut
+[[mgr.prepend_keymap]]
+on = "d"
+run = "yank --cut"
+desc = "Yank selected files (cut)"
+# Make `x` delete / send to trash
+[[mgr.prepend_keymap]]
+on = "x"
+run = "remove"
+desc = "Trash selected files"
+
 # Make yazi quit without changing terminal's directory by default
+# ---------------------------------------------------------------
 # Swap the default `q` with `Q` so we don't change terminal's directory
 [[mgr.prepend_keymap]]
 on = "q"
