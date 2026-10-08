@@ -18,7 +18,7 @@ set showmode
 " Enable use of mouse
 set mouse=a
 " Do not let cursor scroll below or above N number of lines when scrolling
-set scrolloff=8
+set scrolloff=5
 set nowrap
 
 " Change cursor when in insert mode (like in nvim), (note there is a small

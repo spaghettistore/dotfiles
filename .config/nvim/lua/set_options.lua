@@ -13,8 +13,8 @@ vim.opt.showmode = true
 -- Enable use of mouse
 vim.opt.mouse = 'a'
 -- Do not let cursor scroll below or above N number of lines when scrolling
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 8
+vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 5
 vim.opt.wrap = false
 -- Border for diagnostics and hover info
 --vim.opt.winborder = "rounded"
