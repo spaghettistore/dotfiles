@@ -6,3 +6,6 @@ y() {
     [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
     command rm -f -- "$tmp"
 }
+
+alias e="y"
+alias f="y"

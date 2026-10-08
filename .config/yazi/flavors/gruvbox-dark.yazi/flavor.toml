@@ -10,18 +10,18 @@ find_keyword  = { fg = "#b8bb26", bold = true, italic = true, underline = true }
 find_position = { fg = "#fe8019", bg = "reset", bold = true, italic = true }
 
 # Symlink
-symlink_target = { italic = true }
+symlink_target = { fg = "cyan", italic = true }
 
 # Marker
 marker_copied   = { fg = "#8ec07c", bg = "#8ec07c" }
-marker_cut      = { fg = "#d3869b", bg = "#d3869b" }
+marker_cut      = { fg = "red", bg = "red" }
 marker_marked   = { fg = "#83a598", bg = "#83a598" }
-marker_selected = { fg = "#fbf1c7", bg = "#fbf1c7" }
+marker_selected = { fg = "yellow", bg = "yellow" }
 
 # Count
 count_copied   = { fg = "#282828", bg = "#8ec07c" }
-count_cut      = { fg = "#282828", bg = "#d3869b" }
-count_selected = { fg = "#282828", bg = "#fbf1c7" }
+count_cut      = { fg = "#282828", bg = "red" }
+count_selected = { fg = "#282828", bg = "yellow" }
 
 # Border
 border_symbol = "│"
@@ -49,11 +49,11 @@ normal_main = { fg = "#282828", bg = "#a89984", bold = true }
 normal_alt  = { fg = "#a89984", bg = "#504945" }
 
 # Select mode
-select_main = { fg = "#282828", bg = "#fe8019", bold = true }
+select_main = { fg = "#282828", bg = "yellow", bold = true }
 select_alt  = { fg = "#a89984", bg = "#504945" }
 
 # Unset mode
-unset_main = { fg = "#282828", bg = "#b8bb26", bold = true }
+unset_main = { fg = "#282828", bg = "red", bold = true }
 unset_alt  = { fg = "#a89984", bg = "#504945" }
 
 # : }}}
@@ -65,7 +65,8 @@ unset_alt  = { fg = "#a89984", bg = "#504945" }
 parent  = { reversed = true }
 current = { reversed = true }
 preview = { underline = true }
-padding = { open = "█", close = "█" }
+#padding = { open = "█", close = "█" }
+padding = { open = "", close = "" }  # Rounded corners
 
 # : }}}
 
@@ -74,8 +75,10 @@ padding = { open = "█", close = "█" }
 
 [status]
 overall = { }
-sep_left = { open = "\ue0be", close = "\ue0b8" }
-sep_right = { open = "\ue0be", close = "\ue0b8" }
+#sep_left = { open = "\ue0be", close = "\ue0b8" }  # Rhombus corners
+#sep_right = { open = "\ue0be", close = "\ue0b8" }
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
 # Permissions
 perm_sep   = { fg = "#665c54" }
 perm_type  = { fg = "#504945" }
@@ -108,11 +111,11 @@ separator_style = { fg = "#504945" }
 # : Confirmation {{{
 
 [confirm]
-border     = { fg = "#a89984" }
+border     = { fg = "#665c54" }
 title      = { fg = "#83a598" }
 body       = { fg = "#fbf1c7" }
 list       = { fg = "#ebdbb2" }
-btn_yes    = { reversed = true, fg = "#ebdbb2" }
+btn_yes    = { reversed = true, fg = "cyan" }
 btn_no     = {}
 btn_labels = [ "  [Y]es  ", "  (N)o  " ]
 
@@ -136,8 +139,8 @@ tbl_cell = { fg = "#fabd2f", reversed = true }
 
 [notify]
 title_info  = { fg = "#8ec07c" }
-title_warn  = { fg = "#fbf1c7" }
-title_error = { fg = "#d3869b" }
+title_warn  = { fg = "yellow" }
+title_error = { fg = "red" }
 
 # : }}}
 
@@ -155,7 +158,7 @@ inactive = {}
 # : Input {{{
 
 [input]
-border   = { fg = "#ebdbb2" }
+border   = { fg = "cyan" }
 title    = {}
 value    = {}
 selected = { reversed = true }
@@ -213,7 +216,7 @@ rules = [
 
   # Fallback
   { url = "*", fg = "#ebdbb2" },
-  { url = "*/", fg = "#83a598" },
+  { url = "*/", fg = "blue" },
 ]
 
 # : }}}
