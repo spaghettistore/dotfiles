@@ -8,4 +8,3 @@ y() {
 }
 
 alias e="y"
-alias f="y"
