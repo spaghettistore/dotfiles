@@ -154,6 +154,26 @@ cu() {
 }
 
 
+# l - interactive ls using fzf and eza
+# Dependencies:
+#   eza
+#   fzf
+l() {
+    local response
+    response="$(eza --icons always --color always | fzf --ansi)"
+    [[ -n "$response" ]] || return 1
+
+    # Strip the first two chars, icon and space
+    response="${response:2}"
+
+    if [[ -f "$response" ]]; then
+        $EDITOR "$response"
+    elif [[ -d "$response" ]]; then
+        cd "$response" || return 1
+    fi
+}
+
+
 # fdi - passes args and flags to fdfind and pipes output into fzf
 # Dependencies:
 #   fdfind
