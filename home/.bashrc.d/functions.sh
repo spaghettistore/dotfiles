@@ -108,22 +108,6 @@ fzed() {
 }
 
 
-fzls() {
-    local selected
-    selected="$(find . -maxdepth 1 \
-        | fzf --preview "if [[ -f {} ]]; then cat {}; else ls {}; fi")"
-
-    [[ -z "$selected" ]] && return 1
-
-    if [[ -d "$selected" ]]; then
-        cd "$selected" || return 1
-    elif [[ -f "$selected" ]]; then
-        [[ -e "$HOME/.local/bin/open_thing.sh" ]] \
-            && "$HOME"/.local/bin/open_thing.sh "$selected"
-    fi
-}
-
-
 goto() {
     local target
 
