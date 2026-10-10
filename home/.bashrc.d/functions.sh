@@ -223,7 +223,7 @@ fdi() {
     local FZF_PREVIEW="if [[ -f {} ]]; then
                            batcat -n --theme=gruvbox-dark --color=always -- {}
                        elif [[ -d {} ]]; then
-                           eza --icons always --color always -- {}
+                           eza --icons always --color always --oneline -- {}
                        fi"
     local FZF_FLAGS=(
         --ansi
