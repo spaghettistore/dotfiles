@@ -28,13 +28,9 @@ for session in $list_of_sessions; do
         clean_window="${window%-}"
         clean_window="${clean_window%\*}"
 
-        # Filter out windows named 'bash' to only show active windows
-        if ! echo "$clean_window" | grep -q "bash$"; then
-            [[ "${clean_list[*]}" ]] &&
-                clean_list+="
+        [[ "${clean_list[*]}" ]] && clean_list+="
 "
-            clean_list+="$session:$clean_window"
-        fi
+        clean_list+="$session:$clean_window"
     done
 done
 
