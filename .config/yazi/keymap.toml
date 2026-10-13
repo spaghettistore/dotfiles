@@ -1,3 +1,8 @@
+[[mgr.prepend_keymap]]
+on = ["g", "s"]
+run = 'search --via=fd --args="-u"'
+desc = "Search all unfiltered files with fd -u"
+
 # Swap default `d` and `x`, making `d` cut and `x` send to trash
 # --------------------------------------------------------------
 # Make `d` cut
