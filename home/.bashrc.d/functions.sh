@@ -154,11 +154,11 @@ cu() {
 }
 
 
-# l - interactive ls using fzf and eza
+# li - interactive ls using fzf and eza
 # Dependencies:
 #   eza
 #   fzf
-l() {
+li() {
     local response
     response="$(eza --icons always --color always | fzf --ansi)"
     [[ -n "$response" ]] || return 1
