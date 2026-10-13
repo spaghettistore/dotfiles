@@ -9,7 +9,7 @@ set $mod Mod4
 ### Application Preferences
 set $term kitty
 set $browser firefox
-set $file_manager ranger
+set $file_manager yazi
 set $calculator speedcrunch
 bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 

@@ -25,7 +25,7 @@ set $super Mod4
 # Application Prefrences
 set $terminal kitty
 set $browser firefox
-set $file_manager ranger
+set $file_manager yazi
 set $application_menu pkill rofi || rofi -i -show drun -show-icons
 
 # --------------
