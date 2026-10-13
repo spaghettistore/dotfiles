@@ -127,8 +127,8 @@
         <string>comment, comment text, markup.strikethrough, punctuation.definition.comment, punctuation.whitespace.comment, string.comment, text.cancelled</string>
         <key>settings</key>
         <dict>
-          <key>fontStyle</key>
-          <string>italic</string>
+          <!-- <key>fontStyle</key> -->
+          <!-- <string>italic</string> -->
           <key>foreground</key>
           <string>#928374</string>
         </dict>
