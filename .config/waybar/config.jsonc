@@ -60,7 +60,7 @@
         "timezone": "Europe/London",
         "tooltip-format": "<big>{:%a %d %b  (#%V)}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%H:%M}",
-        "on-click": "alacritty -e calcurse"
+        "on-click": "kitty -e calcurse"
     },
     "tray": {
         "icon-size": 21,
@@ -181,7 +181,7 @@
         "tooltip-format": "MPD (connected)",
         "tooltip-format": "Artist: {artist}\nTitle: {title}\nAlbum: {album}\n({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}%",
         "tooltip-format-disconnected": "MPD (disconnected)",
-        "on-click": "alacritty -e ncmpcpp"
+        "on-click": "kitty -e ncmpcpp"
     },
     "custom/appmenu": {
         "format": "",

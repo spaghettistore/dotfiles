@@ -2,7 +2,7 @@
 
 # Required packages: i3 rofi nmtui fonts-font-awesome
 
-terminal="alacritty"
+terminal="kitty"
 
 get_confirmation() {
     local prompt="$1"

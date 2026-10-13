@@ -7,7 +7,7 @@
 set $mod Mod4
 
 ### Application Preferences
-set $term alacritty
+set $term kitty
 set $browser firefox
 set $file_manager ranger
 set $calculator speedcrunch
