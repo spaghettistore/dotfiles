@@ -1,0 +1,2 @@
+import subprocess
+Sheet.addCommand('go', 'open-url-in-browser', 'subprocess.run(["xdg-open", sheet.cursorDisplay])')
