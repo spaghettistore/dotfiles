@@ -157,10 +157,12 @@ cu() {
 # li - passes args and flags to eza and pipes output to fzf
 #
 # (note that `-R` won't work properly, use `fdi` for that)
+# (also symlinks will not work)
 #
 # Dependencies:
 #   eza
 #   fzf
+#   batcat
 li() {
     local FZF_PREVIEW='path={}
                        path="${path:2}"
