@@ -159,8 +159,17 @@ cu() {
 #   eza
 #   fzf
 li() {
+    local FZF_PREVIEW='path={}
+                       path="${path:2}"
+                       if [[ -f "$path" ]]; then
+                           batcat --color=always --number -- "$path"
+                       else
+                           eza --icons always --color always -1 -- "$path"
+                       fi'
     local response
-    response="$(eza --icons always --color always | fzf --ansi)"
+    response="$(eza --icons always --color always \
+        | fzf --ansi --preview "$FZF_PREVIEW"
+    )"
     [[ -n "$response" ]] || return 1
 
     # Strip the first two chars, icon and space
