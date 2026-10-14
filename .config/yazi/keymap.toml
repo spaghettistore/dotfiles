@@ -1,3 +1,16 @@
+# Open hovered file with a shell command entered in prompt
+# --------------------------------------------------------
+# `%h`       is the currently hovered filename, we append that to the end to avoid typing it
+# `--block`  acts as yazi default keybind `:`, without `--block` acts as `;`
+[[mgr.prepend_keymap]]
+on = ["g", ";"]
+run = "shell ' %h' --interactive --cursor=0"
+desc = "Run a shell command on hovered file"
+[[mgr.prepend_keymap]]
+on = ["g", ":"]
+run = "shell ' %h' --block --interactive --cursor=0"
+desc = "Run a shell command on hovered file (block until finishes)"
+
 # Unfiltered searching
 # --------------------
 # Unfiltered rg
