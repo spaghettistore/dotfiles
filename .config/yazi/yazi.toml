@@ -1,7 +1,8 @@
-# Custom open selected files interactively menu for images
+# Custom open selected files interactively menu
+
 [opener]
-image_viewer = [
-  { run = 'imv-wayland %s', orphan = true, desc = "Image viewer", for = "linux" },
+view_image_imv = [
+  { run = 'imv-wayland %s', orphan = true, desc = "View image with imv-wayland", for = "linux" },
 ]
 edit_image_krita = [
   { run = 'krita %s', orphan = true, desc = "Edit with Krita", for = "linux" },
@@ -9,7 +10,20 @@ edit_image_krita = [
 edit_image_gimp = [
   { run = 'gimp %s', orphan = true, desc = "Edit with GIMP", for = "linux" },
 ]
+# This mpv flag means that songs without art won't play as background process, but open gui instead
+play_with_mpv = [
+  { run = 'mpv --player-operation-mode=pseudo-gui %s', orphan = true, desc = "Play with mpv", for = "linux" },
+]
+play_with_vlc = [
+  { run = 'vlc %s', orphan = true, desc = "Play with VLC", for = "linux" },
+]
+
 [open]
 prepend_rules = [
-  { mime = "image/*", use = [ "open", "image_viewer", "edit_image_krita", "edit_image_gimp" ] },
+  { mime = "audio/*", use = [ "play", "play_with_mpv", "play_with_vlc", "reveal" ]},
+  { mime = "image/*", use = [ "open", "view_image_imv", "edit_image_krita", "edit_image_gimp", "reveal" ] },
+  { mime = "video/*", use = [ "play", "play_with_mpv", "play_with_vlc", "reveal" ]},
+  { url = "*.kra",    use = [ "edit_image_krita", "reveal" ]},
+  { url = "*.m3u",    use = [ "edit", "play_with_mpv", "play_with_vlc", "reveal" ]},
+  { url = "*.wma",    use = [ "play", "play_with_mpv", "play_with_vlc", "reveal" ]}
 ]
