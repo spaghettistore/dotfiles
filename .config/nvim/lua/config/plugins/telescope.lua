@@ -75,6 +75,7 @@ return {
             vim.keymap.set("n", "<leader>sd", require('telescope.builtin').diagnostics, {desc = ":Telescope diagnostics"})
             vim.keymap.set("n", "<leader>sq", require('telescope.builtin').quickfix, {desc = ":Telescope quickfix"})
             vim.keymap.set("n", "<leader>sc", require('telescope.builtin').quickfix, {desc = ":Telescope quickfix"})
+            vim.keymap.set("n", "<leader>cl", require('telescope.builtin').quickfix, {desc = ":Telescope quickfix"})
             vim.keymap.set("n", "<leader>sl", require('telescope.builtin').loclist, {desc = ":Telescope loclist"})
             vim.keymap.set("n", "<leader>sj", require('telescope.builtin').jumplist, {desc = ":Telescope jumplist"})
             vim.keymap.set("n", "<leader>s\"", require('telescope.builtin').registers, {desc = ":Telescope registers"})
