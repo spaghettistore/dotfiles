@@ -154,7 +154,10 @@ cu() {
 }
 
 
-# li - interactive ls using fzf and eza
+# li - passes args and flags to eza and pipes output to fzf
+#
+# (note that `-R` won't work properly, use `fdi` for that)
+#
 # Dependencies:
 #   eza
 #   fzf
@@ -167,7 +170,9 @@ li() {
                            eza --icons always --color always -1 -- "$path"
                        fi'
     local response
-    response="$(eza --icons always --color always \
+    # We must use the `--oneline` flag at the end to not allow user to use `-l`
+    # and mess up expected format. Unfortunately, `-R` will still mess things up.
+    response="$(eza --icons always --color always "$@" --oneline \
         | fzf --ansi --preview "$FZF_PREVIEW"
     )"
     [[ -n "$response" ]] || return 1
