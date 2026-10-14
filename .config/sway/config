@@ -23,7 +23,7 @@ include /etc/sway/config-vars.d/*
 set $super Mod4
 
 # Application Prefrences
-set $terminal kitty
+set $terminal kitty --title kitty
 set $browser firefox
 set $file_manager yazi
 set $application_menu pkill rofi || rofi -i -show drun -show-icons
