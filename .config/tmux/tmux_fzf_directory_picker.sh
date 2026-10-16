@@ -15,7 +15,7 @@ main() {
             "$HOME/files/inbox"
             "$HOME/files/projects"
             "$HOME/files/resources"
-            "$HOME/files/archive"
+            #"$HOME/files/archive"
             "$HOME/files/resources/code"
             "$HOME/files/resources/code/scripts"
             "$HOME/media"
@@ -29,7 +29,8 @@ main() {
 
         # We do this as we want to; add ~/Downloads, but we want ~/files to be
         # at the top of the list
-        local sorted_files="$(printf -- '%s\n' "${files[@]}" | sort)"
+        local sorted_files
+        sorted_files="$(printf -- '%s\n' "${files[@]}" | sort)"
         sorted_files=("files" "${sorted_files[@]}" "Downloads")
 
         local fzf_binds=(
