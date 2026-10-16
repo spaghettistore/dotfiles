@@ -1,2 +1,25 @@
-import subprocess
-Sheet.addCommand('go', 'open-url-in-browser', 'subprocess.run(["xdg-open", sheet.cursorDisplay])')
+# Options
+# -------
+
+# Scroll off
+options.disp_scroll_context = 5
+
+# Keybinds
+# --------
+
+# Example adding your own command
+#import subprocess
+#Sheet.addCommand('go', 'open-with-xdg-open', 'subprocess.run(["xdg-open", sheet.cursorDisplay])', 'Open the current cell with xdg-open')
+
+# Swap default 'd' and 'x' so that 'd' is cut and 'x' is delete
+TableSheet.unbindkey('d')
+TableSheet.unbindkey('x')
+TableSheet.bindkey('d', 'cut-row')
+TableSheet.bindkey('x', 'delete-row')
+
+TableSheet.bindkey('go', 'open-url')
+
+TableSheet.bindkey('Ctrl+U', 'go-pageup')
+# Note that this removes default 'Ctrl+D'='save-cmdlog'
+TableSheet.unbindkey('Ctrl+D')
+TableSheet.bindkey('Ctrl+D', 'go-pagedown')
