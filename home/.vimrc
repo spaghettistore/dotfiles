@@ -117,6 +117,18 @@ hi Comment gui=ITALIC
 " ----------
 let mapleader = "\<Space>"
 
+
+" Markdown Tasks
+" --------------
+noremap <Leader>ti i- [ ] 
+noremap <Leader>to o- [ ] 
+noremap <Leader>tO O- [ ] 
+" Need to use `:` instead of `<cmd>` for visual multi-line to work
+noremap <Leader>td :s/^- \[ \]/- \[x\]/<CR>
+vnoremap <Leader>td :s/^- \[ \]/- \[x\]/<CR>
+noremap <Leader>tu :s/^- \[x\]/- \[ \]/<CR>
+vnoremap <Leader>tu :s/^- \[x\]/- \[ \]/<CR>
+
 " Marks
 " -----
 noremap <Leader>'h <cmd>edit ~/.bash_history<CR>

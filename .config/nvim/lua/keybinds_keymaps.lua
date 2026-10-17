@@ -2,9 +2,19 @@
 -- Keybinds
 -- ########
 
+
 -- Leader Key
 -- ----------
 vim.g.mapleader = " "
+
+-- Markdown Tasks
+-- --------------
+vim.keymap.set("n", "<Leader>ti", "i- [ ] ")
+vim.keymap.set("n", "<Leader>to", "o- [ ] ")
+vim.keymap.set("n", "<Leader>tO", "O- [ ] ")
+-- Need to use `:` instead of `<cmd>` for visual multi-line to work, `\\` is to escape the `\` to send a `\` 
+vim.keymap.set({"n", "v"}, "<Leader>td", ":s/^- \\[ \\]/- \\[x\\]/<CR>")
+vim.keymap.set({"n", "v"}, "<Leader>tu", ":s/^- \\[x\\]/- \\[ \\]/<CR>")
 
 -- Marks
 -- -----
