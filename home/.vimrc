@@ -120,10 +120,18 @@ let mapleader = "\<Space>"
 
 " Markdown Tasks
 " --------------
+" Need to use `:` instead of `<cmd>` for visual multi-line to work
+
+" Insert new task
 noremap <Leader>ti i- [ ] 
 noremap <Leader>to o- [ ] 
 noremap <Leader>tO O- [ ] 
-" Need to use `:` instead of `<cmd>` for visual multi-line to work
+
+" Add task prefix to line(s)
+noremap <Leader>ta :s/^\(- \[ \] \)\?/- \[ \] /<CR>
+vnoremap <Leader>ta :s/^\(- \[ \] \)\?/- \[ \] /<CR>
+
+" Mark task as done / not done
 noremap <Leader>td :s/^- \[ \]/- \[x\]/<CR>
 vnoremap <Leader>td :s/^- \[ \]/- \[x\]/<CR>
 noremap <Leader>tu :s/^- \[x\]/- \[ \]/<CR>

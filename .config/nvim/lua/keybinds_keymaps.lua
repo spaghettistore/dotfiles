@@ -9,10 +9,18 @@ vim.g.mapleader = " "
 
 -- Markdown Tasks
 -- --------------
+-- Need to use `:` instead of `<cmd>` for visual multi-line to work
+-- Nvim needs `\\` is to escape the `\` to send a `\`
+
+-- Insert new task
 vim.keymap.set("n", "<Leader>ti", "i- [ ] ")
 vim.keymap.set("n", "<Leader>to", "o- [ ] ")
 vim.keymap.set("n", "<Leader>tO", "O- [ ] ")
--- Need to use `:` instead of `<cmd>` for visual multi-line to work, `\\` is to escape the `\` to send a `\` 
+
+-- Add task prefix to line(s)
+vim.keymap.set({"n", "v"}, "<Leader>ta", ":s/^\\(- \\[ \\] \\)\\?/- \\[ \\] /<CR>")
+
+-- Mark task as done / not done
 vim.keymap.set({"n", "v"}, "<Leader>td", ":s/^- \\[ \\]/- \\[x\\]/<CR>")
 vim.keymap.set({"n", "v"}, "<Leader>tu", ":s/^- \\[x\\]/- \\[ \\]/<CR>")
 
