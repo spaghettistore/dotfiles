@@ -27,3 +27,6 @@ prepend_rules = [
   { url = "*.m3u",    use = [ "edit", "play_with_mpv", "play_with_vlc", "reveal" ]},
   { url = "*.wma",    use = [ "play", "play_with_mpv", "play_with_vlc", "reveal" ]}
 ]
+
+#[mgr]
+#ratio = [1, 4, 3]  # Default
