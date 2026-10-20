@@ -197,6 +197,27 @@ li() {
 #   batcat
 #   eza
 fdi() {
+    # Due to different distros calling these commands differently, me must
+    # check for bat/batcat and fd/fdfind
+    local bat_command
+    if command -v 'batcat' &>/dev/null; then
+        bat_command='batcat'
+    elif command -v 'bat' &>/dev/null; then
+        bat_command='bat'
+    else
+        echo "fdi: error: batcat is not installed" >&2
+        return 1
+    fi
+    local fd_command
+    if command -v 'fdfind' &>/dev/null; then
+        fd_command='fdfind'
+    elif command -v 'fd' &>/dev/null; then
+        fd_command='fd'
+    else
+        echo "fdi: error: fdfind is not installed" >&2
+        return 1
+    fi
+
     local TMUX_DIR_SCRIPT="$HOME/files/resources/dotfiles/.config/tmux/tmux_directory_opener.sh"
     local TMUX_FILE_SCRIPT="$HOME/files/resources/dotfiles/.config/tmux/tmux_fzf_file_picker.sh"
     local FDFIND_FLAGS=(
@@ -237,7 +258,7 @@ fdi() {
         "C-x xdg-open"
     )
     local FZF_PREVIEW="if [[ -f {} ]]; then
-                           batcat -n --theme=gruvbox-dark --color=always -- {}
+                           $bat_command -n --theme=gruvbox-dark --color=always -- {}
                        elif [[ -d {} ]]; then
                            eza --icons always --color always --oneline -- {}
                        fi"
@@ -250,6 +271,6 @@ fdi() {
     )
 
     local directory
-    directory="$(fdfind "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")"
+    directory="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")"
     [[ -d "$directory" ]] && cd "$directory" || return 1
 }
