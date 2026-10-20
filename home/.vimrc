@@ -128,14 +128,14 @@ noremap <Leader>to o- [ ]
 noremap <Leader>tO O- [ ] 
 
 " Add task prefix to line(s)
-noremap <Leader>ta :s/^\(- \[ \] \)\?/- \[ \] /<CR>
-vnoremap <Leader>ta :s/^\(- \[ \] \)\?/- \[ \] /<CR>
+noremap <Leader>ta :norm I- [ ] <CR>
+vnoremap <Leader>ta :norm I- [ ] <CR>
 
 " Mark task as done / not done
-noremap <Leader>td :s/^- \[ \]/- \[x\]/<CR>
-vnoremap <Leader>td :s/^- \[ \]/- \[x\]/<CR>
-noremap <Leader>tu :s/^- \[x\]/- \[ \]/<CR>
-vnoremap <Leader>tu :s/^- \[x\]/- \[ \]/<CR>
+noremap <Leader>td :s/^\(\s*-\s*\)\[ \]/\1[x]/<CR>
+vnoremap <Leader>td :s/^\(\s*-\s*\)\[ \]/\1[x]/<CR>
+noremap <Leader>tu :s/^\(\s*-\s*\)\[x\]/\1[ ]/<CR>
+vnoremap <Leader>tu :s/^\(\s*-\s*\)\[x\]/\1[ ]/<CR>
 
 " Marks
 " -----

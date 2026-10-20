@@ -18,11 +18,11 @@ vim.keymap.set("n", "<Leader>to", "o- [ ] ")
 vim.keymap.set("n", "<Leader>tO", "O- [ ] ")
 
 -- Add task prefix to line(s)
-vim.keymap.set({"n", "v"}, "<Leader>ta", ":s/^\\(- \\[ \\] \\)\\?/- \\[ \\] /<CR>")
+vim.keymap.set({"n", "v"}, "<Leader>ta", ":norm I- [ ] <CR>")
 
 -- Mark task as done / not done
-vim.keymap.set({"n", "v"}, "<Leader>td", ":s/^- \\[ \\]/- \\[x\\]/<CR>")
-vim.keymap.set({"n", "v"}, "<Leader>tu", ":s/^- \\[x\\]/- \\[ \\]/<CR>")
+vim.keymap.set({"n", "v"}, "<Leader>td", ":s/^\\(\\s*-\\s*\\)\\[ \\]/\\1[x]/<CR>")
+vim.keymap.set({"n", "v"}, "<Leader>tu", ":s/^\\(\\s*-\\s*\\)\\[x\\]/\\1[ ]/<CR>")
 
 -- Marks
 -- -----
