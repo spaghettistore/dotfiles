@@ -308,7 +308,6 @@ bindsym $super+ctrl+a exec pavucontrol
 bindsym $super+ctrl+w exec pkill rofi || ~/.config/sway/wifi_menu_dmenu.py -m rofi
 bindsym $super+ctrl+t exec $terminal -e btop
 bindsym $super+ctrl+l exec systemctl suspend && swaylock
-bindsym $super+Shift+x exec systemctl suspend && swaylock
 bindsym $super+ctrl+n exec swaync-client -t -sw
 
 # Applications
