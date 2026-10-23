@@ -20,12 +20,12 @@ play_with_vlc = [
 
 [open]
 prepend_rules = [
-  { mime = "audio/*", use = [ "play", "play_with_mpv", "play_with_vlc", "reveal" ]},
+  { mime = "audio/*", use = [ "play", "play_with_vlc", "reveal" ]},
   { mime = "image/*", use = [ "open", "view_image_imv", "edit_image_krita", "edit_image_gimp", "reveal" ] },
-  { mime = "video/*", use = [ "play", "play_with_mpv", "play_with_vlc", "reveal" ]},
+  { mime = "video/*", use = [ "play", "play_with_vlc", "play_with_mpv", "reveal" ]},
   { url = "*.kra",    use = [ "edit_image_krita", "reveal" ]},
-  { url = "*.m3u",    use = [ "edit", "play_with_mpv", "play_with_vlc", "reveal" ]},
-  { url = "*.wma",    use = [ "play", "play_with_mpv", "play_with_vlc", "reveal" ]}
+  { url = "*.m3u",    use = [ "edit", "play_with_vlc", "play_with_mpv", "reveal" ]},
+  { url = "*.wma",    use = [ "play", "play_with_vlc", "play_with_mpv", "reveal" ]}
 ]
 
 #[mgr]
