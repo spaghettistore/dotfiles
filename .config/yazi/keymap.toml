@@ -41,6 +41,13 @@ on = "x"
 run = "remove"
 desc = "Trash selected files"
 
+# Make `u` unyank / cancel the yank or cut status
+# -----------------------------------------------
+[[mgr.prepend_keymap]]
+on = "u"
+run = "unyank"
+desc = "Cancel the yank status"
+
 # Make yazi quit without changing terminal's directory by default
 # ---------------------------------------------------------------
 # Swap the default `q` with `Q` so we don't change terminal's directory
