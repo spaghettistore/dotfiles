@@ -3,6 +3,7 @@
 
 # Scroll off
 options.disp_scroll_context = 5
+options.color_current_col = "bold on black"
 
 # Keybinds
 # --------
