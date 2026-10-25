@@ -1,11 +1,13 @@
 # Open selected file(s) with a shell command entered in prompt
 # ------------------------------------------------------------
 # `%s`       is the paths of all selected files, we append that to the end to avoid typing it
-# `--block`  acts as yazi default keybind `:`, without `--block` acts as `;`
+# `--block`  acts as yazi default keybind `:` (for if you need to see the output), without `--block` acts as `;`
+
 [[mgr.prepend_keymap]]
 on = ["g", ";"]
 run = "shell ' %s' --interactive --cursor=0"
 desc = "Run a shell command on hovered file"
+
 [[mgr.prepend_keymap]]
 on = ["g", ":"]
 run = "shell ' %s' --block --interactive --cursor=0"
@@ -13,15 +15,17 @@ desc = "Run a shell command on hovered file (block until finishes)"
 
 # Unfiltered searching
 # --------------------
+
 # Unfiltered rg
-[[mgr.prepend_keymap]]
-on = ["g", "S"]
 # rg flags:
 #   -u   is equivalent to --no-ignore.
 #   -uu  is equivalent to --no-ignore --hidden.
 #   -uuu is equivalent to --no-ignore --hidden --binary.
+[[mgr.prepend_keymap]]
+on = ["g", "S"]
 run = 'search --via=rg --args="-uu"'
 desc = "Search all unfiltered files by contents via rg -uu"
+
 # Unfiltered fd
 [[mgr.prepend_keymap]]
 on = ["g", "s"]
@@ -30,11 +34,13 @@ desc = "Search all unfiltered files via fd -u"
 
 # Swap default `d` and `x`, making `d` cut and `x` send to trash
 # --------------------------------------------------------------
+
 # Make `d` cut
 [[mgr.prepend_keymap]]
 on = "d"
 run = "yank --cut"
 desc = "Yank selected files (cut)"
+
 # Make `x` delete / send to trash
 [[mgr.prepend_keymap]]
 on = "x"
@@ -43,6 +49,7 @@ desc = "Trash selected files"
 
 # Make `u` unyank / cancel the yank or cut status
 # -----------------------------------------------
+
 [[mgr.prepend_keymap]]
 on = "u"
 run = "unyank"
@@ -50,17 +57,26 @@ desc = "Cancel the yank status"
 
 # Make yazi quit without changing terminal's directory by default
 # ---------------------------------------------------------------
-# Swap the default `q` with `Q` so we don't change terminal's directory
+
+## Make `q` not change terminal's directory
+#[[mgr.prepend_keymap]]
+#on = "q"
+#run = "quit --no-cwd-file"
+#desc = "Quit without outputting cwd-file"
+
+# Make `q` close tab and quit if last, but don't change terminal's directory
 [[mgr.prepend_keymap]]
 on = "q"
-run = "quit --no-cwd-file"
-desc = "Quit without outputting cwd-file"
-# Swap the default `Q` with `q` so we do change terminal's directory
+run = "close --no-cwd-file"
+desc = "Close the current tab, or quit if it's last"
+
+# Make `Q` change the terminal's directory
 [[mgr.prepend_keymap]]
 on = "Q"
 run = "quit"
 desc = "Quit the process"
-# Make ctrl+c quit without changing terminal's directory
+
+# Make `ctrl+c` quit without changing terminal's directory
 [[mgr.prepend_keymap]]
 on = "<C-c>"
 run = "close --no-cwd-file"
@@ -68,6 +84,7 @@ desc = "Close the current tab, or quit if it's last"
 
 # Bookmarks / jump to directory
 # -----------------------------
+
 [[mgr.prepend_keymap]]
 on = [ "g", "/" ]
 run = "cd /"
