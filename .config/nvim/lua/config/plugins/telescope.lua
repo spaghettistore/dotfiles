@@ -48,7 +48,7 @@ return {
             vim.keymap.set('n', '<leader>sag',
                 function()
                     require("telescope.builtin").live_grep({
-                        additional_args = function() return {"--hidden"} end
+                        additional_args = function() return {"--hidden", "--follow"} end
                     })
                 end,
                 {desc = "Telescope Live Grep hidden=true"})
@@ -56,7 +56,7 @@ return {
             vim.keymap.set('n', '<leader>sa.',
                 function()
                     require("telescope.builtin").live_grep({
-                        additional_args = function() return {"--hidden"} end,
+                        additional_args = function() return {"--hidden", "--follow"} end,
                         cwd="%:h"
                     })
                 end,
