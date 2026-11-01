@@ -234,6 +234,9 @@ fdi() {
                 $TMUX_DIR_SCRIPT -s -- $(realpath -- {})
             fi
         )+abort"
+        # We can't use `read` when calling this function from a keybind, so we must read user input using fzf
+        #--bind 'ctrl-o:execute(read -rp "Open with: " cmd; [[ -n "$cmd" ]] && $cmd {})+abort'  # This won't work when function is called from a keybind
+        --bind 'ctrl-o:execute(cmd="$(: | fzf --disabled --print-query --prompt "Open with: " --header "{}")"; [[ -n "$cmd" ]] && $cmd {})+abort'
         --bind "ctrl-t:execute(
             if [[ -f {} ]]; then
                 $TMUX_FILE_SCRIPT -o window -- {}
@@ -253,6 +256,7 @@ fdi() {
     local FZF_HEADER=(
         "C-e EDITOR"
         "C-g session"
+        "C-o open with"
         "C-t window"
         "C-v pane"
         "C-x xdg-open"
