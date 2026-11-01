@@ -1,42 +1,28 @@
 #!/bin/bash
 
-# This script is intended to be used as a tmux keybind bind. It will provide a
-# fzf list of all windows, excluding the empty terminals that are there to keep
-# the tmux session alive for use with tmux_fzf_directory_picker.sh
-# Use case is for when you have a lot of sessions and want to jump between the open windows
+# Dependencies:
+#   tmux
+#   fzf
 
-if [[ ! "$TMUX" ]]; then
-    #tmux a -t "$selected"
-    echo "Seems to acts strange when used outside tmux. Disabled for now."
-    exit 1
-fi
+[[ ! "$TMUX" ]] && exit 1
 
-list_of_sessions="$(tmux list-sessions | awk '{print $1}' | tr -d ":")"
-#echo "Sessions: '$list_of_sessions'"
+mapfile -t sessions < <(tmux list-sessions | awk '{print $1}' | tr -d ":")
+[[ -z "$sessions" ]] && exit 1
 
-[[ -z "$list_of_sessions" ]] && exit
-
-clean_list=()
-for session in $list_of_sessions; do
-    #echo "Session: '$session'"
-    list_of_windows="$(tmux list-windows -t "$session" | awk '{print $2}')"
-    #echo "Windows: '$list_of_windows'"
-
-    for window in $list_of_windows; do
-
-        # Remove suffix '-' and '*'
-        clean_window="${window%-}"
-        clean_window="${clean_window%\*}"
-
-        [[ "${clean_list[*]}" ]] && clean_list+="
-"
-        clean_list+="$session:$clean_window"
+all_windows=()
+for session in "${sessions[@]}"; do
+    mapfile -t windows < <(tmux list-windows -t "$session" | awk '{print $1$2}')
+    for window in "${windows[@]}"; do
+        # window is: 'index:window name'
+        # Final format will look like: 'session:index:window name'
+        all_windows+=("$session:$window")
     done
 done
 
-selected="$(echo "$clean_list" | fzf)"
+selected="$(printf -- '%s\n' "${all_windows[@]}" | fzf)"
 [[ -z "$selected" ]] && exit 1
 
-if [[ "$TMUX" ]]; then
-    tmux switch-client -t "$selected"
-fi
+# Strip window name and use only 'session:index'
+selected="$(printf -- '%s\n' "$selected" | awk -F ":" '{print $1":"$2}')"
+
+tmux switch-client -t "$selected"
