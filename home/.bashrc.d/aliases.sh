@@ -3,6 +3,7 @@ alias bc="bc -lq"
 alias c="clear"
 alias d="fdi --type d"
 alias f="fdi --type f"
+alias glow='glow --width $COLUMNS --pager'
 alias l="eza --icons auto"
 alias n="\$EDITOR \$HOME/files/inbox/notepad.txt"
 alias tl="tmux ls"
