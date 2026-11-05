@@ -30,4 +30,4 @@ prepend_rules = [
 
 [mgr]
 #ratio = [1, 4, 3]  # Default
-ratio = [1, 4, 4]  # Default
+ratio = [1, 3, 4]  # Default
