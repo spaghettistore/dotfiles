@@ -10,6 +10,8 @@ FZF_CTRL_R_OPTS="
   --header 'Press CTRL-Y to copy command into clipboard'"
 
 # Default fzf options, changing vanity
-export FZF_DEFAULT_OPTS="--color=dark --style=minimal --ansi --layout=reverse"
+export FZF_DEFAULT_OPTS="--color=dark --style=minimal --ansi --layout=reverse --cycle"
+
+export FZF_DEFAULT_COMMAND="fd -HL --color always"
 
 eval "$(fzf --bash)"
