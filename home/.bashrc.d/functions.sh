@@ -278,3 +278,58 @@ fdi() {
     directory="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")"
     [[ -d "$directory" ]] && cd "$directory" || return 1
 }
+
+# Dependencies:
+#   fdfind
+#   fzf
+#   batcat
+#   eza
+g() {
+    # Due to different distros calling these commands differently, me must
+    # check for bat/batcat and fd/fdfind
+    local bat_command
+    if command -v 'batcat' &>/dev/null; then
+        bat_command='batcat'
+    elif command -v 'bat' &>/dev/null; then
+        bat_command='bat'
+    else
+        echo "fdi: error: batcat is not installed" >&2
+        return 1
+    fi
+    local fd_command
+    if command -v 'fdfind' &>/dev/null; then
+        fd_command='fdfind'
+    elif command -v 'fd' &>/dev/null; then
+        fd_command='fd'
+    else
+        echo "fdi: error: fdfind is not installed" >&2
+        return 1
+    fi
+
+    local FDFIND_FLAGS=(
+        --color always
+        --follow  # Follow symlinks
+        --hidden
+    )
+    local FZF_PREVIEW="if [[ -f {} ]]; then
+                           $bat_command -n --theme=gruvbox-dark --color=always -- {}
+                       elif [[ -d {} ]]; then
+                           eza --icons always --color always --oneline -- {}
+                       fi"
+    local FZF_FLAGS=(
+        --ansi
+        --color dark
+        --preview "$FZF_PREVIEW"
+    )
+
+    local file
+    file="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")"
+    if [[ -d "$file" ]]; then
+        directory="$file"
+    elif [[ -f "$file" ]]; then
+        directory="$(dirname -- "$(realpath -- "$file")")"
+    else
+        return 1
+    fi
+    cd "$directory" || return 1
+}
