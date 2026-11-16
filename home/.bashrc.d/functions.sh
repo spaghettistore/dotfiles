@@ -324,6 +324,7 @@ g() {
 
     local file
     file="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")"
+    local directory
     if [[ -d "$file" ]]; then
         directory="$file"
     elif [[ -f "$file" ]]; then
