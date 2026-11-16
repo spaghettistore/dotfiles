@@ -22,47 +22,68 @@ cu() {
 
 # li - passes args and flags to eza and pipes output to fzf
 #
-# (note that `-R` won't work properly, use `fdi` for that)
-# (also symlinks will not work)
-#
 # Dependencies:
-#   eza
 #   fzf
-#   batcat
+# Optional dependencies:
+#   bat / batcat  (will use cat instead)
+#   eza           (will use ls instead)
 li() {
-    local FZF_PREVIEW='path={}
-                       path="${path:2}"
-                       if [[ -f "$path" ]]; then
-                           batcat --color=always --number -- "$path"
-                       else
-                           eza --icons always --color always -1 -- "$path"
-                       fi'
+    # Due to different distros calling these commands differently, me must
+    # check for bat/batcat
+    local bat_command
+    if command -v 'batcat' &>/dev/null; then
+        bat_command='batcat'
+    elif command -v 'bat' &>/dev/null; then
+        bat_command='bat'
+    else
+        bat_command='cat'
+    fi
+
+    # Use `bat` if installed, else use `cat`
+    local fzf_preview_file
+    case "$bat_command" in
+        'bat' | 'batcat') fzf_preview_file="$bat_command --number --theme=gruvbox-dark --color=always -- {}" ;;
+        *) fzf_preview_file='cat --number -- {}' ;;
+    esac
+
+    # Use `eza` if installed, else use `ls`
+    local fzf_preview_directory
+    if command -v 'eza' &>/dev/null; then
+        fzf_preview_directory='eza --all --icons always --color always --oneline -- {}'
+    else
+        fzf_preview_directory='ls --all --color=always -1 -- {}'
+    fi
+
+    local FZF_PREVIEW="
+        if [[ -f {} ]]; then
+            $fzf_preview_file
+        elif [[ -d {} ]]; then
+            $fzf_preview_directory
+        fi"
+
     local response
-    # We must use the `--oneline` flag at the end to not allow user to use `-l`
-    # and mess up expected format. Unfortunately, `-R` will still mess things up.
-    response="$(eza --icons always --color always "$@" --oneline \
+    response="$(ls --all -1 --color=always "$@" \
         | fzf --ansi --preview "$FZF_PREVIEW"
     )"
-    [[ -n "$response" ]] || return 1
-
-    # Strip the first two chars, icon and space
-    response="${response:2}"
 
     if [[ -f "$response" ]]; then
         $EDITOR "$response"
     elif [[ -d "$response" ]]; then
         cd "$response" || return 1
+    else
+        return 1
     fi
 }
 
 
 # fdi - passes args and flags to fdfind and pipes output into fzf
 # Dependencies:
-#   fdfind
 #   fzf
-#   batcat
-#   eza
 #   tmux
+# Optional dependencies:
+#   fd / fdfind   (will use find instead)
+#   bat / batcat  (will use cat instead)
+#   eza           (will use ls instead)
 fdi() {
     # Due to different distros calling these commands differently, me must
     # check for bat/batcat and fd/fdfind
@@ -72,8 +93,7 @@ fdi() {
     elif command -v 'bat' &>/dev/null; then
         bat_command='bat'
     else
-        echo "fdi: error: batcat is not installed" >&2
-        return 1
+        bat_command='cat'
     fi
     local fd_command
     if command -v 'fdfind' &>/dev/null; then
@@ -81,8 +101,22 @@ fdi() {
     elif command -v 'fd' &>/dev/null; then
         fd_command='fd'
     else
-        echo "fdi: error: fdfind is not installed" >&2
-        return 1
+        fd_command='find'
+    fi
+
+    # Use `bat` if installed, else use `cat`
+    local fzf_preview_file
+    case "$bat_command" in
+        'bat' | 'batcat') fzf_preview_file="$bat_command --number --theme=gruvbox-dark --color=always -- {}" ;;
+        *) fzf_preview_file='cat --number -- {}' ;;
+    esac
+
+    # Use `eza` if installed, else use `ls`
+    local fzf_preview_directory
+    if command -v 'eza' &>/dev/null; then
+        fzf_preview_directory='eza --all --icons always --color always --oneline -- {}'
+    else
+        fzf_preview_directory='ls --all --color=always -1 -- {}'
     fi
 
     local TMUX_DIR_SCRIPT="$HOME/files/resources/dotfiles/.config/tmux/tmux_directory_opener.sh"
@@ -128,11 +162,12 @@ fdi() {
         "C-v pane"
         "C-x xdg-open"
     )
-    local FZF_PREVIEW="if [[ -f {} ]]; then
-                           $bat_command --number --theme=gruvbox-dark --color=always -- {}
-                       elif [[ -d {} ]]; then
-                           eza --icons always --color always --oneline -- {}
-                       fi"
+    local FZF_PREVIEW="
+        if [[ -f {} ]]; then
+            $fzf_preview_file
+        elif [[ -d {} ]]; then
+            $fzf_preview_directory
+        fi"
     local FZF_FLAGS=(
         --ansi
         --color dark
@@ -141,8 +176,13 @@ fdi() {
         --preview "$FZF_PREVIEW"
     )
 
+    # Use `fd`/`fdfind` if installed, else use `find`
     local directory
-    directory="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")"
+    case "$fd_command" in
+        'fd' | 'fdfind') directory="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")" ;;
+        *) directory="$(find -L -- "$@" | fzf "${FZF_FLAGS[@]}")" ;;
+    esac
+
     [[ -d "$directory" ]] && cd "$directory" || return 1
 }
 
@@ -152,9 +192,9 @@ fdi() {
 # Dependencies:
 #   fzf
 # Optional dependencies:
-#   fdfind / fd  (will use find instead)
-#   batcat       (will use cat instead)
-#   eza          (will use ls instead)
+#   fd / fdfind   (will use find instead)
+#   bat / batcat  (will use cat instead)
+#   eza           (will use ls instead)
 g() {
     # Due to different distros calling these commands differently, me must
     # check for bat/batcat and fd/fdfind
@@ -185,9 +225,9 @@ g() {
     # Use `eza` if installed, else use `ls`
     local fzf_preview_directory
     if command -v 'eza' &>/dev/null; then
-        fzf_preview_directory='eza --icons always --color always --oneline -- {}'
+        fzf_preview_directory='eza --all --icons always --color always --oneline -- {}'
     else
-        fzf_preview_directory='ls --color=always -1 -- {}'
+        fzf_preview_directory='ls --all --color=always -1 -- {}'
     fi
 
     local FDFIND_FLAGS=(
@@ -211,7 +251,7 @@ g() {
     local file
     case "$fd_command" in
         'fd' | 'fdfind') file="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")" ;;
-        *) file="$(find . | fzf "${FZF_FLAGS[@]}")"
+        *) file="$(find -L -- "$@" | fzf "${FZF_FLAGS[@]}")" ;;
     esac
 
     local directory
