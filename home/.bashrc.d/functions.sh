@@ -1,139 +1,5 @@
 #!/bin/bash
 
-fzcd() {
-    local selected
-    selected="$(find . -mindepth 1 -type d \
-        | grep -v -e "/\.steam/" -e "/\.git/" \
-        | fzf --preview 'ls {}')"
-    cd "$selected" || return 1
-}
-
-
-fzed() {
-    local selected=""
-
-    if [[ "$#" -eq 1 ]]; then
-        if [[ -f "$1" ]]; then
-            # If provided argument is a file, use that and skip fzf
-            selected="$1"
-        elif [[ -d "$1" ]]; then
-            # If provided argument is a directory, open fzf using that directory
-            cd "$1" || return 1
-        fi
-    fi
-
-    if [[ -z "$selected" ]]; then
-        # If we are in ~, only search specific directories to reduce clutter
-        if [[ "$(pwd)" == "$HOME" ]]; then
-            local dirs
-            dirs=(
-                "$HOME/inbox"
-                "$HOME/projects"
-                "$HOME/resources"
-            )
-            local files
-            files="$({ find -L "${dirs[@]}" -type f
-                find -L "$HOME" -maxdepth 1 -type f
-            })"
-        else
-            # Search recursively
-            files="$(find -L ./ -type f)"
-        fi
-
-        local batcat_flags=(
-            "--number"
-            "--theme=gruvbox-dark"
-            "--color=always"
-        )
-
-        # Some distros call it 'batcat' or 'bat'
-        local cat_cmd
-        if command -v "batcat" &>/dev/null; then
-            cat_cmd="batcat ${batcat_flags[*]}"
-        elif command -v "bat" &>/dev/null; then
-            cat_cmd="bat ${batcat_flags[*]}"
-        else
-            cat_cmd="cat"
-        fi
-
-        # Filter out non-text files
-        selected="$(echo "$files" \
-            | grep -v \
-            -e "/\.steam/" \
-            -e "/GIMP/2\.10/" \
-            -e "/\.config/libreoffice/" \
-            -e "\.mp3$" \
-            -e "\.wma$" \
-            -e "\.m4a$" \
-            -e "\.png$" \
-            -e "\.jpg$" \
-            -e "\.jpeg$" \
-            -e "\.svg$" \
-            -e "\.kra$" \
-            -e "\.pdf$" \
-            -e "\.epub$" \
-            -e "\.djvu$" \
-            -e "\.docx$" \
-            -e "\.mp4$" \
-            -e "\.mkv$" \
-            -e "\.wav$" \
-            -e "\.mmpz" \
-            -e "\.tdb$" \
-            -e "\.zip$" \
-            -e "\.7z$" \
-            -e "\.bin$" \
-            -e "\.cue$" \
-            -e "\.chd$" \
-            -e "\.iso$" \
-            -e "\.gba$" \
-            -e "\.nes$" \
-            -e "\.nds$" \
-            -e "\.srm$" \
-            -e "\.tar$" \
-            -e "\.nvmem$" \
-            -e "\.eeprom$" \
-            -e "\.ps2$" \
-            -e "/\.git/" \
-            -e "/__pycache__/" \
-            -e "a\.out" \
-            -e "\.gitignore" \
-            | sort \
-            | fzf --preview="$cat_cmd {}")"
-    fi
-
-    [[ -z "$selected" ]] && return 1
-    [[ -z "$EDITOR" ]] && EDITOR="nvim"
-
-    $EDITOR "$selected"
-}
-
-
-goto() {
-    local target
-
-    if [[ "$1" ]]; then
-        target="$1"
-    else
-        target="$(find . -mindepth 1 | fzf)"
-    fi
-
-    [[ -z "$target" ]] && return 1
-
-    target="$(realpath -- "$target")"
-
-    local directory
-    if [[ -f "$target" ]]; then
-        directory="$(dirname -- "$target")"
-    elif [[ -d "$target" ]]; then
-        directory="$target"
-    else
-        return 1
-    fi
-
-    cd "$directory" || return 1
-}
-
-
 cu() {
     local number="$1"
 
@@ -196,6 +62,7 @@ li() {
 #   fzf
 #   batcat
 #   eza
+#   tmux
 fdi() {
     # Due to different distros calling these commands differently, me must
     # check for bat/batcat and fd/fdfind
@@ -262,7 +129,7 @@ fdi() {
         "C-x xdg-open"
     )
     local FZF_PREVIEW="if [[ -f {} ]]; then
-                           $bat_command -n --theme=gruvbox-dark --color=always -- {}
+                           $bat_command --number --theme=gruvbox-dark --color=always -- {}
                        elif [[ -d {} ]]; then
                            eza --icons always --color always --oneline -- {}
                        fi"
@@ -279,11 +146,15 @@ fdi() {
     [[ -d "$directory" ]] && cd "$directory" || return 1
 }
 
+
+# g - goto a directory / file's directory via fzf
+#
 # Dependencies:
-#   fdfind
 #   fzf
-#   batcat
-#   eza
+# Optional dependencies:
+#   fdfind / fd  (will use find instead)
+#   batcat       (will use cat instead)
+#   eza          (will use ls instead)
 g() {
     # Due to different distros calling these commands differently, me must
     # check for bat/batcat and fd/fdfind
@@ -293,8 +164,7 @@ g() {
     elif command -v 'bat' &>/dev/null; then
         bat_command='bat'
     else
-        echo "fdi: error: batcat is not installed" >&2
-        return 1
+        bat_command='cat'
     fi
     local fd_command
     if command -v 'fdfind' &>/dev/null; then
@@ -302,8 +172,22 @@ g() {
     elif command -v 'fd' &>/dev/null; then
         fd_command='fd'
     else
-        echo "fdi: error: fdfind is not installed" >&2
-        return 1
+        fd_command='find'
+    fi
+
+    # Use `bat` if installed, else use `cat`
+    local fzf_preview_file
+    case "$bat_command" in
+        'bat' | 'batcat') fzf_preview_file="$bat_command --number --theme=gruvbox-dark --color=always -- {}" ;;
+        *) fzf_preview_file='cat --number -- {}' ;;
+    esac
+
+    # Use `eza` if installed, else use `ls`
+    local fzf_preview_directory
+    if command -v 'eza' &>/dev/null; then
+        fzf_preview_directory='eza --icons always --color always --oneline -- {}'
+    else
+        fzf_preview_directory='ls --color=always -1 -- {}'
     fi
 
     local FDFIND_FLAGS=(
@@ -311,19 +195,25 @@ g() {
         --follow  # Follow symlinks
         --hidden
     )
-    local FZF_PREVIEW="if [[ -f {} ]]; then
-                           $bat_command -n --theme=gruvbox-dark --color=always -- {}
-                       elif [[ -d {} ]]; then
-                           eza --icons always --color always --oneline -- {}
-                       fi"
+    local FZF_PREVIEW="
+        if [[ -f {} ]]; then
+            $fzf_preview_file
+        elif [[ -d {} ]]; then
+            $fzf_preview_directory
+        fi"
     local FZF_FLAGS=(
         --ansi
         --color dark
         --preview "$FZF_PREVIEW"
     )
 
+    # Use `fd`/`fdfind` if installed, else use `find`
     local file
-    file="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")"
+    case "$fd_command" in
+        'fd' | 'fdfind') file="$($fd_command "${FDFIND_FLAGS[@]}" "$@" | fzf "${FZF_FLAGS[@]}")" ;;
+        *) file="$(find . | fzf "${FZF_FLAGS[@]}")"
+    esac
+
     local directory
     if [[ -d "$file" ]]; then
         directory="$file"
@@ -332,5 +222,6 @@ g() {
     else
         return 1
     fi
+
     cd "$directory" || return 1
 }
